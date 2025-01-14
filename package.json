@@ -1,0 +1,40 @@
+{
+  "name": "swimmer",
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/i18n": "^8.5.5",
+    "@nuxtjs/tailwindcss": "6.8.0",
+    "@pinia/nuxt": "^0.5.5",
+    "@primevue/nuxt-module": "^4.0.0-rc.3",
+    "autoprefixer": "^10.4.20",
+    "nuxt": "^3.12.1",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@fawmi/vue-google-maps": "^0.9.72",
+    "@primevue/themes": "^4.0.0-rc.3",
+    "@vee-validate/nuxt": "^4.13.2",
+    "axios": "^1.7.7",
+    "firebase": "^11.1.0",
+    "nuxt-countdown": "^1.2.0",
+    "pinia": "^2.2.4",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.0.0-rc.3",
+    "vue3-carousel": "^0.3.4",
+    "vue3-otp-input": "^0.5.21",
+    "yup": "^1.4.0"
+  },
+  "overrides": {
+    "vue": "latest"
+  }
+}

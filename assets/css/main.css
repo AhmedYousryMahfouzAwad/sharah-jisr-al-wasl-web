@@ -1,0 +1,109 @@
+@layer tailwind-base, primevue, tailwind-utilities;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+.p-items-hidden .p-carousel-item {
+  visibility: visible !important;
+}
+
+.p-datepicker-day-selected {
+  @apply !bg-primary-1 !text-white;
+}
+
+.p-select-dropdown {
+  @apply !text-primary-1;
+}
+
+.p-carousel-item-list {
+  flex-direction: row-reverse !important;
+}
+.p-button-text.p-button-secondary {
+  display: none !important;
+}
+.p-carousel-indicator-active .p-carousel-indicator-button {
+  @apply !bg-primary-1 !h-3 !w-3 !rounded-full;
+}
+
+.p-carousel-indicator .p-carousel-indicator-button {
+  @apply !h-3 !w-3   !rounded-full;
+}
+.p-radiobutton-checked .p-radiobutton-box {
+  @apply !bg-primary-1;
+}
+.p-rating-icon {
+  color: gold !important;
+}
+.p-toggleswitch.p-toggleswitch-checked .p-toggleswitch-slider {
+  @apply !bg-primary-1 border-primary-1;
+}
+.pac-container {
+  z-index: 9999;
+}
+.p-datepicker-input {
+  border-radius: 100px !important;
+  padding: 0.75rem !important;
+}
+.p-inputtext:enabled:focus {
+  @apply !border-primary-1;
+}
+.p-textarea:enabled:focus {
+  @apply !border-primary-1;
+}
+.p-checkbox-checked .p-checkbox-box {
+  @apply !border-primary-1 !bg-primary-1;
+}
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  display: none !important;
+}
+.p-paginator {
+  @apply !bg-transparent !border-none;
+}
+.p-dataview-paginator-bottom {
+  @apply !bg-transparent !border-none;
+}
+.p-paginator-page.p-paginator-page-selected {
+  @apply !bg-primary-1 !text-white;
+}
+.p-datepicker {
+  display: inline-flex;
+  max-width: 100%;
+  padding: 1px;
+  border: none !important;
+}
+.p-datepicker-input {
+  border-radius: 100px !important;
+  padding: 0.55rem !important;
+}
+
+.p-inputtext::placeholder {
+  color: #a1a5ad !important;
+  font-size: 14px !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+.p-select-label.p-placeholder {
+  color: #a1a5ad !important;
+  font-size: 14px !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+.p-select {
+  border-radius: 100px !important;
+}
+.p-select:not(.p-disabled).p-focus {
+  @apply !border-primary-1;
+}
+
+.p-select-option.p-select-option-selected {
+  @apply !bg-primary-1 !text-white;
+}
+.p-select-overlay {
+  @apply !bg-white !rounded-xl !border-gray-300;
+}
