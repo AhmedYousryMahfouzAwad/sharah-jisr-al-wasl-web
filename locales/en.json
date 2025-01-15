@@ -9,6 +9,8 @@
     "warranty": " warranty"
   },
   "pages": {
+    "my_orders": "My Orders",
+
     "sorry_you_are_not_registered": "Sorry, you are not registered on the site.",
     "details_plase": "Please enter the details.",
     "contact_technical_support": "Contact technical support",
@@ -82,6 +84,7 @@
     "Unsubscribe": "Unsubscribe",
     "complaints_inquiries": "  Complaints and inquiries  ",
     "about_website": "About the site",
+    "aboutUs": "About Us",
     "terms_conditions": "Terms and Conditions",
     "my_nice": " Favorite",
     "clear_all": "Clear all",

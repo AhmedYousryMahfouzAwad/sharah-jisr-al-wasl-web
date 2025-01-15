@@ -42,28 +42,29 @@ export default defineNuxtConfig({
 
   compatibilityDate: "2024-09-30",
 
-  // i18n
+  // i18n module configuration
   i18n: {
     // lazy: true,
     // strategy: "prefix_except_default",
     langDir: "locales",
     defaultLocale: "ar",
     defaultDirection: "rtl",
-    locales: [
-      {
-        code: "en",
-        iso: "en",
-        name: "English",
-        file: { path: "en.json", cache: false },
-        dir: "ltr",
-      },
+    detectBrowserLanguage: false,
 
+    locales: [
       {
         code: "ar",
         iso: "ar",
         name: "العربية",
         file: { path: "ar.json", cache: false },
         dir: "rtl",
+      },
+      {
+        code: "en",
+        iso: "en",
+        name: "English",
+        file: { path: "en.json", cache: false },
+        dir: "ltr",
       },
     ],
   },

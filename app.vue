@@ -1,22 +1,26 @@
 <template>
-  <div>
-    <Transition name="fade" mode="out-in">
-      <div v-if="!hide_splash" class="fixed w-full !h-screen !bg-blue-950 z-[1000] flex justify-center items-center">
-        <img class="animate-pulse duration-75 lg:scale-75" :src="defaultImage" alt="Logo" />
+    <!-- <Transition name="fade" mode="out-in">
+      <div
+        v-if="!hide_splash"
+        class="fixed w-full !h-screen !bg-white z-950 z-[1000] flex justify-center items-center"
+      >
+        <img
+          class="animate-pulse duration-75 lg:scale-75"
+          :src="defaultImage"
+          alt="Logo"
+        />
       </div>
-    </Transition>
-    <nuxt-layout>
-      <Toast /> <!-- Toast component available globally -->
+    </Transition> -->
+
+    <NuxtLayout>
+      <Toast />
+      <!-- Toast component available globally -->
       <NuxtPage />
-    </nuxt-layout>
-
-
-
-  </div>
+    </NuxtLayout>
 </template>
 
 <script setup>
-import Toast from 'primevue/toast';
+import Toast from "primevue/toast";
 
 useSeoMeta({
   title: "Swimmer",
@@ -31,7 +35,7 @@ useSeoMeta({
   twitterCard: "summary",
 });
 
-import logo_app from "@/assets/img/logo_app.png"
+import logo_app from "/img/cover.png";
 const defaultImage = ref(logo_app);
 const hide_splash = ref(false);
 
@@ -80,8 +84,7 @@ useHead({
 .fade-enter,
 .fade-leave-to
 
-/* .fade-leave-active in <2.1.8 */
-  {
+/* .fade-leave-active in <2.1.8 */ {
   opacity: 0;
 }
 </style>
