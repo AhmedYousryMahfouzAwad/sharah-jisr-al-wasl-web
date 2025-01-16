@@ -1,5 +1,5 @@
 <template>
-    <!-- <Transition name="fade" mode="out-in">
+  <!-- <Transition name="fade" mode="out-in">
       <div
         v-if="!hide_splash"
         class="fixed w-full !h-screen !bg-white z-950 z-[1000] flex justify-center items-center"
@@ -12,11 +12,11 @@
       </div>
     </Transition> -->
 
-    <NuxtLayout>
-      <Toast />
-      <!-- Toast component available globally -->
-      <NuxtPage />
-    </NuxtLayout>
+  <NuxtLayout>
+    <Toast />
+    <!-- Toast component available globally -->
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <script setup>

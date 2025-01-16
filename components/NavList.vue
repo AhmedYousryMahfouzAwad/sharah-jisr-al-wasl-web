@@ -7,6 +7,7 @@
     >
       <div class="flex items-center">
         <span
+          class="text-sm"
           :style="{
             color: inActiveColor,
             position: 'relative',

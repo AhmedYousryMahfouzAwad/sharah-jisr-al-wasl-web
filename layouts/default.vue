@@ -1,8 +1,8 @@
 <template>
   <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
-    <nav class="bg-white shadow-md">
+    <nav class="bg-white shadow-md mx-w-7xl">
       <div
-        class="container mx-auto px-4 flex items-center justify-between py-1"
+        class="container max-w-[95rem] px-4 flex items-center justify-between py-1"
       >
         <!-- Logo -->
         <div class="flex items-center space-x-2">
@@ -52,34 +52,84 @@
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
           </NavList>
+          <NavList
+            :is-active="
+              route.path === '/my-orders' || route.path === '/en/my-orders'
+            "
+            :to="localePath({ name: 'my-orders' })"
+            :title="t('pages.contact_us')"
+            class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+          >
+          </NavList>
 
-          <li>
-            <a href="#" class="text-gray-700 hover:text-gray-900">حول الموقع</a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-700 hover:text-gray-900"
-              >سياسة الخصوصية</a
-            >
-          </li>
-          <li>
-            <a href="#" class="text-gray-700 hover:text-gray-900"
-              >الشروط والأحكام</a
-            >
-          </li>
+          <NavList
+            :is-active="
+              route.path === '/my-orders' || route.path === '/en/my-orders'
+            "
+            :to="localePath({ name: 'my-orders' })"
+            :title="t('pages.about_the_site')"
+            class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+          >
+          </NavList>
+          <NavList
+            :is-active="
+              route.path === '/my-orders' || route.path === '/en/my-orders'
+            "
+            :to="localePath({ name: 'my-orders' })"
+            :title="t('pages.privacy_policy')"
+            class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+          >
+          </NavList>
+          <NavList
+            :is-active="
+              route.path === '/my-orders' || route.path === '/en/my-orders'
+            "
+            :to="localePath({ name: 'my-orders' })"
+            :title="t('pages.terms_conditions')"
+            class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+          >
+          </NavList>
         </ul>
 
         <!-- User Actions -->
         <div class="flex items-center space-x-4 rtl:space-x-reverse">
-          <button
-            class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
-          >
-            حساب جديد
-          </button>
-          <div class="relative">
-            <button class="text-gray-700 hover:text-gray-900">العربية</button>
+          <div class="relative flex items-center space-x-2">
+            <button
+              class="text-gray-700 hover:text-gray-900 p-1 rounded-md bg-primary-2"
+            >
+              <img src="../public/img/notification.png" alt="notification" />
+            </button>
           </div>
+          <button
+            class="text-black px-4 py-1 rounded-md border border-primary-1 flex justify-center items-center"
+          >
+            <span class="text-sm font-semibold"> حساب جديد </span>
+          </button>
+          <Select
+            v-model="lang"
+            :options="languages"
+            optionLabel="name"
+            class="border-0 shadow-none outline-none text-xs font-semibold"
+          >
+            <template #option="slotProps">
+              <div class="flex items-center">
+                <img
+                  class="w-4 h-4 rounded-md mx-1"
+                  :alt="slotProps.option.label"
+                  :src="slotProps.option.image"
+                  style="width: 18px"
+                />
+                <div class="text-xs font-semibold">
+                  {{ slotProps.option.name }}
+                </div>
+              </div>
+            </template>
+          </Select>
         </div>
       </div>
+    </nav>
+    <nav class="bg-black shadow-md">
+      <p class="text-white p-3 max-w-[94rem] mx-auto">dsadsadsadsad</p>
     </nav>
 
     <slot />
@@ -107,6 +157,8 @@
 </template>
 
 <script setup>
+import saudi from "../public/img/saudi.png";
+import Flag_of_the_United from "../public/img/Flag_of_the_United.webp";
 // Function to close the sidebar
 
 // const { logOut } = useLogoutStore();
@@ -115,8 +167,13 @@
 // };
 
 // i18n setup
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
+const lang = ref(locale.value);
+const languages = ref([
+  { name: "Saudi Arabia", image: saudi },
+  { name: "English", image: Flag_of_the_United },
+]);
 // Current route
 const route = useRoute();
 const localePath = useLocalePath();

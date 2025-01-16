@@ -9,8 +9,11 @@
     "warranty": " warranty"
   },
   "pages": {
+    "client": "Client",
+    "privacy_policy": "Privacy Policy",
+    "welcome_back": "Welcome back! Log in to continue your achievements. ",
     "my_orders": "My Orders",
-
+    "about_the_site": "About the site",
     "sorry_you_are_not_registered": "Sorry, you are not registered on the site.",
     "details_plase": "Please enter the details.",
     "contact_technical_support": "Contact technical support",

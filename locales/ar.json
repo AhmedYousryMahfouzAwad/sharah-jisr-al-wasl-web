@@ -8,15 +8,17 @@
     "warranty": "الضمان"
   },
   "pages": {
-    "the_remaining_time": "   الوقت المتبقي :",
-    "new_mobile_number": "    رقم الجوال الجديد  ",
+    "privacy_policy": " سياسة الخصوصية",
+    "client": " عميل ",
+    "the_remaining_time": " الوقت المتبقي :",
+    "new_mobile_number": " رقم الجوال الجديد  ",
     "congratulations_change_phone": " تهانينا تم تغيير رقم الجوال بنجاح",
     "contact_technical_support": " التواصل مع الدعم الفني ",
     "sorry_you_are_not_registered": " عفوا انت غير مسجل بالموقع",
     "details_plase": "من فضلك  ادخل التفاصيل",
     "aboutUs": "من نحن",
     "my_orders": "طلباتي",
-
+    "about_the_site": "معلومات عن الموقع",
     "engineer_evaluation": "   تقييم المهندس ",
     "how_was_your_experience": "   كيف كانت تجربتك مع  ",
     "extra_services": "    خدمات اضافية ",
@@ -92,6 +94,7 @@
     "how_want_delete_visit": " هل انت متأكد من إلغاء الزيارة بنجاح ؟ ",
     "length": " الطول ",
     "from_length": " من فضلك ادخل الطول ",
+    "welcome_back": " أهلاً بعودتك! سجّل دخولك لمتابعة إنجازاتك.",
 
     "total_price": " الاجمالي ",
     "service_price": "سعر الخدمة",
