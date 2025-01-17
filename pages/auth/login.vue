@@ -1,99 +1,98 @@
 <template>
-  <!-- Main content -->
   <div
     class="flex col-span-12 flex-col items-center relative shadow-md p-4 rounded-lg bg-white max-w-xl mx-auto justify-center mt-24 w-full z-10"
   >
     <form @submit.prevent="submitLogin" class="text-start space-y-10 w-full">
+      <!-- Header -->
       <div>
         <h1 class="md:text-3xl text-black text-base text-center font-bold">
           {{ t("pages.auth.login") }}
         </h1>
         <h1
-          class="font-semibold my-1 md:text-sm text-xs text-center text-black"
+          class="font-semibold my-1 md:text-sm text-xs text-center text-gray-600"
         >
           {{ t("pages.welcome_back") }}
         </h1>
       </div>
-
       <div class="card">
-        <Tabs v-model="currentTab" value="0">
-          <TabList>
-            <div class="grid grid-cols-12 w-full justify-center items-center">
-              <!-- First Tab -->
-              <div class="col-span-6 flex justify-center">
-                <Tab value="0" class="w-full text-center">{{
-                  t("pages.client")
-                }}</Tab>
-              </div>
-              <!-- Second Tab -->
-              <div class="col-span-6 flex justify-center">
-                <Tab value="1" class="w-full text-center">Header 2</Tab>
-              </div>
-            </div>
-          </TabList>
+        <!-- Tabs Container -->
+        <div class="flex">
+          <!-- Tab: Client -->
+          <button
+            @click="currentTab = 'client'"
+            :class="{
+              'border-b-2 border-primary-1 font-bold text-black':
+                currentTab === 'client',
+              'text-gray-600': currentTab !== 'client',
+            }"
+            class="flex-1 text-center py-2"
+          >
+            عميل
+          </button>
 
-          <TabPanels>
-            <TabPanel value="0">
-              <!-- Sub-tabs inside first tab -->
-              <div
-                class="grid grid-cols-12 w-full rounded-full items-center p-1 bg-gray-100"
+          <!-- Tab: Provider -->
+          <button
+            @click="currentTab = 'provider'"
+            :class="{
+              'border-b-2 border-primary-1 font-bold text-black':
+                currentTab === 'provider',
+              'text-gray-600': currentTab !== 'provider',
+            }"
+            class="flex-1 text-center py-2"
+          >
+            مقدم خدمة
+          </button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="p-4">
+          <div v-if="currentTab === 'client'">
+            <!-- Sub-tabs -->
+            <div
+              class="grid grid-cols-12 w-full rounded-full bg-primary-2 p-1 items-center justify-center mb-4"
+            >
+              <!-- Sub-tab: Individual -->
+              <button
+                @click="activeSubTab = 'individual'"
+                :class="
+                  activeSubTab === 'individual'
+                    ? 'bg-primary-1 text-white'
+                    : 'bg-primary-2 text-gray-600'
+                "
+                class="col-span-6 text-center font-semibold rounded-full py-2"
               >
-                <!-- First Sub-tab -->
-                <div
-                  class="col-span-6 flex rounded-full justify-center cursor-pointer"
-                  :class="{
-                    'bg-primary-1 text-white': activeSubTab === 2,
-                    'text-gray-600': activeSubTab !== 2,
-                  }"
-                  @click="setActiveSubTab(2)"
-                >
-                  <Tab value="2" class="w-full text-center font-bold py-2">
-                    {{ t("pages.company") }}
-                  </Tab>
-                </div>
-                <!-- Second Sub-tab -->
-                <div
-                  class="col-span-6 flex rounded-full justify-center cursor-pointer"
-                  :class="{
-                    'bg-primary-1 text-white': activeSubTab === 3,
-                    'text-gray-600': activeSubTab !== 3,
-                  }"
-                  @click="setActiveSubTab(3)"
-                >
-                  <Tab value="3" class="w-full text-center font-bold py-2">
-                    {{ t("pages.individual") }}
-                  </Tab>
-                </div>
-              </div>
+                فرد
+              </button>
 
-              <!-- Sub-tab content -->
-              <div class="w-full text-center mt-4">
-                <div v-show="activeSubTab === 2" class="p-4 text-gray-800">
-                  Content for Sub-tab: Company
-                </div>
-                <div v-show="activeSubTab === 3" class="p-4 text-gray-800">
-                  Content for Sub-tab: Individual
-                </div>
-              </div>
-            </TabPanel>
+              <!-- Sub-tab: Company -->
+              <button
+                @click="activeSubTab = 'company'"
+                :class="
+                  activeSubTab === 'company'
+                    ? 'bg-primary-1 text-white'
+                    : 'bg-pr-200 text-gray-600'
+                "
+                class="col-span-6 text-center font-semibold rounded-full py-2"
+              >
+                شركة
+              </button>
+            </div>
 
-            <TabPanel value="1">
-              <p class="m-0">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto beatae
-                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                voluptas sit aspernatur aut odit aut fugit, sed quia
-                consequuntur magni dolores eos qui ratione voluptatem sequi
-                nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
-                modi.
-              </p>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+            <!-- Sub-tab Content -->
+            <div v-if="activeSubTab === 'individual'" class="text-center">
+              <p>محتوى الفرد</p>
+            </div>
+            <div v-else-if="activeSubTab === 'company'" class="text-center">
+              <p>محتوى الشركة</p>
+            </div>
+          </div>
+          <div v-else-if="currentTab === 'provider'">
+            <p>محتوى مقدم الخدمة</p>
+          </div>
+        </div>
       </div>
 
-      <!-- Input and Button -->
+      <!-- Phone Input -->
       <div class="w-full md:px-0 px-2">
         <div class="relative w-full">
           <InputForm
@@ -108,13 +107,13 @@
             <template #endIcon>
               <div class="flex items-center gap-2 relative">
                 <div>
-                  <!-- Select Component -->
+                  <!-- Country Select -->
                   <Select
                     v-model="country"
                     :options="list_countries"
                     optionLabel="key"
                     :placeholder="$t('inputs.country_code.placeholder')"
-                    class="!border-none text-xs appearance-none bg-transparent text-gray-700 focus:outline-none cursor-pointer"
+                    class="!border-none text-xs bg-transparent text-gray-700 focus:outline-none cursor-pointer"
                   >
                     <template #value="slotProps">
                       <div v-if="slotProps.value" class="flex items-center">
@@ -152,10 +151,12 @@
           type="submit"
           :label="t('pages.auth.login')"
           :disabled="loading"
+          class="w-full bg-primary-1 text-white font-semibold py-2 rounded-md"
         />
       </div>
     </form>
   </div>
+
   <!-- Background Image -->
   <img
     :src="illustration"
@@ -166,20 +167,23 @@
 
 <script setup>
 import illustration from "../../public/img/Illustration.png";
+const activeSubTab = ref("individual"); // اللسان الفرعي الافتراضي
+const setActiveSubTab = (tab) => (activeSubTab.value = tab);
 
+const submitLogin = () => {
+  // عملية تسجيل الدخول
+};
+const tabs = [
+  { name: "Client", content: "محتوى العميل" },
+  { name: "Provider", content: "محتوى مقدم الخدمة" },
+];
+const currentTab = ref(0);
 const localeRoute = useLocaleRoute();
 const localePath = useLocalePath();
 const router = useRouter();
 const route = useRoute();
 const isLoading = ref(false); // حالة التحميل
 
-// State for managing the active tab
-const activeTab = ref(2); // Default to Tab 2
-
-// Function to change the active tab
-const setActiveTab = (tab) => {
-  activeTab.value = tab;
-};
 const { phone } = storeToRefs(useLoginStore());
 const { list_countries, country } = storeToRefs(useCountries());
 const { isAuth } = storeToRefs(useAuthStore());
@@ -278,5 +282,14 @@ img.z-0 {
 
 ::v-root .active-bar-color {
   background-color: #c69e73 !important;
+}
+
+.active-tab {
+  background-color: #c69e73;
+  color: white;
+}
+.inactive-tab {
+  background-color: #f3f3f3;
+  color: black;
 }
 </style>
