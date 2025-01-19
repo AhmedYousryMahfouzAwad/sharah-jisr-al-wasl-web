@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex col-span-12 flex-col items-center relative shadow-md p-4 rounded-lg bg-white max-w-xl mx-auto justify-center mt-24 w-full z-10"
+    class="flex col-span-12 flex-col items-center relative shadow-md p-4 rounded-lg bg-white max-w-lg mx-auto justify-center mt-24 w-full z-10"
   >
     <form @submit.prevent="submitLogin" class="text-start space-y-10 w-full">
       <!-- Header -->
@@ -14,6 +14,7 @@
           {{ t("pages.welcome_back") }}
         </h1>
       </div>
+
       <div class="card">
         <!-- Tabs Container -->
         <div class="flex">
@@ -80,41 +81,18 @@
 
             <!-- Sub-tab Content -->
             <div v-if="activeSubTab === 'individual'" class="text-center">
-              <p>محتوى الفرد</p>
-            </div>
-            <div v-else-if="activeSubTab === 'company'" class="text-center">
-              <p>محتوى الشركة</p>
-            </div>
-          </div>
-          <div v-else-if="currentTab === 'provider'">
-            <p>محتوى مقدم الخدمة</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Phone Input -->
-      <div class="w-full md:px-0 px-2">
-        <div class="relative w-full">
-          <InputForm
-            name="phone"
-            :loading="loading"
-            v-model="phone"
-            :label="t('pages.auth.call_number')"
-            type="number"
-            :placeholder="t('pages.auth.call_number_placeholder')"
-            class="w-full"
-          >
-            <template #endIcon>
-              <div class="flex items-center gap-2 relative">
-                <div>
-                  <!-- Country Select -->
+              <p class="text-start">{{ t("pages.mobile_number") }}</p>
+              <!-- Phone Input -->
+              <div class="w-full grid grid-cols-12 gap-2">
+                <!-- Country Select -->
+                <div class="relative col-span-3 mt-[9px]">
                   <Select
                     v-model="country"
                     :options="list_countries"
                     optionLabel="key"
-                    :placeholder="$t('inputs.country_code.placeholder')"
-                    class="!border-none text-xs bg-transparent text-gray-700 focus:outline-none cursor-pointer"
+                    class="w-full pl-3 pr-3 py-1 h-full items-center flex border-2 text-sm rounded-lg !bg-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-1"
                   >
+                    <!-- Selected Value Display -->
                     <template #value="slotProps">
                       <div v-if="slotProps.value" class="flex items-center">
                         <img
@@ -128,7 +106,7 @@
                             border-radius: 3px;
                           "
                         />
-                        <span class="text-gray-700">{{
+                        <span class="text-gray-700 font-medium">{{
                           `+${slotProps.value.key}`
                         }}</span>
                       </div>
@@ -136,11 +114,52 @@
                         slotProps.placeholder
                       }}</span>
                     </template>
+
+                    <!-- Dropdown Options -->
+                    <template #option="slotProps">
+                      <div
+                        class="flex items-center justify-start w-full px-2 py-1 hover:bg-gray-300 cursor-pointer"
+                        :key="slotProps.option.key"
+                      >
+                        <img
+                          :alt="slotProps.option.label"
+                          :src="slotProps.option.image"
+                          class="mr-2"
+                          style="
+                            width: 25px;
+                            height: 15px;
+                            object-fit: cover;
+                            border-radius: 3px;
+                          "
+                        />
+                        <span class="text-gray-700 font-medium">{{
+                          `+${slotProps.option.key}`
+                        }}</span>
+                      </div>
+                    </template>
                   </Select>
                 </div>
+
+                <!-- Phone Input -->
+                <div class="relative col-span-9">
+                  <InputForm
+                    name="phone"
+                    :loading="loading"
+                    v-model="phone"
+                    type="text"
+                    :placeholder="t('pages.auth.call_number_placeholder')"
+                    class="w-full pl-3 pr-3 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+                  />
+                </div>
               </div>
-            </template>
-          </InputForm>
+            </div>
+            <div v-else-if="activeSubTab === 'company'" class="text-center">
+              <p>محتوى الشركة</p>
+            </div>
+          </div>
+          <div v-else-if="currentTab === 'provider'">
+            <p>محتوى مقدم الخدمة</p>
+          </div>
         </div>
       </div>
 
@@ -167,17 +186,17 @@
 
 <script setup>
 import illustration from "../../public/img/Illustration.png";
-const activeSubTab = ref("individual"); // اللسان الفرعي الافتراضي
+const activeSubTab = ref("individual");
 const setActiveSubTab = (tab) => (activeSubTab.value = tab);
+const currentTab = ref("client");
 
-const submitLogin = () => {
-  // عملية تسجيل الدخول
-};
+// const submitLogin = () => {
+//   // عملية تسجيل الدخول
+// };
 const tabs = [
   { name: "Client", content: "محتوى العميل" },
   { name: "Provider", content: "محتوى مقدم الخدمة" },
 ];
-const currentTab = ref(0);
 const localeRoute = useLocaleRoute();
 const localePath = useLocalePath();
 const router = useRouter();
@@ -229,15 +248,15 @@ const { handleSubmit } = useForm({
   validationSchema,
 });
 
-//hooks
-// onMounted(async () => {
-//   try {
-//     await getCountries(); // Wait until getCountries() completes
-//   } catch (error) {
-//     console.error("Error fetching countries:", error);
-//   } finally {
-//   }
-// });
+// Lifecycle hooks;
+onMounted(async () => {
+  try {
+    await getCountries(); // Wait until getCountries() completes
+  } catch (error) {
+    console.error("Error fetching countries:", error);
+  } finally {
+  }
+});
 
 // Wrapping the submit logic
 // const submitLogin = handleSubmit(async () => {
@@ -291,5 +310,54 @@ img.z-0 {
 .inactive-tab {
   background-color: #f3f3f3;
   color: black;
+}
+
+/* Dropdown Container */
+.select-container {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 4px;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown Option */
+.select-option {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.select-option:hover {
+  background-color: #f9fafb;
+}
+
+.select-option img {
+  width: 25px;
+  height: 15px;
+  border-radius: 3px;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+.select-option span {
+  font-size: 14px;
+  color: #1a202c;
+}
+
+/* Arrow Styling */
+.dropdown-arrow {
+  font-size: 12px;
+  color: #a0aec0;
+  margin-left: auto;
+}
+
+/* Selected Item */
+.selected-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
 }
 </style>

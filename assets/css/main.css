@@ -94,9 +94,7 @@
   padding-top: 12px !important;
   padding-bottom: 12px !important;
 }
-.p-select {
-  border-radius: 100px !important;
-}
+
 .p-select:not(.p-disabled).p-focus {
   @apply !border-primary-1;
 }
@@ -104,6 +102,11 @@
 .p-select-option.p-select-option-selected {
   @apply !bg-primary-1 !text-white;
 }
-.p-select-overlay {
-  @apply !bg-white !rounded-xl !border-gray-300;
+
+.p-select-label {
+  @apply !p-0;
 }
+
+/* .p-select {
+  @apply !h-full !flex !align-center;
+} */
