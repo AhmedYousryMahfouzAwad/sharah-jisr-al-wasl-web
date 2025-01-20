@@ -104,9 +104,9 @@
 }
 
 .p-select-label {
-  @apply !p-0;
+  overflow: inherit !important;
+  width: fit-content !important;
 }
-
-/* .p-select {
-  @apply !h-full !flex !align-center;
-} */
+.p-button {
+  border: none !important;
+}

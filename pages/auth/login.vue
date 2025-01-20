@@ -81,16 +81,16 @@
 
             <!-- Sub-tab Content -->
             <div v-if="activeSubTab === 'individual'" class="text-center">
-              <p class="text-start">{{ t("pages.mobile_number") }}</p>
+              <p class="text-start my-2">{{ t("pages.mobile_number") }}</p>
               <!-- Phone Input -->
-              <div class="w-full grid grid-cols-12 gap-2">
+              <div class="w-full grid grid-cols-12 gap-1">
                 <!-- Country Select -->
-                <div class="relative col-span-3 mt-[9px]">
+                <div class="relative col-span-3 self-start">
                   <Select
                     v-model="country"
                     :options="list_countries"
                     optionLabel="key"
-                    class="w-full pl-3 pr-3 py-1 h-full items-center flex border-2 text-sm rounded-lg !bg-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-1"
+                    class="w-full pl-3 pr-3 py-1 h-full flex border-2 text-sm rounded-lg !bg-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-1"
                   >
                     <!-- Selected Value Display -->
                     <template #value="slotProps">
@@ -110,6 +110,7 @@
                           `+${slotProps.value.key}`
                         }}</span>
                       </div>
+
                       <span v-else class="text-gray-400">{{
                         slotProps.placeholder
                       }}</span>
@@ -118,13 +119,12 @@
                     <!-- Dropdown Options -->
                     <template #option="slotProps">
                       <div
-                        class="flex items-center justify-start w-full px-2 py-1 hover:bg-gray-300 cursor-pointer"
+                        class="flex items-center justify-start w-full py-1 hover:bg-gray-300 cursor-pointer"
                         :key="slotProps.option.key"
                       >
                         <img
                           :alt="slotProps.option.label"
                           :src="slotProps.option.image"
-                          class="mr-2"
                           style="
                             width: 25px;
                             height: 15px;
@@ -166,12 +166,61 @@
       <!-- Submit Button -->
       <div class="md:px-0 px-2">
         <ButtonAuth
+          :imageSrc="'/arrow.png'"
           :loading="loading"
           type="submit"
           :label="t('pages.auth.login')"
           :disabled="loading"
-          class="w-full bg-primary-1 text-white font-semibold py-2 rounded-md"
+          class="!w-[96%] !mx-auto !justify-center !items-center !flex !bg-primary-1 text-white font-semibold py-2"
         />
+      </div>
+      <div class="w-[100%] md:px-0 px-2">
+        <button
+          @click="logoutGuestAuth"
+          :disabled="isLoading"
+          type="button"
+          class="text-center flex justify-center items-center mx-auto cursor-pointer"
+        >
+          <p class="text-primary-1 hover:underline transition duration-200">
+            {{ t("pages.auth.login_as_guest") }}
+          </p>
+
+          <span
+            v-if="isLoading"
+            class="text-primary-1 mx-3 hover:underline transition duration-200"
+            >{{ t("pages.loading") }}</span
+          >
+        </button>
+
+        <BaseDialog v-model:visible="visible" class="w-full max-w-xl mx-2">
+          <template #content>
+            <span
+              class="text-surface-500 text-center font-bold text-sm dark:text-surface-400 block mb-8 mx-auto md:text-xl"
+            >
+              {{ t("pages.login_as_guest") }}
+            </span>
+            <img
+              :src="animation"
+              alt="animation_image"
+              class="mx-auto justify-center items-center flex"
+            />
+          </template>
+        </BaseDialog>
+        <div
+          class="text-center mt-3 mb-2 md:text-base text-xs flex justify-center items-center"
+        >
+          <p>{{ t("pages.auth.have_an_account") }}</p>
+          <NuxtLink
+            :to="localeRoute({ name: 'auth-register' })"
+            class="text-center flex justify-center items-center cursor-pointer"
+          >
+            <p
+              class="text-primary-1 hover:underline md:text-base text-xs transition duration-200 mx-2"
+            >
+              {{ t("pages.auth.create_a_new_account") }}
+            </p>
+          </NuxtLink>
+        </div>
       </div>
     </form>
   </div>
@@ -348,9 +397,9 @@ img.z-0 {
 
 /* Arrow Styling */
 .dropdown-arrow {
-  font-size: 12px;
+  font-size: 10px !important;
   color: #a0aec0;
-  margin-left: auto;
+  margin-left: 4px;
 }
 
 /* Selected Item */
@@ -359,5 +408,20 @@ img.z-0 {
   align-items: center;
   justify-content: space-between;
   padding: 8px;
+}
+/* منع تغيير ارتفاع الحاوية */
+.grid {
+  align-items: center; /* محاذاة رأسية للـ Select و Input */
+}
+
+/* منع التأثير على select */
+.relative {
+  position: relative; /* لجعل الرسالة مستقلة عن الحقل */
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #4299e1; /* لون عند التركيز */
 }
 </style>

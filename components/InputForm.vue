@@ -8,7 +8,7 @@
     v-slot="{ field, errorMessage }"
   >
     <div>
-      <p class="font-bold my-2 px-1 md:text-base text-sm">{{ label }}</p>
+      <p class="font-bold mb-2 px-1 md:text-base text-sm" v-if="label">{{ label }}</p>
       <div class="relative flex items-center justify-center">
         <input
           :type="type"
@@ -97,5 +97,12 @@ function openModal(event) {
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
+}
+
+.text-red-500 {
+  position: absolute;
+  top: calc(100% + 4px); /* ضع رسالة الخطأ أسفل الحقل مباشرة */
+  font-size: 0.875rem; /* حجم خط صغير */
+  color: #f56565; /* لون الخطأ */
 }
 </style>
