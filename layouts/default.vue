@@ -95,13 +95,8 @@
 
       <!-- Sidebar (Mobile View) -->
       <div
-        v-if="isSidebarOpen"
-        class="fixed inset-0 bg-gray-800 bg-opacity-50 z-40"
-        @click="toggleSidebar"
-      ></div>
-      <div
-        v-show="isSidebarOpen"
-        class="fixed top-0 left-0 h-full bg-white shadow-lg z-50 w-64 p-4 transform transition-transform duration-300 ease-in-out"
+        :class="['sidebar', { 'sidebar-open': isSidebarOpen }]"
+        class="fixed top-0 left-0 h-full bg-white shadow-lg z-50 w-64 p-4"
       >
         <button class="text-gray-700 mb-4" @click="toggleSidebar">
           <i class="pi pi-times text-2xl"></i>
@@ -222,7 +217,7 @@ const { isAuth } = storeToRefs(useAuthStore());
 <style scoped>
 .sidebar {
   transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out; /* Animation effect */
 }
 .sidebar-open {
   transform: translateX(0);
