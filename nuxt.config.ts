@@ -35,7 +35,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      base_url: "https://backend.swimmer.aait-sa.com/public/api/",
+      base_url: "https://jisralwasl.com/",
       device_id: "1",
     },
   },

@@ -84,16 +84,18 @@ export const useFetchData = () => {
       // result message
       resMsg.value = res.msg;
 
-      // response ststus code
+      // response   code
       if (response.status === 200) {
         // Handle different keys from the response
         if (["success", "needCompleteInfo", "needActive"].includes(res.key)) {
           handleSuccess(res, options, res.key);
         } else if (res.key === "blocked" || res.key === "unauthenticated") {
-          // Handle unauthorized/blocking cases
-          // logout();
+          console.log("unauthed");
 
           showError(resMsg.value);
+
+          RemoveAuth();
+          navigateTo(localePath({ name: "auth-login" }));
         } else {
           throw new Error(resMsg.value);
         }

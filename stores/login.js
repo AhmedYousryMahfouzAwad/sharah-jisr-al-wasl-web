@@ -11,6 +11,7 @@ export const useLoginStore = defineStore("login", () => {
   const token = ref("");
   const device_type = ref("web");
   const country_code = ref(966);
+  const code = ref(null);
   const phone = ref(null);
   const otpInput = ref("");
   const uploadedImage = ref("");
@@ -26,7 +27,7 @@ export const useLoginStore = defineStore("login", () => {
 
   const sendLogin = async (payload) => {
     await fetchData({
-      url: `user/send-code`,
+      url: `api/user/login`,
       method: "post",
       body: payload,
       getSuccess: true,
@@ -111,6 +112,7 @@ export const useLoginStore = defineStore("login", () => {
     register,
     //STATE
     loading,
+    code,
     device_type,
     country_code,
     phone,

@@ -6,16 +6,15 @@ export const useCountries = defineStore("countries", () => {
   const { fetchData, resultData } = useFetchData();
   const list_countries = ref([]);
   const country = ref({
-    key: "966", // Default country code for Saudi Arabia
+    key: "+966", // Default country code for Saudi Arabia
     image: sa, // Correct flag image for Saudi Arabia
     iso: "SA", // ISO code for Saudi Arabia
   });
   const getCountries = async () => {
     await fetchData({
-      url: `user/countries`,
+      url: `api/countries`,
       onSuccess: () => {
         list_countries.value = resultData.value;
-        console.log(list_countries.value);
       },
     });
   };

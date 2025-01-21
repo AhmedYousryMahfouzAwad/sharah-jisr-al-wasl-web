@@ -3,1008 +3,963 @@
     "title": "Swimmer"
   },
   "buttons": {
-    "add_to_cart": "Add to cart",
-    "add_to_wishlist": "Add to wishlist",
-
-    "warranty": " warranty"
+    "add_to_cart": "Add to Cart",
+    "add_to_wishlist": "Add to Wishlist",
+    "warranty": "Warranty"
   },
   "pages": {
-    "mobile_number": "Mobile number",
-    "client": "Client",
+    "mobile_number": "Mobile Number",
     "privacy_policy": "Privacy Policy",
-    "welcome_back": "Welcome back! Log in to continue your achievements. ",
+    "client": "Client",
+    "the_remaining_time": "Remaining Time:",
+    "new_mobile_number": "New Mobile Number",
+    "congratulations_change_phone": "Congratulations, your mobile number has been successfully changed",
+    "contact_technical_support": "Contact Technical Support",
+    "sorry_you_are_not_registered": "Sorry, you are not registered on the site",
+    "details_plase": "Please enter the details",
+    "aboutUs": "About Us",
     "my_orders": "My Orders",
-    "about_the_site": "About the site",
-    "sorry_you_are_not_registered": "Sorry, you are not registered on the site.",
-    "details_plase": "Please enter the details.",
-    "contact_technical_support": "Contact technical support",
-    "congratulations_change_phone": "Congratulations, the mobile number has been successfully changed.",
-    "the_remaining_time": "The remaining time :",
-    "new_mobile_number": "New mobile number ",
-    "upload_complaint_images": "Please upload the complaint images",
-    "no_favorites": " No list favorites",
-    "complaint_images": " Complaint Images",
-    "extra_services": "    Additional services",
-    "technical_evaluation": "Technical evaluation",
-    "tasks_completed": "Tasks Completed :",
-    "continuation": "Continuation",
-    "automatic_renewal": "Automatic renewal",
-    "congratulations": "Congratulations, you have successfully paid and subscribed to the package. You can specify the days of your visits",
-    "offer_price": "  Offer price    ",
-    "no_data": "No data",
-    "subscribe": "subscription",
-    "spare_name": "Spare part name",
-    "spare_price": " Spare part price  ",
-    "service_name": "Additional service name ",
-    "service_name_price": "Additional service price",
-    "the_order": "The order will be cancelled automatically within 2 hours if payment is not made.",
-    "problem_description": ": Problem description",
-    "place_description": ": Place description",
+    "about_the_site": "About the Site",
+    "engineer_evaluation": "Engineer Evaluation",
+    "how_was_your_experience": "How was your experience with",
+    "extra_services": "Extra Services",
+    "congratulations_rate": "Congratulations, you have been successfully rated",
+    "technical_evaluation": "Technical Evaluation",
+    "subscribe": "Subscribe",
+    "automatic_renewal": "Automatic Renewal",
+    "congratulations": "Congratulations! The package subscription and payment have been successfully completed. You can now choose your visit days.",
+    "continuation": "Continue",
+    "no_favorites": "No Favorites",
+    "tasks_completed": "Tasks Completed:",
+    "complaint_images": "Complaint Images",
+    "no_data": "No Subscriptions",
+    "offer_price": "Offer Price",
+    "spare_name": "Spare Part Name",
+    "spare_price": "Spare Part Price",
+    "service_name": "Additional Service Name",
+    "service_name_price": "Additional Service Price",
+    "the_order": "The order will be automatically canceled within two hours if payment is not made",
+    "problem_description": "Problem Description:",
+    "place_description": "Place Description:",
+    "reason": "Reason for rejecting the offer price",
+    "payment": "Payment",
+    "image_of_design": "3D Design Image",
+    "select_color": "Select the color of the image",
+    "choose_time": "Choose Time",
     "meter": "Meter",
     "depth": "Depth",
-    "image_of_design": "Image of design type (3D)",
-    "length": "Length",
-    "from_length": "Please enter the length ",
-    "Finished": "Finished",
-    "select_color": " Specify the color of the image ",
-    "engineer_evaluation": "Engineer Evaluation",
-    "how_was_your_experience": "  How was your experience with  ",
-    "payment": "Payment",
-    "congratulations_rate": "Congratulations, your evaluation has been submitted successfully.",
-    "how_want_delete_visit": "Are you sure you want to cancel the visit?",
-    "remain_visits": "Remaining visits",
+    "remain_visits": "Visits Remaining",
     "day": "Day",
-    "cancel": "Cancel",
-    "no_visits": "No visits",
-    "how_want_delete_package": "Are you sure you canceled the subscription successfully?",
-    "successfully_add_favorite": " Congratulations, the product has been added to your favorites",
+    "successfully_add_favorite": "Congratulations! The product has been added to your favorites",
     "loading": "Loading...",
     "loading_send": "Sending...",
-    "remove_from_favorites": "Remove from wishlist",
+    "remove_from_favorites": "Remove from Favorites",
     "sar": "SAR",
-    "successfully_add": "Congratulations, the product has been added to the cart",
+    "successfully_add": "Congratulations! The product has been added to the cart",
     "comments": "Comments",
-    "choose_payment_method": "Choose payment method",
-    "image_required": "Image required",
-    "how_want_delete_account": "Are you sure you want to delete your account? ",
-    "successfully_deleted": "The account has been successfully deleted",
-    "settings": "Settings",
-    "language": "Language",
+    "choose_payment_method": "Choose Payment Method",
+    "successfully_deleted": "Account successfully deleted",
+    "image_required": "Image is required",
+    "how_want_delete_account": "Are you sure you want to delete your account?",
+    "delete_account": "Delete Account",
     "edit_profile": "Edit Profile",
-    "change_mobile_number": "Change mobile number",
-    "change_mobile_number_sa": "Change mobile number",
-    "change_language": "Change  language",
-    "delete_account": "Delete account",
-    "complaint_details": " Complaint details",
-    "text_of_the_complaint": "  Text of the complaint    ",
-    "images": " Images ",
-    "management_response": "Management response",
-    "or_contact": "Or contact us via",
-    "massage": "Massage",
-    "enter_massage": "Please enter the message text",
-    "current_balance": "  Your current balance",
-    "the_wallet": "The wallet",
+    "change_mobile_number": "Change Phone Number",
+    "change_mobile_number_sa": "Change Mobile Number",
+    "change_language": "Change Language",
+    "complaint_details": "Complaint Details",
+    "upload_complaint_images": "Please upload the complaint images",
+    "text_of_the_complaint": "Complaint Text",
+    "images": "Images",
+    "management_response": "Management Response",
+    "the_wallet": "The Wallet",
     "shipping": "Shipping",
-    "Unsubscribe": "Unsubscribe",
-    "complaints_inquiries": "  Complaints and inquiries  ",
-    "about_website": "About the site",
-    "aboutUs": "About Us",
+    "current_balance": "Your Current Balance",
     "terms_conditions": "Terms and Conditions",
-    "my_nice": " Favorite",
-    "clear_all": "Clear all",
-    "my_wallet": "My wallet",
-    "my_remains": "My remains",
-    "notifications": "notifications",
-    "cealr": "notifications",
+    "complaints_inquiries": "Complaints and Inquiries",
+    "my_wallet": "My Wallet",
+    "my_remains": "My Packages",
+    "my_nice": "Favorites",
+    "about_website": "About the Website",
+    "clear_all": "Clear All",
+    "price_offer_suitable": "Is the offer price suitable for you?",
     "yes": "Yes",
     "no": "No",
-    "service_price": "Service price",
-    "product_price": "Product price",
-    "installation_price": "Installation price",
-    "delivery_price": "Delivery price",
-    "discount_price": "Discount price",
-    "tax_value": "Tax value",
-    "total_price": "Total price",
-    "price_offer_suitable": "Is the price offer suitable for you?",
-    "reason": "Reason for rejecting the price offer",
-    "sizes": "sizes :",
-    "send": "  Send  ",
+    "sizes": "Sizes:",
+    "service_date_and_time": "Service Date and Time",
+    "tax_value": "Tax Value",
+    "discount_coupon": "Please add the discount coupon",
+    "discount_coupon_placeholder": "Please add the discount coupon",
+    "cancel": "Cancel",
+    "no_visits": "No Visits",
+    "how_want_delete_package": "Are you sure you want to cancel the subscription?",
+    "how_want_delete_visit": "Are you sure you want to cancel the visit?",
+    "length": "Length",
+    "from_length": "Please enter the length",
+    "welcome_back": "Welcome Back! Log in to continue your achievements.",
+    "total_price": "Total Price",
+    "service_price": "Service Price",
+    "product_price": "Product Price",
+    "installation_price": "Installation Price",
+    "delivery_price": "Delivery Price",
+    "discount_price": "Discount Price",
     "order_number": "Order Number",
     "order_date": "Order Date",
-    "service_date_and_time": "Service Date and Time",
-    "reorder": "reorder ",
-    "product_evaluation": "Product evaluation",
+    "reorder": "Reorder",
     "new": "New",
     "order_details": "Order Details",
-    "pending_payment": "Pending Payment",
+    "product_evaluation": "Product Evaluation",
     "waiting": "Waiting",
-    "details": "Details",
-    "current": "Current",
-    "payment_method": " Payment method ",
-    "electronic": "electronic",
-    "wallet": "wallet",
-    "home": "Home",
-    "share": "Subscription",
-    "products": "Products",
-    "construction": "Pool installation",
-    "textual_details": "Textual details",
+    "pending_payment": "Pending Payment",
+    "electronic": "Electronic",
+    "wallet": "Wallet",
+    "payment_method": "Payment Method",
+    "product_details": "Product Details",
     "Enter_the_following_data": "Enter the following data",
+    "Immediate_maintenance": "Immediate Maintenance",
+    "share": "Subscribe",
+    "Unsubscribe": "Unsubscribe",
+    "or_contact": "Or contact us via",
+    "profile": "Profile",
+    "massage": "Message",
+    "enter_massage": "Please enter the message text",
+    "language": "Language",
+    "home": "Home",
+    "products": "Products",
     "orders": "Orders",
-    "choose_time": "Choose time",
-    "admins": "المشرفين",
-    "users": "المستخدمين",
-    "reports": "التقارير",
-    "country_codes": "اكواد الدول",
-    "cities": "المدن",
-    "brands": "الماركات التجارية",
-    "faq": "الأسئلة الشائعة",
-    "seo": "Seo",
-    "categories": "الاقسام",
-    "features": "السمات",
-    "coupons": "كوبونات التخفيض",
-    "cancel_reasons": "أسباب الالغاء",
-    "social": "وسائل التواصل",
-    "intros": "الصفحات التعريفية",
-    "ads": "البانرات الإعلانية",
     "more": "More",
-    "profile": "Profile ",
+    "settings": "Settings",
+    "admins": "Admins",
+    "users": "Users",
+    "reports": "Reports",
+    "country_codes": "Country Codes",
+    "cities": "Cities",
+    "brands": "Brands",
+    "faq": "FAQ",
+    "seo": "SEO",
+    "categories": "Categories",
+    "features": "Features",
+    "coupons": "Discount Coupons",
+    "cancel_reasons": "Cancellation Reasons",
+    "social": "Social Media",
+    "intros": "Intro Pages",
+    "ads": "Ads Banners",
     "contact_us": "Contact Us",
     "welcome": "Welcome",
+    "current": "Current",
+    "Finished": "Finished",
+    "details": "Details",
+    "notifications": "Notifications",
     "main_sections": "Main Sections",
-    "online_store": "Online store",
-    "discount_coupon": "Discount Coupon (if available)",
-    "discount_coupon_placeholder": "Please add the discount coupon",
-    "immediate_maintenance": "Immediate maintenance",
-    "scheduled_maintenance": "Scheduled maintenance",
-    "the_highest": "the highest price",
-    "the_lowest": "the lowest price",
+    "online_store": "Online Store",
+    "construction": "Pool Construction and Establishment",
+    "immediate_maintenance": "Immediate Maintenance",
+    "scheduled_maintenance": "Scheduled Maintenance",
+    "the_highest": "Highest Price",
+    "the_lowest": "Lowest Price",
+    "the_most_popular": "Most Popular",
+    "the_least_popular": "Least Popular",
+    "the_most_commented": "Most Commented",
+    "the_least_commented": "Least Commented",
+    "the_most_viewed": "Most Viewed",
+    "the_least_viewed": "Least Viewed",
+    "the_most_rated": "Most Rated",
     "filter_by": "Filter by",
     "price": "Price",
-    "out_of_stock": "out Of Stock",
-    "product_details": "Product details",
     "Filters": "Filters",
-    "Cleaning_tools": "    Cleaning tools ",
-    "Chemicals": "  Chemicals   ",
-    "picture_problems": "Picture problems",
-    "please_problems": "Please upload pictures of the problem",
-    "send_request": "  Send request ",
-    "default_text": "Default text",
-    "auth": {
-      "upload": "Please upload your photo",
-      "invalid_date_selection": "Please select exactly {required} dates.",
-      "no_dates_selected": "You must select at least one date.",
-      "call_number_placeholder": "Enter your mobile number",
-      "update": "  update save  ",
-      "logout": "Log Out",
-      "height": "Height",
-      "width": "Width",
-      "Height": "Height",
-      "text_details": "Text details",
-      "Please_enter_height": "Please enter height",
-      "Please_enter_width": "Please enter width",
-      "Please_enter_Height": "Please enter Height",
-      "login": "Log In",
-      "spare_parts": "Spare parts",
-      "email": "Email",
-      "password": "Password",
-      "remember_me": "Remember Me",
-      "service_history": "Service history",
-      "Service_time": "Service time",
-      "problem_description": " Problem description ",
-      "the_site": " The site ",
-      "placeholder_the_site": " Please select a location. ",
-      "username": "Username",
-      "hint": "Please enter your account details to log in",
-      "call_number": "Mobile number",
-      "login_as_guest": "Login as guest",
-      "have_an_account": "Don't have an account?",
-      "create_a_new_account": "Create a new account",
-      "code_verification": "Code Verification",
-      "Please_enter_the_verification_code": "Please Enter The Verification Code",
-      "of_course": "To be sure",
-      "resend_code": "Resend The Code",
-      "remaining_time": ": Remaining Time ",
-      "register": "Register",
-      "login_register": "login",
-      "please_enter": "Please enter your account information to be able to log in",
-      "full_name": "Full Name",
-      "Name_of_the_account_holder": "Name of the Account Holder",
-      "name_bank": "Bank Name",
-      "iban": "IBAN Number",
-      "bank_account_number": "Bank Account Number",
-      "Please_upload": "Please upload your personal picture.",
-      "available": "Profile Picture (if available)",
+    "Cleaning_tools": "Cleaning Tools",
+    "Chemicals": "Chemicals",
+    "picture_problems": "Problem Images",
+    "please_problems": "Please upload problem images",
+    "send_request": "Send Request",
+    "send": "Send",
+    "textual_details": "Text Details",
+    "default_text": "Default Text",
+    "out_of_stock": "Out of Stock"
+  },
 
-      "placeholders": {
-        "specify_date": " Specify the service date",
-        "specify_time": " Set a service time",
-        "problem_description": " Problem description ",
-        "full_name": "Please enter your full name",
-        "Name_of_the_account_holder": "Please enter the name of the account holder",
-        "name_bank": "Please enter the bank name",
-        "iban": "Please enter the IBAN number",
-        "bank_account_number": "Please enter the bank account number",
-        "msg": "Write your message here.."
-      }
-    }
-  },
   "auth": {
-    "logout": "Log Out"
+    "logout": "Logout"
   },
+
   "inputs": {
     "site_search": {
-      "label": "البحث",
-      "placeholder": "قم بتحديد نوع البحث أولا"
+      "label": "Search",
+      "placeholder": "Specify the type of search first"
     },
     "name": {
-      "label": "الإسم",
-      "placeholder": "ادخل الإسم",
-      "required": "الإسم مطلوب"
+      "label": "Name",
+      "placeholder": "Enter name",
+      "required": "Name is required"
     },
     "email": {
-      "label": "البريد الإلكترونى",
-      "placeholder": "   Please enter the email address",
-      "required": "البريد الإلكترونى مطلوب",
-      "invalid": "البريد الإلكترونى غير صالح"
+      "label": "Email",
+      "placeholder": "Please enter the email",
+      "required": "Email is required",
+      "invalid": "Invalid email"
     },
-
     "username": {
-      "label": "اسم المستخدم",
-      "name": "  Client name    ",
-      "placeholder": "ادخل اسم المستخدم",
-      "required": "اسم المستخدم مطلوب"
+      "name": "Client Name",
+      "label": "Username",
+      "placeholder": "Enter username",
+      "required": "Username is required"
     },
     "new_username": {
-      "label": "اسم المستخدم الجديد",
-      "placeholder": "ادخل اسم المستخدم الجديد",
-      "required": "اسم المستخدم الجديد مطلوب"
+      "label": "New Username",
+      "placeholder": "Enter new username",
+      "required": "New username is required"
     },
     "job_name": {
-      "label": "اسم الوظيفة",
-      "placeholder": "ادخل اسم الوظيفة",
-      "required": "اسم الوظيفة مطلوب"
+      "label": "Job Title",
+      "placeholder": "Enter job title",
+      "required": "Job title is required"
     },
-
+    "job_name_ar": {
+      "label": "Job Title (in Arabic)",
+      "placeholder": "Enter job title (in Arabic)",
+      "required": "Job title (in Arabic) is required"
+    },
     "job_name_en": {
-      "label": "اسم الوظيفة (بالإنجليزية)",
-      "placeholder": "ادخل اسم الوظيفة (بالإنجليزية)",
-      "required": "اسم الوظيفة (بالإنجليزية) مطلوب"
+      "label": "Job Title (in English)",
+      "placeholder": "Enter job title (in English)",
+      "required": "Job title (in English) is required"
     },
     "permissions": {
-      "label": "الصلاحيات",
-      "placeholder": "ادخل الصلاحيات",
-      "required": "الصلاحيات مطلوبة"
+      "label": "Permissions",
+      "placeholder": "Enter permissions",
+      "required": "Permissions are required"
     },
     "phone": {
-      "label": "رقم الجوال",
-      "placeholder": "ادخل رقم الجوال",
-      "required": "رقم الجوال مطلوب"
+      "label": "Mobile Number",
+      "placeholder": "Enter mobile number",
+      "required": "Mobile number is required"
     },
     "new_phone": {
-      "label": "رقم الجوال الجديد",
-      "placeholder": "ادخل رقم الجوال الجديد",
-      "required": "رقم الجوال الجديد مطلوب"
+      "label": "New Mobile Number",
+      "placeholder": "Enter new mobile number",
+      "required": "New mobile number is required"
     },
     "country_code": {
       "label": "Country Code",
-      "placeholder": "Select Country Code",
+      "placeholder": "Choose country code",
       "required": "Country code is required",
-      "search": "Search for a country code",
-      "no_result": "No results found"
+      "search": "Search for country code",
+      "no_result": ""
     },
     "password": {
-      "label": "كلمة المرور",
-      "placeholder": "ادخل كلمة المرور",
-      "required": "كلمة المرور مطلوبة",
+      "label": "Password",
+      "placeholder": "Enter password",
+      "required": "Password is required",
       "invalid": {
-        "length": "كلمة المرور يجب الا تقل عن 6 حروف او ارقام"
+        "length": "Password must be at least 6 characters or numbers"
       }
     },
     "current_password": {
-      "label": "كلمة المرور الحالية",
-      "placeholder": "ادخل كلمة المرور الحالية",
-      "required": "كلمة المرور الحالية مطلوبة",
+      "label": "Current Password",
+      "placeholder": "Enter current password",
+      "required": "Current password is required",
       "invalid": {
-        "length": "كلمة المرور يجب الا تقل عن 6 حروف او ارقام"
+        "length": "Password must be at least 6 characters or numbers"
       }
     },
     "new_password": {
-      "label": "كلمة المرور الجديدة",
-      "placeholder": "ادخل كلمة المرور",
-      "required": "كلمة المرور الجديدة مطلوبة",
+      "label": "New Password",
+      "placeholder": "Enter password",
+      "required": "New password is required",
       "invalid": {
-        "length": "كلمة المرور يجب الا تقل عن 6 حروف او ارقام"
+        "length": "Password must be at least 6 characters or numbers"
       }
     },
     "confirm_new_password": {
-      "label": "تأكيد كلمة المرور الجديدة",
-      "placeholder": "ادخل كلمة المرور",
-      "required": "برجاء تأكيد كلمة المرور",
+      "label": "Confirm New Password",
+      "placeholder": "Enter password",
+      "required": "Please confirm the password",
       "invalid": {
-        "match": "كلمة المرور غير متطابقة"
+        "match": "Passwords do not match"
       }
     },
     "block_status": {
-      "label": "حالة الحظر",
-      "placeholder": "اختر حالة الحظر",
-      "required": "حالة الحظر مطلوبة",
-      "options": { "unblocked": "غير محظور", "blocked": "محظور" }
+      "label": "Block Status",
+      "placeholder": "Choose block status",
+      "required": "Block status is required",
+      "options": {
+        "unblocked": "Unblocked",
+        "blocked": "Blocked"
+      }
     },
     "chat": {
-      "placeholder": "يمكنك كتابة رسالتك هنا",
-      "placeholder_order": "رسالتك..",
-      "empty": "لا توجد محادثات بعد"
+      "placeholder": "You can type your message here",
+      "placeholder_order": "Your message..",
+      "empty": "No chats available yet"
     },
     "type": {
-      "label": "النوع",
-      "placeholder": "اختر النوع",
-      "required": "النوع مطلوب"
+      "label": "Type",
+      "placeholder": "Choose type",
+      "required": "Type is required"
     },
     "category": {
-      "label": "القسم",
-      "placeholder": "اختر القسم",
-      "required": "القسم مطلوب"
+      "label": "Category",
+      "placeholder": "Choose category",
+      "required": "Category is required"
     },
     "sub_category": {
-      "label": "القسم الفرعى",
-      "placeholder": "اختر القسم الفرعى",
-      "required": "القسم الفرعى مطلوب"
+      "label": "Subcategory",
+      "placeholder": "Choose subcategory",
+      "required": "Subcategory is required"
     },
     "product_name": {
-      "label": "اسم المنتج",
-      "placeholder": "ادخل اسم المنتج",
-      "required": "اسم المنتج مطلوب"
+      "label": "Product Name",
+      "placeholder": "Enter product name",
+      "required": "Product name is required"
     },
     "product_name_en": {
-      "label": "إسم المنتج (بالانجليزية)",
-      "placeholder": "ادخل إسم المنتج (بالانجليزية)",
-      "required": "إسم المنتج (بالانجليزية) مطلوب"
+      "label": "Product Name (in English)",
+      "placeholder": "Enter product name (in English)",
+      "required": "Product name (in English) is required"
     },
     "quantity": {
-      "label": "الكمية",
-      "placeholder": "ادخل الكمية",
-      "required": "الكمية مطلوبة",
-      "type_error": "يجب ان تكون الكمية رقما",
-      "min": "يجب ان لا تقل الكمية عن 1"
+      "label": "Quantity",
+      "placeholder": "Enter quantity",
+      "required": "Quantity is required",
+      "type_error": "Quantity must be a number",
+      "min": "Quantity cannot be less than 1"
     },
     "brand": {
-      "label": "العلامة التجارية",
-      "placeholder": "اختر العلامة التجارية",
-      "required": "العلامة التجارية مطلوبة"
+      "label": "Brand",
+      "placeholder": "Choose brand",
+      "required": "Brand is required"
     },
     "product_description": {
       "ar": {
-        "label": "وصف المنتج",
-        "placeholder": "ادخل وصف المنتج",
-        "required": "وصف المنتج مطلوبة"
+        "label": "Product Description",
+        "placeholder": "Enter product description",
+        "required": "Product description is required"
       },
       "en": {
-        "label": "وصف المنتج (بالانجليزية)",
-        "placeholder": "ادخل وصف المنتج (بالانجليزية)",
-        "required": "وصف المنتج (بالانجليزية) مطلوبة"
+        "label": "Product Description (in English)",
+        "placeholder": "Enter product description (in English)",
+        "required": "Product description (in English) is required"
       }
     },
     "price": {
-      "label": "السعر",
-      "placeholder": "ادخل السعر",
-      "required": "السعر مطلوب"
+      "label": "Price",
+      "placeholder": "Enter price",
+      "required": "Price is required"
     },
     "discount_type": {
-      "label": "نوع الخصم",
-      "placeholder": "ادخل نوع الخصم",
-      "required": "نوع الخصم مطلوب",
+      "label": "Discount Type",
+      "placeholder": "Enter discount type",
+      "required": "Discount type is required",
       "options": {
-        "ratio": "نسبة",
-        "number": "مبلغ",
-        "none": "لا يوجد"
+        "ratio": "Percentage",
+        "number": "Fixed Amount",
+        "none": "None"
       }
     },
     "discount_amount": {
-      "label": "قيمة الخصم",
-      "placeholder": "ادخل قيمة الخصم",
-      "required": "قيمة الخصم مطلوبة",
-      "val_error": "قيمة الخصم لا يمكن تكون أكبر من السعر",
-      "percent_error": "نسبة الخصم لا يمكن تكون أكبر من %100"
+      "label": "Discount Amount",
+      "placeholder": "Enter discount amount",
+      "required": "Discount amount is required",
+      "val_error": "Discount amount cannot be greater than the price",
+      "percent_error": "Discount percentage cannot exceed 100%"
     },
     "discount_expire": {
-      "label": "تاريخ انتهاء الخصم",
-      "placeholder": "ادخل تاريخ انتهاء الخصم",
-      "required": "تاريخ انتهاء الخصم مطلوبة",
-      "val_error": "تاريخ انتهاء الخصم لا يمكن تكون أكبر من السعر"
+      "label": "Discount Expiration Date",
+      "placeholder": "Enter discount expiration date",
+      "required": "Discount expiration date is required",
+      "val_error": "Discount expiration date cannot be greater than the price"
     },
     "select_attribute": {
-      "label": "تحديد السمة",
-      "placeholder": "اختر السمة",
-      "required": "السمة مطلوبة"
+      "label": "Select Attribute",
+      "placeholder": "Choose attribute",
+      "required": "Attribute is required"
     },
     "message_title": {
-      "label": "عنوان الرسالة",
-      "placeholder": "عنوان الرسالة هنا",
-      "required": "عنوان الرسالة مطلوب"
+      "label": "Message Title",
+      "placeholder": "Message title here",
+      "required": "Message title is required"
     },
     "message": {
-      "label": "رسالتك",
-      "placeholder": "قم بكتابة رسالتك هنا",
-      "required": "الرسالة مطلوبة"
+      "label": "Your Message",
+      "placeholder": "Type your message here",
+      "required": "Message is required"
     },
     "image": {
-      "label": "تحميل صورة",
-      "placeholder": "اضغط هنا تحميل صورة",
-      "required": "الصورة مطلوبة",
-      "click_drag": "اضغط لتحميل صورة او قم بسحبها وافلاتها هنا",
-      "browse": "تصفح ملفاتك",
-      "selected": "من الصور المحددة"
+      "label": "Upload Image",
+      "placeholder": "Click here to upload an image",
+      "required": "Image is required",
+      "click_drag": "Click to upload or drag and drop here",
+      "browse": "Browse your files",
+      "selected": "From selected images"
     },
-
     "city": {
-      "label": "المدينة",
-      "placeholder": "اختر المدينة",
-      "required": "المدينة مطلوبة",
-      "search": "ابحث عن المدينة"
+      "label": "City",
+      "placeholder": "Choose city",
+      "required": "City is required",
+      "search": "Search for city"
     },
     "notification": {
       "title_ar": {
-        "label": "عنوان الاشعار بالعربية",
-        "placeholder": "ادخل عنوان الاشعار بالعربية",
-        "required": "عنوان الاشعار بالعربية مطلوب"
+        "label": "Notification Title (in Arabic)",
+        "placeholder": "Enter notification title (in Arabic)",
+        "required": "Notification title (in Arabic) is required"
       },
       "title_en": {
-        "label": "عنوان الاشعار بالإنجليزية",
-        "placeholder": "ادخل عنوان الاشعار بالإنجليزية",
-        "required": "عنوان الاشعار بالإنجليزية مطلوب"
+        "label": "Notification Title (in English)",
+        "placeholder": "Enter notification title (in English)",
+        "required": "Notification title (in English) is required"
       },
       "body_ar": {
-        "label": "الرسالة بالإنجليزية",
-        "placeholder": "ادخل الرسالة بالإنجليزية",
-        "required": "الرسالة بالإنجليزية مطلوب"
+        "label": "Message (in Arabic)",
+        "placeholder": "Enter message (in Arabic)",
+        "required": "Message (in Arabic) is required"
       },
       "body_en": {
-        "label": "الرسالة بالإنجليزية",
-        "placeholder": "ادخل الرسالة بالإنجليزية",
-        "required": "الرسالة بالإنجليزية مطلوب"
+        "label": "Message (in English)",
+        "placeholder": "Enter message (in English)",
+        "required": "Message (in English) is required"
       }
     },
     "role": {
-      "label": "الدور الوظيفى",
-      "placeholder": "حدد الدور الوظيفى",
-      "required": "الدور الوظيفى مطلوب"
+      "label": "Role",
+      "placeholder": "Select role",
+      "required": "Role is required"
     },
     "role_name": {
       "ar": {
-        "label": "اسم الدور الوظيفى بالعربية",
-        "placeholder": "ادخل اسم الدور الوظيفى بالعربية",
-        "required": "اسم الدور الوظيفى بالعربية مطلوب"
+        "label": "Role Name (in Arabic)",
+        "placeholder": "Enter role name (in Arabic)",
+        "required": "Role name (in Arabic) is required"
       },
       "en": {
-        "label": "اسم الدور الوظيفى بالإنجليزية",
-        "placeholder": "ادخل اسم الدور الوظيفى بالإنجليزية",
-        "required": "اسم الدور الوظيفى بالإنجليزية مطلوب"
+        "label": "Role Name (in English)",
+        "placeholder": "Enter role name (in English)",
+        "required": "Role name (in English) is required"
       }
     },
     "name_ar": {
-      "label": "الاسم بالعربية",
-      "placeholder": "ادخل الاسم بالعربية",
-      "required": "الاسم بالعربية مطلوب"
+      "label": "Name (in Arabic)",
+      "placeholder": "Enter name (in Arabic)",
+      "required": "Name (in Arabic) is required"
     },
     "name_en": {
-      "label": "الاسم بالإنجليزية",
-      "placeholder": "ادخل الاسم بالإنجليزية",
-      "required": "الاسم بالإنجليزية مطلوب"
+      "label": "Name (in English)",
+      "placeholder": "Enter name (in English)",
+      "required": "Name (in English) is required"
     },
     "url": {
-      "label": "الرابط",
-      "placeholder": "ادخل الرابط",
-      "required": "الرابط مطلوب"
+      "label": "URL",
+      "placeholder": "Enter URL",
+      "required": "URL is required"
     },
     "method": {
-      "label": "نوع الإجراء",
-      "placeholder": "ادخل نوع الإجراء",
-      "required": "نوع الإجراء مطلوب"
+      "label": "Action Type",
+      "placeholder": "Enter action type",
+      "required": "Action type is required"
     },
     "ip": {
       "label": "IP",
-      "placeholder": "ادخل IP",
-      "required": "IP مطلوب"
+      "placeholder": "Enter IP",
+      "required": "IP is required"
     },
     "agent": {
-      "label": "المتصفح",
-      "placeholder": "ادخل المتصفح",
-      "required": "المتصفح مطلوب"
+      "label": "Browser",
+      "placeholder": "Enter browser",
+      "required": "Browser is required"
     },
     "report_subject": {
-      "label": "موضوع التقرير",
-      "placeholder": "ادخل موضوع التقرير",
-      "required": "موضوع التقرير مطلوب"
+      "label": "Report Subject",
+      "placeholder": "Enter report subject",
+      "required": "Report subject is required"
     },
     "question": {
-      "label": "عنوان السؤال",
-      "placeholder": "ادخل عنوان السؤال",
-      "required": "عنوان السؤال مطلوب"
+      "label": "Question Title",
+      "placeholder": "Enter question title",
+      "required": "Question title is required"
     },
     "question_ar": {
-      "label": "السؤال بالعربية",
-      "placeholder": "ادخل السؤال بالعربية",
-      "required": "السؤال بالعربية مطلوب"
+      "label": "Question (in Arabic)",
+      "placeholder": "Enter question (in Arabic)",
+      "required": "Question (in Arabic) is required"
     },
     "question_en": {
-      "label": "السؤال بالإنجليزية",
-      "placeholder": "ادخل السؤال بالإنجليزية",
-      "required": "السؤال بالإنجليزية مطلوب"
+      "label": "Question (in English)",
+      "placeholder": "Enter question (in English)",
+      "required": "Question (in English) is required"
     },
     "answer_ar": {
-      "label": "الإجابة بالعربية",
-      "placeholder": "ادخل الإجابة بالعربية",
-      "required": "الإجابة بالعربية مطلوبة"
+      "label": "Answer (in Arabic)",
+      "placeholder": "Enter answer (in Arabic)",
+      "required": "Answer (in Arabic) is required"
     },
     "answer_en": {
-      "label": "الإجابة بالإنجليزية",
-      "placeholder": "ادخل الإجابة بالإنجليزية",
-      "required": "الإجابة بالإنجليزية مطلوبة"
+      "label": "Answer (in English)",
+      "placeholder": "Enter answer (in English)",
+      "required": "Answer (in English) is required"
     },
     "key": {
       "label": "Key",
-      "placeholder": "ادخل Key",
-      "required": "Key مطلوب"
+      "placeholder": "Enter Key",
+      "required": "Key is required"
     },
     "meta_title": {
       "ar": {
-        "label": "عنوان Meta بالعربية",
-        "placeholder": "ادخل عنوان Meta بالعربية",
-        "required": "عنوان Meta بالعربية مطلوب"
+        "label": "Meta Title (in Arabic)",
+        "placeholder": "Enter Meta title (in Arabic)",
+        "required": "Meta title (in Arabic) is required"
       },
       "en": {
-        "label": "عنوان Meta بالإنجليزية",
-        "placeholder": "ادخل عنوان Meta بالإنجليزية",
-        "required": "عنوان Meta بالإنجليزية مطلوب"
+        "label": "Meta Title (in English)",
+        "placeholder": "Enter Meta title (in English)",
+        "required": "Meta title (in English) is required"
       }
     },
     "meta_description": {
       "ar": {
-        "label": "وصف Meta بالعربية",
-        "placeholder": "ادخل وصف Meta بالعربية",
-        "required": "وصف Meta بالعربية مطلوب"
+        "label": "Meta Description (in Arabic)",
+        "placeholder": "Enter Meta description (in Arabic)",
+        "required": "Meta description (in Arabic) is required"
       },
       "en": {
-        "label": "وصف Meta بالإنجليزية",
-        "placeholder": "ادخل وصف Meta بالإنجليزية",
-        "required": "وصف Meta بالإنجليزية مطلوب"
+        "label": "Meta Description (in English)",
+        "placeholder": "Enter Meta description (in English)",
+        "required": "Meta description (in English) is required"
       }
     },
     "meta_keywords": {
       "ar": {
-        "label": "مفاتيح Meta بالعربية",
-        "placeholder": "ادخل مفاتيح Meta بالعربية",
-        "required": "مفاتيح Meta بالعربية مطلوب"
+        "label": "Meta Keywords (in Arabic)",
+        "placeholder": "Enter Meta keywords (in Arabic)",
+        "required": "Meta keywords (in Arabic) are required"
       },
       "en": {
-        "label": "مفاتيح Meta بالإنجليزية",
-        "placeholder": "ادخل مفاتيح Meta بالإنجليزية",
-        "required": "مفاتيح Meta بالإنجليزية مطلوب"
+        "label": "Meta Keywords (in English)",
+        "placeholder": "Enter Meta keywords (in English)",
+        "required": "Meta keywords (in English) are required"
       }
     },
     "option_name": {
       "ar": {
-        "label": "اسم الخيار بالعربية",
-        "placeholder": "ادخل اسم الخيار بالعربية",
-        "required": "اسم الخيار بالعربية مطلوب"
+        "label": "Option Name (in Arabic)",
+        "placeholder": "Enter option name (in Arabic)",
+        "required": "Option name (in Arabic) is required"
       },
       "en": {
-        "label": "اسم الخيار بالإنجليزية",
-        "placeholder": "ادخل اسم الخيار بالإنجليزية",
-        "required": "اسم الخيار بالإنجليزية مطلوب"
+        "label": "Option Name (in English)",
+        "placeholder": "Enter option name (in English)",
+        "required": "Option name (in English) is required"
       }
     },
     "coupon": {
       "title": {
-        "label": "عنوان الكوبون",
-        "placeholder": "ادخل عنوان الكوبون",
-        "required": "عنوان الكوبون مطلوب"
+        "label": "Coupon Title",
+        "placeholder": "Enter coupon title",
+        "required": "Coupon title is required"
       },
       "type": {
-        "label": "نوع الخصم",
-        "placeholder": "ادخل نوع الخصم",
-        "required": "نوع الخصم مطلوب"
+        "label": "Discount Type",
+        "placeholder": "Enter discount type",
+        "required": "Discount type is required"
       },
       "max_use": {
-        "label": "عدد مرات الاستخدام",
-        "placeholder": "ادخل عدد مرات الاستخدام",
-        "required": "عدد مرات الاستخدام مطلوب"
+        "label": "Maximum Uses",
+        "placeholder": "Enter maximum uses",
+        "required": "Maximum uses is required"
       },
       "discount": {
-        "label": "قيمة الخصم",
-        "placeholder": "ادخل قيمة الخصم",
-        "required": "قيمة الخصم مطلوب"
+        "label": "Discount Value",
+        "placeholder": "Enter discount value",
+        "required": "Discount value is required"
       },
       "max_discount": {
-        "label": "أكبر قيمة للخصم",
-        "placeholder": "ادخل أكبر قيمة للخصم",
-        "required": "أكبر قيمة للخصم مطلوب"
+        "label": "Maximum Discount Value",
+        "placeholder": "Enter maximum discount value",
+        "required": "Maximum discount value is required"
       },
       "start_date": {
-        "label": "تاريخ البداية",
-        "placeholder": "ادخل تاريخ البداية",
-        "required": "تاريخ البداية مطلوب"
+        "label": "Start Date",
+        "placeholder": "Enter start date",
+        "required": "Start date is required"
       },
       "expire_date": {
-        "label": "تاريخ الانتهاء",
-        "placeholder": "ادخل تاريخ الانتهاء",
-        "required": "تاريخ الانتهاء مطلوب"
+        "label": "Expiration Date",
+        "placeholder": "Enter expiration date",
+        "required": "Expiration date is required"
       }
     },
     "cancel_reason": {
-      "label": "سبب الالغاء",
-      "placeholder": "ادخل سبب الالغاء",
-      "required": "سبب الالغاء مطلوب",
+      "label": "Cancellation Reason",
+      "placeholder": "Enter cancellation reason",
+      "required": "Cancellation reason is required",
       "ar": {
-        "label": "سبب الالغاء بالعربية",
-        "placeholder": "ادخل سبب الالغاء بالعربية",
-        "required": "سبب الالغاء بالعربية مطلوب"
+        "label": "Cancellation Reason (in Arabic)",
+        "placeholder": "Enter cancellation reason (in Arabic)",
+        "required": "Cancellation reason (in Arabic) is required"
       },
       "en": {
-        "label": "سبب الالغاء بالانجليزية",
-        "placeholder": "ادخل سبب الالغاء بالانجليزية",
-        "required": "سبب الالغاء بالانجليزية مطلوب"
+        "label": "Cancellation Reason (in English)",
+        "placeholder": "Enter cancellation reason (in English)",
+        "required": "Cancellation reason (in English) is required"
       }
     },
     "link": {
-      "label": "الرابط",
-      "placeholder": "ادخل الرابط",
-      "required": "الرابط مطلوب",
-      "invalid": "الرابط غير صالح"
+      "label": "Link",
+      "placeholder": "Enter link",
+      "required": "Link is required",
+      "invalid": "Invalid link"
     },
     "title": {
-      "label": "العنوان",
-      "placeholder": "ادخل العنوان",
-      "required": "العنوان مطلوب",
+      "label": "Title",
+      "placeholder": "Enter title",
+      "required": "Title is required",
       "ar": {
-        "label": "العنوان بالعربية",
-        "placeholder": "ادخل العنوان بالعربية",
-        "required": "العنوان بالعربية مطلوب"
+        "label": "Title (in Arabic)",
+        "placeholder": "Enter title (in Arabic)",
+        "required": "Title (in Arabic) is required"
       },
       "en": {
-        "label": "العنوان بالإنجليزية",
-        "placeholder": "ادخل العنوان بالإنجليزية",
-        "required": "العنوان بالإنجليزية مطلوب"
+        "label": "Title (in English)",
+        "placeholder": "Enter title (in English)",
+        "required": "Title (in English) is required"
       }
     },
     "description": {
       "ar": {
-        "label": "الوصف بالعربية",
-        "placeholder": "ادخل الوصف بالعربية",
-        "required": "الوصف بالعربية مطلوب"
+        "label": "Description (in Arabic)",
+        "placeholder": "Enter description (in Arabic)",
+        "required": "Description (in Arabic) is required"
       },
       "en": {
-        "label": "الوصف بالإنجليزية",
-        "placeholder": "ادخل الوصف بالإنجليزية",
-        "required": "الوصف بالإنجليزية مطلوب"
+        "label": "Description (in English)",
+        "placeholder": "Enter description (in English)",
+        "required": "Description (in English) is required"
       }
     },
     "content": {
       "ar": {
-        "label": "المحتوى بالعربية",
-        "placeholder": "ادخل المحتوى بالعربية",
-        "required": "المحتوى بالعربية مطلوب"
+        "label": "Content (in Arabic)",
+        "placeholder": "Enter content (in Arabic)",
+        "required": "Content (in Arabic) is required"
       },
       "en": {
-        "label": "المحتوى بالإنجليزية",
-        "placeholder": "ادخل المحتوى بالإنجليزية",
-        "required": "المحتوى بالإنجليزية مطلوب"
+        "label": "Content (in English)",
+        "placeholder": "Enter content (in English)",
+        "required": "Content (in English) is required"
       }
     },
     "ad_order": {
-      "label": "ترتيب الإعلان",
-      "placeholder": "ادخل ترتيب الإعلان",
-      "required": "ترتيب الإعلان مطلوب"
+      "label": "Ad Order",
+      "placeholder": "Enter ad order",
+      "required": "Ad order is required"
     },
     "product_id": {
-      "label": "رقم المنتج",
-      "placeholder": "ادخل رقم المنتج",
-      "required": "رقم المنتج مطلوب"
+      "label": "Product ID",
+      "placeholder": "Enter product ID",
+      "required": "Product ID is required"
     },
-    "required": "مطلوب",
-    "optional": "اختياري"
+    "required": "Required",
+    "optional": "Optional"
   },
   "home": {
-    "month_summary": "ملخص الشهر",
-    "orders": "الطلبات",
-    "visitors": "الزائرين",
-    "sales": "المبيعات",
-    "targets": "هدف الشهر",
-    "more_reports": "المزيد من التقارير",
-    "notifications": "الاشعارات",
-    "newest_orders": "احدث الطلبات",
-    "sold_out_products": "المنتجات المباعة"
+    "month_summary": "Monthly Summary",
+    "orders": "Orders",
+    "visitors": "Visitors",
+    "sales": "Sales",
+    "targets": "Monthly Target",
+    "more_reports": "More Reports",
+    "notifications": "Notifications",
+    "newest_orders": "Newest Orders",
+    "sold_out_products": "Sold Out Products"
   },
   "admins": {
     "roles": {
-      "this": "الأدوار الوظيفية",
-      "single": "الدور الوظيفى",
+      "this": "Job Roles",
+      "single": "Job Role",
       "role": {
-        "this": "دور",
-        "create": "إنشاء دور وظيفي جديد",
-        "edit": "تعديل الدور الوظيفي"
+        "this": "Role",
+        "create": "Create New Job Role",
+        "edit": "Edit Job Role"
       },
       "filter": {
-        "title": "فرز الأدوار حسب"
+        "title": "Filter Roles By"
       }
     },
-    "create": "اضافة مشرف",
+    "create": "Add Admin",
     "status": {
-      "blocked": "محظور",
-      "unblocked": "غير محظور"
+      "blocked": "Blocked",
+      "unblocked": "Unblocked"
     },
-    "admin_data": "بيانات المشرف",
-    "permissions": { "this": "صلاحيات المشرف", "empty": "لا يوجد صلاحيات" },
+    "admin_data": "Admin Data",
+    "permissions": {
+      "this": "Admin Permissions",
+      "empty": "No Permissions Available"
+    },
     "filter": {
-      "title": "فرز المشرفين حسب"
+      "title": "Filter Admins By"
     }
   },
   "users": {
     "user": "User",
     "location": "Location",
     "lang": "Language",
-    "phone": "Phone number",
-    "actions": "Customer options",
+    "phone": "Phone Number",
+    "actions": "Client Options",
     "rules": {
-      "this": "Job roles"
+      "this": "Job Roles"
     },
-    "create": "اضافة مستخدم",
-    "edit": "تعديل مستخدم"
+    "create": "Add User",
+    "edit": "Edit User"
   },
   "reports": {
-    "this": "التقارير",
-    "show": "عرض التقرير"
+    "this": "Reports",
+    "show": "Show Report"
   },
   "brand": {
-    "this": "الماركة التجارية",
-    "create": "اضافة ماركة جديدة",
-    "edit": "تعديل الماركة التجارية",
-    "delete": "حذف الماركة نهائيا",
-    "filter": "فرز الماركات التجارية حسب"
+    "this": "Brand",
+    "create": "Add New Brand",
+    "edit": "Edit Brand",
+    "delete": "Delete Brand Permanently",
+    "filter": "Filter Brands By"
   },
   "city": {
-    "this": "المدينة",
-    "create": "اضافة مدينة جديدة",
-    "edit": "تعديل المدينة",
-    "delete": "حذف المدينة نهائيا",
-    "filter": "فرز المدن حسب",
-    "empty": "لا يوجد مدن"
+    "this": "City",
+    "create": "Add New City",
+    "edit": "Edit City",
+    "delete": "Delete City Permanently",
+    "filter": "Filter Cities By",
+    "empty": "No Cities Available"
   },
   "faq": {
-    "create": "اضافة سؤال جديد",
-    "view": "عرض السؤال",
-    "edit": "تعديل السؤال",
-    "delete": "حذف السؤال",
-    "filter": "فرز الأسئلة حسب"
+    "create": "Add New Question",
+    "view": "View Question",
+    "edit": "Edit Question",
+    "delete": "Delete Question",
+    "filter": "Filter Questions By"
   },
   "seo": {
-    "view": "عرض Seo",
-    "edit": "تعديل Seo",
-    "filter": "فرز Seo حسب"
+    "view": "View SEO",
+    "edit": "Edit SEO",
+    "filter": "Filter SEO By"
   },
   "features": {
-    "create": "اضافة سمة جديدة",
-    "view": "عرض السمة",
-    "edit": "تعديل السمة",
-    "delete": "حذف السمة",
-    "filter": "فرز السمات حسب",
+    "create": "Add New Feature",
+    "view": "View Feature",
+    "edit": "Edit Feature",
+    "delete": "Delete Feature",
+    "filter": "Filter Features By",
     "options": {
-      "this": "خيارات السمة",
-      "create": "اضافة خيار جديد",
-      "edit": "تعديل خيار",
-      "delete": "حذف خيار",
-      "empty": "لا توجد خيارات قم بإضافة بعض الخيارات لتظهر هنا"
+      "this": "Feature Options",
+      "create": "Add New Option",
+      "edit": "Edit Option",
+      "delete": "Delete Option",
+      "empty": "No Options Available. Add some to see them here."
     }
   },
   "coupons": {
-    "create": "اضافة كوبون جديد",
-    "view": "عرض الكوبون",
-    "edit": "تعديل الكوبون",
-    "delete": "حذف الكوبون",
-    "filter": "فرز الكوبونات حسب",
+    "create": "Add New Coupon",
+    "view": "View Coupon",
+    "edit": "Edit Coupon",
+    "delete": "Delete Coupon",
+    "filter": "Filter Coupons By",
     "type": {
-      "number": "رقم ثابت",
-      "ratio": "نسبة مئوية"
+      "number": "Fixed Number",
+      "ratio": "Percentage"
     },
     "status": {
-      "available": "متاح",
-      "expire": "منتهى الصلاحية",
-      "usage_end": "انتهت مرات الاستخدام",
-      "closed": "مغلق"
+      "available": "Available",
+      "expire": "Expired",
+      "usage_end": "Usage Limit Reached",
+      "closed": "Closed"
     }
   },
   "cancel_reasons": {
-    "create": "اضافة سبب جديد",
-    "view": "عرض السبب",
-    "edit": "تعديل السبب",
-    "delete": "حذف السبب",
-    "filter": "فرز أسباب الالغاء حسب"
+    "create": "Add New Reason",
+    "view": "View Reason",
+    "edit": "Edit Reason",
+    "delete": "Delete Reason",
+    "filter": "Filter Cancellation Reasons By"
   },
   "socials": {
-    "added": "وسائل التواصل المضافة",
-    "create": "اضافة وسيلة تواصل جديدة",
-    "view": "عرض وسيلة التواصل",
-    "edit": "تعديل وسيلة التواصل",
-    "delete": "حذف وسيلة التواصل",
-    "filter": "فرز وسائل التواصل حسب",
-    "empty": "لا يوجد وسائل تواصل"
+    "added": "Added Social Media",
+    "create": "Add New Social Media",
+    "view": "View Social Media",
+    "edit": "Edit Social Media",
+    "delete": "Delete Social Media",
+    "filter": "Filter Social Media By",
+    "empty": "No Social Media Available"
   },
   "intros": {
-    "create": "اضافة صفحة جديدة",
-    "view": "عرض الصفحة التعريفية",
-    "edit": "تعديل الصفحة التعريفية",
-    "delete": "حذف الصفحة التعريفية",
-    "filter": "فرز الصفحات التعريفية حسب",
-    "empty": "لا توجد صفحات تعريفية"
+    "create": "Add New Intro Page",
+    "view": "View Intro Page",
+    "edit": "Edit Intro Page",
+    "delete": "Delete Intro Page",
+    "filter": "Filter Intro Pages By",
+    "empty": "No Intro Pages Available"
   },
   "ads": {
-    "create": "اضافة بانر إعلانى جديد",
-    "view": "عرض البانر الإعلانى",
-    "edit": "تعديل البانر الإعلانى",
-    "delete": "حذف البانر الإعلانى",
-    "filter": "فرز البانرات الإعلانية حسب",
-    "empty": "لا توجد بانرات إعلانية"
+    "create": "Add New Ad Banner",
+    "view": "View Ad Banner",
+    "edit": "Edit Ad Banner",
+    "delete": "Delete Ad Banner",
+    "filter": "Filter Ad Banners By",
+    "empty": "No Ad Banners Available"
   },
   "products": {
-    "filter": "فرز المنتجات حسب",
-    "empty": "لا توجد منتجات",
+    "filter": "Filter Products By",
+    "empty": "No Products Available",
     "item": {
       "status": {
-        "available": "متاح",
-        "unavailable": "غير متاح"
+        "available": "Available",
+        "unavailable": "Unavailable"
       },
-      "average_rate": "متوسط التقييمات",
-      "qty": "الكمية",
-      "create": "اضافة منتج جديد",
-      "view": "عرض المنتج",
-      "confirm_create": "تأكيد اضافة المنتج",
-      "confirm_edit": "تأكيد بيانات المنتج",
-      "edit": "تعديل المنتج",
-      "delete": "حذف المنتج",
-      "sure_delete": "هل تريد حذف هذا المنتج؟",
+      "average_rate": "Average Ratings",
+      "qty": "Quantity",
+      "create": "Add New Product",
+      "view": "View Product",
+      "confirm_create": "Confirm Adding Product",
+      "confirm_edit": "Confirm Product Details",
+      "edit": "Edit Product",
+      "delete": "Delete Product",
+      "sure_delete": "Are you sure you want to delete this product?",
       "types": {
-        "simple": "بسيط",
-        "multi": "متعدد السمات"
+        "simple": "Simple",
+        "multi": "Multi-Attribute"
       }
     },
     "attribute": {
-      "this": "السمة",
-
+      "this": "Attribute",
       "plural": {
-        "this": "السمات",
-        "add": "اضافة السمات",
-        "edit": "تعديل السمات"
+        "this": "Attributes",
+        "add": "Add Attributes",
+        "edit": "Edit Attributes"
       }
     },
     "group": {
-      "this": "المجموعة",
-
+      "this": "Group",
       "plural": {
-        "this": "المجموعات",
-        "add": "اضافة المجموعات",
-        "confirm_add": "تأكيد الإضافة",
-        "edit": "تعديل المجموعات"
+        "this": "Groups",
+        "add": "Add Groups",
+        "confirm_add": "Confirm Addition",
+        "edit": "Edit Groups"
       },
       "delete": {
-        "this": "حذف",
-        "sure": "هل انت متأكد من حذف المجموعة؟"
+        "this": "Delete",
+        "sure": "Are you sure you want to delete the group?"
       },
       "choose_main": {
-        "title": "أختر منتج العرض الرئيسي",
-        "description": "يجب اختيار احد المنتجات ليكون منتج العرض الاساسي بتطبيق و موقع العميل",
-        "change_success": "تم ارسال بيانات المنتج بنجاح وسيتم المراجعه من الادارة"
+        "title": "Choose Main Display Product",
+        "description": "You must choose one product to be the main display product in the client’s app and website",
+        "change_success": "The product details have been successfully sent and will be reviewed by the administration"
       }
     }
   },
   "table": {
     "admins": {
-      "phone": "رقم الهاتف",
-      "status": "الحالة",
-      "image": "الصورة"
+      "phone": "Phone Number",
+      "status": "Status",
+      "image": "Image"
     },
     "role": {
-      "name": "اسم الدور"
+      "name": "Role Name"
     },
     "faq": {
-      "question": "السؤال"
+      "question": "Question"
     },
     "seo": {
       "key": "Key",
-      "meta_title": "عنوان Meta"
+      "meta_title": "Meta Title"
     },
     "coupons": {
-      "title": "عنوان الكوبون",
-      "type": "نوع الخصم",
-      "value": "قيمة الخصم",
-      "start": "تاريخ بداية الكوبون",
-      "end": "تاريخ انتهاء الكوبون",
+      "title": "Coupon Title",
+      "type": "Discount Type",
+      "value": "Discount Value",
+      "start": "Coupon Start Date",
+      "end": "Coupon End Date",
       "actions": {
-        "open": "فتح الكوبون",
-        "close": "إغلاق الكوبون",
-        "notify": "إرسال اشعار"
+        "open": "Open Coupon",
+        "close": "Close Coupon",
+        "notify": "Send Notification"
       }
     },
     "cancel_reasons": {
-      "title": "العنوان"
+      "title": "Title"
     },
     "ads": {
-      "order": "الترتيب"
+      "order": "Order"
     },
-    "phone": "رقم الهاتف",
-    "email": "البريد الالكتروني",
-    "status": "الحالة",
-    "loading": "جاري التحميل",
-    "empty": "لا يوجد بيانات",
-    "user": "المستخدم",
-    "city": "المدينة",
-    "country_code": "كود الدولة",
-    "controles": "التحكم",
-    "image": "الصورة",
-    "name": "الاسم",
-    "create": "اضافة",
-    "date": "التاريخ",
-    "title": "العنوان",
-    "reports": { "report": "التقرير", "ip": "IP" }
+    "phone": "Phone Number",
+    "email": "Email",
+    "status": "Status",
+    "loading": "Loading",
+    "empty": "No Data Available",
+    "user": "User",
+    "city": "City",
+    "country_code": "Country Code",
+    "controles": "Controls",
+    "image": "Image",
+    "name": "Name",
+    "create": "Add",
+    "date": "Date",
+    "title": "Title",
+    "reports": { "report": "Report", "ip": "IP" }
   },
-
   "validation": {
-    "invalid_iban": " The IBAN is invalid ",
-    "invalid_time": "Write the time digitally as 00:00",
+    "invalid_iban": "Invalid IBAN",
     "required": "This field is required",
     "otp_required": "OTP is required",
+    "only_digits": "Must be a number",
+    "invalid_time": "Enter time in digital format (00:00)",
     "otp_must_be_4_digits": "OTP must be 4 digits",
-    "email": "Invalid email address",
+    "email": "Invalid email",
     "min": "Must be at least {min} characters",
-    "max": "Must be at most {max} characters",
-    "phone_only_digits": "Phone number Must be only digits",
-    "only_digits": " Must be only digits",
-    "charge_amount_only_digits": "Charge amount Must be only digits",
-    "phone_at_least_9": "Phone number Must be at least 9 digits",
-    "phone_cannot_be_longer_than_10": "Phone number Cannot be longer than 10 digits",
+    "max": "Must not exceed {max} characters",
+    "min_n": "Must be at least {min} numbers",
+    "max_n": "Must not exceed {max} numbers",
+    "phone_only_digits": "Phone number must contain only numbers",
+    "charge_amount_only_digits": "Charge amount must contain only numbers",
+    "phone_at_least_9": "Phone number must be at least 9 digits",
+    "phone_cannot_be_longer_than_10": "Phone number cannot exceed 10 digits",
     "login": {
-      "invalid_email": "البريد غير صحيح",
-      "required_email": "البريد الالكتروني مطلوب",
-      "least_password": "يجب أن يكون على الأقل 8 خانات",
-      "required_password": "كلمة المرور مطلوبه"
+      "invalid_email": "Invalid email",
+      "required_email": "Email is required",
+      "least_password": "Must be at least 8 characters",
+      "required_password": "Password is required"
     }
   },
-  "delete": "حذف",
+  "delete": "Delete",
   "delete_selected": {
-    "this": "حذف المحدد",
-    "title": "هل تريد حذف المحدد؟"
+    "this": "Delete Selected",
+    "title": "Do you want to delete the selected items?"
   },
-
-  "select_all": "تحديد الكل",
-  "deselect_all": "إلغاء الكل",
-  "show": "عرض",
-  "create": "اضافة",
-  "edit": "تعديل",
-  "save": "حفظ",
-  "cancel": "الغاء",
-  "confirm": "تأكيد",
-  "close": "اغلاق",
-  "search": "بحث",
-  "block": "حظر",
-  "unblock": "إلغاء الحظر",
-  "send_notification": "إرسال اشعار",
-  "send_notification_all": "إرسال اشعار للكل",
-  "send_notification_selected": "إرسال اشعار للمحدد",
-  "not_found": "غير موجود",
-  "country_code_data": "بيانات كود الدولة",
-  "active": "مفعل",
-  "inactive": "غير مفعل",
-  "activate": "تفعيل",
-  "deactivate": "إلغاء التفعيل",
-  "loading": "جاري التحميل",
-  "already_chose": "لقد اخترت بالفعل",
-  "added": "تمت إضافة",
-  "save_changes": "حفظ التغييرات",
+  "select_all": "Select All",
+  "deselect_all": "Deselect All",
+  "show": "Show",
+  "create": "Add",
+  "edit": "Edit",
+  "save": "Save",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "close": "Close",
+  "search": "Search",
+  "block": "Block",
+  "unblock": "Unblock",
+  "send_notification": "Send Notification",
+  "send_notification_all": "Send Notification to All",
+  "send_notification_selected": "Send Notification to Selected",
+  "not_found": "Not Found",
+  "country_code_data": "Country Code Data",
+  "active": "Active",
+  "inactive": "Inactive",
+  "activate": "Activate",
+  "deactivate": "Deactivate",
+  "loading": "Loading",
+  "already_chose": "Already Selected",
+  "added": "Added",
+  "save_changes": "Save Changes",
   "filter": {
-    "title": "فرز حسب",
-    "this": "تصفية",
-    "show_results": "عرض النتائج",
-    "reset": "اعادة تعيين"
+    "title": "Filter By",
+    "this": "Filter",
+    "show_results": "Show Results",
+    "reset": "Reset"
   },
-
-  "currency": "ر.س"
+  "currency": "SAR"
 }

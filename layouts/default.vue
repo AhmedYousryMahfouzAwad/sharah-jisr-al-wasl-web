@@ -1,9 +1,7 @@
 <template>
   <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
     <nav class="bg-white shadow-md w-full">
-      <div
-        class="container mx-auto px-4 flex items-center justify-between py-3"
-      >
+      <div class="container mx-auto px-4 flex items-center justify-between">
         <!-- Logo -->
         <div class="flex items-center">
           <img src="../public/logo.png" alt="Logo" class="w-24" />
