@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-5">
+  <div class="mx-auto">
     <div
       class="flex col-span-12 flex-col items-center relative shadow-lg p-2 rounded-lg bg-white max-w-lg mx-auto justify-center my-5 w-full z-10"
     >
@@ -178,7 +178,7 @@
         </div>
 
         <div class="w-[100%] md:px-0 px-2">
-          <button
+          <!-- <button
             @click="logoutGuestAuth"
             :disabled="isLoading"
             type="button"
@@ -193,7 +193,7 @@
               class="text-primary-1 mx-3 hover:underline transition duration-200"
               >{{ t("pages.loading") }}</span
             >
-          </button>
+          </button> -->
 
           <BaseDialog v-model:visible="visible" class="w-full max-w-xl mx-2">
             <template #content>

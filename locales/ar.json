@@ -8,6 +8,8 @@
     "warranty": "الضمان"
   },
   "pages": {
+    "please_enter_verification": " يرجي إدخال رمز التحقق المرسل إلي ",
+    "verification_code": " رمز التحقق ",
     "mobile_number": "رقم الجوال",
     "privacy_policy": " سياسة الخصوصية",
     "client": " عميل ",
@@ -96,7 +98,6 @@
     "length": " الطول ",
     "from_length": " من فضلك ادخل الطول ",
     "welcome_back": " أهلاً بعودتك! سجّل دخولك لمتابعة إنجازاتك.",
-
     "total_price": " الاجمالي ",
     "service_price": "سعر الخدمة",
     "product_price": "سعر المنتج",

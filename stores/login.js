@@ -10,9 +10,9 @@ export const useLoginStore = defineStore("login", () => {
   const { locale } = useI18n();
   const token = ref("");
   const device_type = ref("web");
-  const country_code = ref(966);
+  const country_code = ref(useCookie("country_code").value);
+  const phone = ref(null || useCookie("phone").value);
   const code = ref(null);
-  const phone = ref(null);
   const otpInput = ref("");
   const uploadedImage = ref("");
   const email = ref("");
@@ -33,7 +33,13 @@ export const useLoginStore = defineStore("login", () => {
       getSuccess: true,
       onSuccess: () => {
         setTimeout(() => {
+          useCookie("country_code").value = resultData.value.country_code;
+          useCookie("phone").value = resultData.value.phone;
+          // useCookie("country_code", resultData.value.country_code);
+          // useCookie("phone", resultData.value.phone);
           router.push(localePath("auth-Otp"));
+          country_code.value = resultData.value.country_code;
+          phone.value = resultData.value.phone;
         }, 1000);
       },
     });
@@ -42,7 +48,7 @@ export const useLoginStore = defineStore("login", () => {
   //sendOtp
   const sendOtp = async (payload) => {
     await fetchData({
-      url: `user/check-code`,
+      url: `api/user/verify-login`,
       method: "post",
       body: payload,
       getSuccess: true,
@@ -77,7 +83,7 @@ export const useLoginStore = defineStore("login", () => {
   //resendOtp
   const resendOtp = async (payload) => {
     await fetchData({
-      url: `user/resend-code`,
+      url: `api/user/resend-code`,
       method: "post",
       body: payload,
       getSuccess: true,
