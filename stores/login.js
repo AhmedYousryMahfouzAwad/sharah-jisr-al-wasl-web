@@ -10,7 +10,7 @@ export const useLoginStore = defineStore("login", () => {
   const { locale } = useI18n();
   const token = ref("");
   const device_type = ref("web");
-  const country_code = ref(useCookie("country_code").value);
+
   const phone = ref(null || useCookie("phone").value);
   const code = ref(null);
   const otpInput = ref("");
@@ -23,24 +23,52 @@ export const useLoginStore = defineStore("login", () => {
   const lang = ref(locale.value);
   const iban = ref("");
   const timerActive = ref(false);
-  // fetch country codes data
+  const macCookie = useCookie("macAddress", {
+    maxAge: 60 * 60 * 24 * 7, // Cookie expires in 7 days
+    secure: true, // Ensures secure transmission over HTTPS
+    httpOnly: false, // Accessible from JavaScript
+  });
 
-  const sendLogin = async (payload) => {
+  const generateRandomMacAddress = () => {
+    return Array.from({ length: 6 }, () =>
+      Math.floor(Math.random() * 256)
+        .toString(16)
+        .padStart(2, "0")
+    ).join(":");
+  };
+
+  //mac address
+  if (!macCookie.value) {
+    // Generate and set a random MAC address in the cookie
+    macCookie.value = generateRandomMacAddress();
+    console.log("New MAC Address cookie set:", macCookie.value);
+  } else {
+    console.log("Existing MAC Address cookie found:", macCookie.value);
+  }
+
+  //user login
+  const sendLogin = async (data) => {
+    const url =
+      data.type === "provider" ? `api/provider/login` : `api/user/login`;
     await fetchData({
-      url: `api/user/login`,
+      url,
       method: "post",
-      body: payload,
+      body: data.payload,
       getSuccess: true,
       onSuccess: () => {
         setTimeout(() => {
-          useCookie("country_code").value = resultData.value.country_code;
+          useCookie("country_code").value = data.payload.country_code;
           useCookie("phone").value = resultData.value.phone;
-          // useCookie("country_code", resultData.value.country_code);
-          // useCookie("phone", resultData.value.phone);
-          router.push(localePath("auth-Otp"));
-          country_code.value = resultData.value.country_code;
-          phone.value = resultData.value.phone;
+
+          if (data.type === "provider") {
+            router.push(localePath({ name: "auth-otp-provider" }));
+          } else {
+            router.push(localePath("auth-Otp"));
+          }
         }, 1000);
+      },
+      onNeedActive: () => {
+        router.push(localePath("auth-Otp"));
       },
     });
   };
@@ -63,10 +91,14 @@ export const useLoginStore = defineStore("login", () => {
 
         authCookie.value = resultData.value;
         token.value = resultData.value.token;
+
         nextTick(async () => {
           setAuth();
           setTimeout(() => {
             router.push(localePath("index"));
+            otpInput.value = "";
+            // country_code.value = "";
+            // phone.value = "";
           }, 1000);
         });
       },
@@ -116,11 +148,13 @@ export const useLoginStore = defineStore("login", () => {
     sendOtp,
     resendOtp,
     register,
+    generateRandomMacAddress,
+
     //STATE
     loading,
     code,
     device_type,
-    country_code,
+
     phone,
     otpInput,
     email,
@@ -133,5 +167,6 @@ export const useLoginStore = defineStore("login", () => {
     uploadedImage,
     token,
     timerActive,
+    macCookie,
   };
 });

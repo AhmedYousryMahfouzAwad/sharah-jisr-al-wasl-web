@@ -9,8 +9,9 @@
       </p>
 
       <p class="text-center text-sm font-bold">
-        {{ t("pages.please_enter_verification") }} {{ phone }}
-        {{ useCookie("country_code") }}
+        {{ t("pages.please_enter_verification") }} {{ phone }} +{{
+          country_code
+        }}
       </p>
 
       <div class="card flex-col flex justify- items-center mx-auto">
@@ -94,6 +95,7 @@
 <script setup>
 // imports
 import illustration from "../../public/img/Illustration.png";
+import img_otp from "@/assets/img/otp.png";
 import * as yup from "yup";
 import { Field, useForm } from "vee-validate";
 
@@ -102,7 +104,7 @@ const loading = ref(false);
 const { t } = useI18n();
 const loginStore = useLoginStore();
 const { sendOtp, resendOtp } = loginStore;
-const { phone, otpInput, device_type, timerActive } = storeToRefs(
+const { phone, otpInput, country_code, device_type, timerActive } = storeToRefs(
   useLoginStore()
 );
 

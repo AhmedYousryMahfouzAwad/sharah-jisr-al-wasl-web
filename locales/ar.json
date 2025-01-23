@@ -8,6 +8,7 @@
     "warranty": "الضمان"
   },
   "pages": {
+    "verify": "تحقق",
     "please_enter_verification": " يرجي إدخال رمز التحقق المرسل إلي ",
     "verification_code": " رمز التحقق ",
     "mobile_number": "رقم الجوال",

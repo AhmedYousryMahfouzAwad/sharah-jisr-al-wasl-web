@@ -8,6 +8,7 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "verify": " Verify",
     "please_enter_verification": "Please enter the verification code sent to",
     "verification_code": "Verification Code",
     "mobile_number": "Mobile Number",

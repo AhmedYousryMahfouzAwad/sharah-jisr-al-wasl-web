@@ -11,7 +11,7 @@
         v-if="imageSrc"
         :src="imageSrc"
         alt="button icon"
-        class="h-6 w-6 mr-2 object-contain justify-center items-center flex mt-1"
+        class="h-4 w-4 mr-2 object-contain justify-center items-center flex mt-1"
       />
     </span>
   </Button>
