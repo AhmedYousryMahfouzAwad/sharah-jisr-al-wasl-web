@@ -460,7 +460,12 @@
             :header="t('pages.auth.terms')"
             class="w-full max-w-xl mx-2"
           >
-            <template #content> </template>
+            <template #content>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
+              expedita nesciunt excepturi harum similique eos assumenda odit,
+              delectus debitis, eaque fugit et mollitia minus incidunt!
+              Inventore maxime alias neque exercitationem.
+            </template>
           </BaseDialog>
           <div
             class="text-center mt-3 mb-2 md:text-base text-xs flex justify-center items-center"

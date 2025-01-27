@@ -23,13 +23,13 @@
 .p-carousel-item-list {
   flex-direction: row-reverse !important;
 }
+
 .p-dialog-header {
   @apply bg-primary-2 !important;
-}
-.p-dialog-header {
-  padding: 10px !important;
+  padding: 8px !important;
   border: none !important;
-  border-radius: 8px !important;
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
 }
 
 .p-carousel-indicator-active .p-carousel-indicator-button {
