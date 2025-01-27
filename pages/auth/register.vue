@@ -341,27 +341,39 @@
                 </div>
               </div>
               <div class="flex items-center gap-2 mt-2">
-                <Checkbox
-                  v-model="pizza"
-                  inputId="ingredient1"
-                  name="pizza"
-                  value="Cheese"
-                />
-                <label for="ingredient1">
-                  <div class="flex justify-center items-center">
-                    <p>
-                      <span class="text-red-2">*</span>
-                      {{ t("pages.auth.agree") }}
-                    </p>
-                    <button
-                      type="button"
-                      class="text-primary-1 px-1 underline font-semibold"
-                      @click="visible = true"
-                    >
-                      {{ t("pages.auth.terms") }}
-                    </button>
-                  </div>
-                </label>
+                <Field
+                  v-model="check_box"
+                  name="check_box"
+                  type="text"
+                  v-slot="{ errorMessage, field }"
+                >
+                  <Checkbox
+                    v-model="check_box"
+                    inputId="ingredient1"
+                    name="check_box"
+                    value="Cheese"
+                  />
+                  <label for="ingredient1">
+                    <div class="flex justify-center items-center">
+                      <p>
+                        <span class="text-red-2">*</span>
+                        {{ t("pages.auth.agree") }}
+                      </p>
+                      <button
+                        type="button"
+                        class="text-primary-1 px-1 underline font-semibold"
+                        @click="visible = true"
+                      >
+                        {{ t("pages.auth.terms") }}
+                      </button>
+                    </div>
+                  </label>
+                  <span
+                    v-if="errorMessage"
+                    class="error-message text-red-2 pt-3 font-bold text-sm flex flex-col justify-center items-center"
+                    >{{ errorMessage }} dfsdfsdfsdfsd</span
+                  >
+                </Field>
               </div>
             </div>
             <div v-else-if="currentTab === 'provider'">
@@ -500,6 +512,7 @@ import illustration from "../../public/img/Illustration.png";
 const activeSubTab = ref("individual");
 const setActiveSubTab = (tab) => (activeSubTab.value = tab);
 const currentTab = ref("client");
+import { Field, useForm } from "vee-validate";
 
 const tabs = [
   { name: "Client", content: "محتوى العميل" },
@@ -572,6 +585,8 @@ const validationSchema = yup.object({
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net)$/,
       t("validation.emailDomain")
     ),
+
+  check_box: yup.boolean().oneOf([true], t("validation.required_check")), // رسالة التحقق عند عدم تحديد الـ checkbox
 });
 
 const fileInput = ref(null);
@@ -597,7 +612,7 @@ const removeImage = () => {
 const { handleSubmit } = useForm({
   validationSchema,
 });
-const pizza = ref();
+const check_box = ref(false);
 
 // Lifecycle hooks;
 onMounted(async () => {

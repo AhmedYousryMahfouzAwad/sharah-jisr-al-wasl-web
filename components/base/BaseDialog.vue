@@ -3,7 +3,6 @@
     :visible="visible"
     :modal="modal"
     :header="header"
-    :label="label"
     class="md:max-w-xl max-w-7xl"
     @update:visible="updateVisible"
   >
@@ -19,11 +18,12 @@
     <div class="flex justify-center gap-2 mt-4">
       <Button
         type="button"
-        label="Cancel"
+        :label="t('pages.cancel')"
         v-show="show"
         severity="secondary"
         @click="handleCancel"
       />
+
       <ButtonAuth
         class="!w-28 my-5"
         type="button"
@@ -85,7 +85,7 @@ const handleCancel = () => {
 </script>
 
 <style scoped>
-  .p-dialog-header {
+.p-dialog-header {
   @apply bg-primary-1 !important;
 }
 /* Add any additional styles if needed */
