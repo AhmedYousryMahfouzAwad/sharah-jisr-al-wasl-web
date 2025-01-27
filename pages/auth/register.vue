@@ -455,14 +455,12 @@
         </div>
 
         <div class="w-[100%] md:px-0 px-2">
-          <BaseDialog v-model:visible="visible" class="w-full max-w-xl mx-2">
-            <template #content>
-              <span
-                class="text-surface-500 text-start font-bold text-sm dark:text-surface-400 block mb-8 mx-auto md:text-xl"
-              >
-                {{ t("pages.auth.terms") }}
-              </span>
-            </template>
+          <BaseDialog
+            v-model:visible="visible"
+            :header="t('pages.auth.terms')"
+            class="w-full max-w-xl mx-2"
+          >
+            <template #content> </template>
           </BaseDialog>
           <div
             class="text-center mt-3 mb-2 md:text-base text-xs flex justify-center items-center"
