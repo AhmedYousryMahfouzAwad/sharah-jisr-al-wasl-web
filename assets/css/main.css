@@ -23,9 +23,7 @@
 .p-carousel-item-list {
   flex-direction: row-reverse !important;
 }
-.p-button-text.p-button-secondary {
-  display: none !important;
-}
+ 
 .p-carousel-indicator-active .p-carousel-indicator-button {
   @apply !bg-primary-1 !h-3 !w-3 !rounded-full;
 }

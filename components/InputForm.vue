@@ -8,7 +8,9 @@
     v-slot="{ field, errorMessage }"
   >
     <div>
-      <p class="font-bold mb-2 px-1 md:text-base text-sm" v-if="label">{{ label }}</p>
+      <p class="font-bold mb-2 px-1 md:text-base text-sm" v-if="label">
+        {{ label }}
+      </p>
       <div class="relative flex items-center justify-center">
         <input
           :type="type"
@@ -19,8 +21,8 @@
           :readonly="readonly"
           :class="{
             'ps-20': $slots.leading,
-            'ps-5': $slots.startIcon,
-            'pe-5': $slots.startIcon,
+            'ps-7': $slots.startIcon,
+            'pe-7': $slots.startIcon,
           }"
           @click="openModal"
         />

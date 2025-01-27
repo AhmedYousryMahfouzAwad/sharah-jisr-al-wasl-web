@@ -30,7 +30,7 @@
               }"
               class="flex-1 text-center py-2"
             >
-              عميل
+              {{ t("pages.client") }}
             </button>
 
             <!-- Tab: Provider -->
@@ -44,7 +44,7 @@
               }"
               class="flex-1 text-center py-2"
             >
-              مقدم خدمة
+              {{ t("pages.provider") }}
             </button>
           </div>
 
@@ -66,7 +66,7 @@
                   "
                   class="col-span-6 text-center font-semibold rounded-full py-2"
                 >
-                  فرد
+                  {{ t("pages.individual") }}
                 </button>
 
                 <!-- Sub-tab: Company -->
@@ -80,13 +80,16 @@
                   "
                   class="col-span-6 text-center font-semibold rounded-full py-2"
                 >
-                  شركة
+                  {{ t("pages.company") }}
                 </button>
               </div>
 
               <!-- Sub-tab Content -->
               <div v-if="activeSubTab === 'individual'" class="text-center">
-                <p class="text-start my-2">{{ t("pages.mobile_number") }}</p>
+                <p class="text-start my-2">
+                  <span class="text-red-2">*</span>
+                  {{ t("pages.mobile_number") }}
+                </p>
                 <!-- Phone Input -->
                 <div class="w-full grid grid-cols-12 gap-2">
                   <!-- Country Select -->
@@ -160,7 +163,10 @@
                 </div>
               </div>
               <div v-else-if="activeSubTab === 'company'" class="text-center">
-                <p class="text-start my-2">{{ t("pages.mobile_number") }}</p>
+                <p class="text-start my-2">
+                  <span class="text-red-2">*</span>
+                  {{ t("pages.mobile_number") }}
+                </p>
                 <!-- Phone Input -->
                 <div class="w-full grid grid-cols-12 gap-2">
                   <!-- Country Select -->
@@ -236,7 +242,10 @@
               <!-- Submit Button -->
             </div>
             <div v-else-if="currentTab === 'provider'">
-              <p class="text-start my-2">{{ t("pages.mobile_number") }}</p>
+              <p class="text-start my-2">
+                <span class="text-red-2">*</span>
+                {{ t("pages.mobile_number") }}
+              </p>
               <!-- Phone Input -->
               <div class="w-full grid grid-cols-12 gap-2">
                 <!-- Country Select -->

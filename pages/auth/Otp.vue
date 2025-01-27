@@ -34,6 +34,15 @@
           >
         </Field>
       </div>
+      <div class="sm:w-[50%] w-full md:px-0 mx-auto px-2">
+        <ButtonAuth
+          :imageSrc="'/arrow.png'"
+          :loading="submitLoading"
+          :label="t('pages.verify')"
+          :disabled="submitLoading"
+          type="submit"
+        />
+      </div>
 
       <div v-if="timerActive" class="flex justify-center items-center">
         <p class="text-gray-400 font-bold text-center text-sm">
@@ -54,32 +63,27 @@
         <p v-else class="text-gray-400 font-bold text-center mt-1">00:00</p>
       </div>
 
-      <button
+      <div
         v-else
-        @click="resendCode()"
-        :disabled="loading"
-        class="text-center mx-auto flex justify-center items-center cursor-pointer"
-        type="button"
+        class="text-center mt-3 space-x-3 mb-2 md:text-base text-xs flex justify-center items-center"
       >
-        <p
-          v-if="!loading"
-          class="text-primary-1 hover:underline transition duration-200"
+        <p>{{ t("pages.no_resend_code") }}</p>
+        <button
+          @click="resendCode()"
+          :disabled="loading"
+          class="text-center px-2 flex justify-center font-bold items-center cursor-pointer"
+          type="button"
         >
-          {{ t("pages.auth.resend_code") }}
-        </p>
-        <p v-else class="text-primary-1 transition duration-200">
-          {{ t("pages.loading_send") }}
-        </p>
-      </button>
-
-      <div class="sm:w-[50%] w-full md:px-0 mx-auto px-2">
-        <ButtonAuth
-          :imageSrc="'/arrow.png'"
-          :loading="submitLoading"
-          :label="t('pages.verify')"
-          :disabled="submitLoading"
-          type="submit"
-        />
+          <p
+            v-if="!loading"
+            class="text-primary-1 hover:underline transition font-bold duration-200"
+          >
+            {{ t("pages.resend") }}
+          </p>
+          <p v-else class="text-primary-1 transition duration-200">
+            {{ t("pages.loading_send") }}
+          </p>
+        </button>
       </div>
     </form>
   </div>
@@ -139,8 +143,6 @@ const otpLogin = handleSubmit(async () => {
     code: otpInput.value,
     device_type: device_type.value,
     device_id: 111,
-
-    // Make the login request
   });
   submitLoading.value = false;
 });

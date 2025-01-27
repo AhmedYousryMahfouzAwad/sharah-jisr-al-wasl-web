@@ -11,14 +11,16 @@
         v-if="imageSrc"
         :src="imageSrc"
         alt="button icon"
-        class="h-4 w-4 mr-2 object-contain justify-center items-center flex mt-1"
+        :class="[
+          'h-4 w-4 mx-2 object-contain justify-center items-center flex mt-1 ',
+          currentLang === 'en' ? 'rotate-180' : '',
+        ]"
       />
     </span>
   </Button>
 </template>
-
 <script setup>
-const { t } = useI18n();
+const { t, locale } = useI18n();
 defineProps({
   disabled: Boolean,
   loading: Boolean,
@@ -32,4 +34,7 @@ defineProps({
     default: "25rem",
   },
 });
+
+// اللغة الحالية (ar للغة العربية)
+const currentLang = computed(() => locale.value);
 </script>

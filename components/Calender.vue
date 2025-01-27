@@ -1,64 +1,47 @@
 <template>
-    <Field v-model="modelValue" :name="name" :rules="rules" validate-on-input v-slot="{ field, errorMessage }">
-        <div>
-            <h1 class="font-bold my-2 px-1">{{ label }}</h1>
-            <div class="relative flex items-center justify-center">
-                <!-- PrimeVue Calendar Component -->
-                <Calendar v-model="modelValue" :type="type" v-bind="field" :placeholder="placeholder"
-                    :disabled="disabled" :readonly-input="readonly" :showIcon="showIcon"
-                    class="w-full pl-4 pr-4 py-2 border-2 rounded-full focus:outline-none focus:ring-1 focus:ring-primary-1"
-                    :class="{ 'ps-20': $slots.leading, 'ps-5': $slots.startIcon, 'pe-5': $slots.startIcon }" />
-
-                <!-- Leading Icon Slot -->
-                <span class="absolute inset-y-0 start-0 *:h-full">
-                    <slot name="leading"></slot>
-                </span>
-                <span class="absolute inset-y-0 start-2 *:h-full">
-                    <slot name="startIcon"></slot>
-                </span>
-
-                <span class="absolute inset-y-0 end-2 *:h-full">
-                    <slot name="endIcon"></slot>
-                </span>
-            </div>
-
-            <!-- Error Message -->
-            <span v-if="errorMessage" class="error-message text-red-500">{{ errorMessage }}</span>
-        </div>
-    </Field>
+  <!-- Custom Button Implementation -->
+  <Button
+    :disabled="loading || disabled"
+    class="w-full !bg-primary-1 hover:!bg-primary-1 text-white"
+  >
+    <i v-if="loading" class="pi pi-spinner pi-spin text-white"></i>
+    <span v-else class="flex justify-center items-center my-auto mb-1 px-5">
+      {{ t(label) }}
+      <img
+        v-if="localizedImageSrc"
+        :src="localizedImageSrc"
+        alt="button icon"
+        class="h-4 w-4 ml-2 object-contain justify-center items-center flex mt-1"
+      />
+    </span>
+  </Button>
 </template>
 
 <script setup>
-import { Field } from 'vee-validate';
-import { ref } from 'vue';
-import Calendar from 'primevue/calendar';  // Import PrimeVue Calendar component
+import { useI18n } from "vue-i18n";
+import { computed } from "vue";
 
-// Define props
+const { t, locale } = useI18n();
+
 defineProps({
-    disabled: Boolean,
-    name: String,
-    label: String,
-    placeholder: String,
-    readonly: {
-        type: Boolean,
-        default: false
-    },
-    rules: String,
-    modelValue: String, // v-model binding for Calendar
+  disabled: Boolean,
+  loading: Boolean,
+  label: {
+    type: String,
+    required: true,
+  },
+  imageSrc: {
+    type: Object, // Object to store image paths for different languages
+    required: true, // Required to ensure images for all languages are provided
+  },
+  width: {
+    type: String,
+    default: "25rem",
+  },
 });
 
-// Define emit to update model value
-const emit = defineEmits(['update:modelValue', 'click']);
-
-// Enable two-way binding for modelValue
-const modelValue = ref('');
-
-// Handle click event for any custom actions (e.g., open modal)
-function openModal(event) {
-    emit('click', event);  // Emit click event (customize as needed)
-}
+// Compute the image source based on the current locale
+const localizedImageSrc = computed(() => {
+  return imageSrc[locale.value] || imageSrc["en"]; // Default to English if no match
+});
 </script>
-
-<style scoped>
-/* Add any additional styles as needed */
-</style>
