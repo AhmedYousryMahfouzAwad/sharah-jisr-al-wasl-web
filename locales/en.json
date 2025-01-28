@@ -8,10 +8,15 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "main_category": "Main Category",
+    "engineering_consultancy_office": "Engineering Consultancy Office",
+    "building_materials_companies": "Building Materials Companies",
+    "contracting_companies": "Contracting Companies",
     "profile_img": "Profile Picture",
     "optional": "(Optional)",
     "title_register": "Create a New Account",
-
+    "commercial_register": "Commercial Registration Number",
+    "des_register": "Join us and start your journey with the elite construction companies, contracting firms, and engineering consultancy offices!",
     "name": "FullName",
     "no_resend_code": " Didn't receive the code? ",
     "resend": "Resend the code",
