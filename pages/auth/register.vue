@@ -465,11 +465,7 @@
                     </template>
                   </div>
                 </div>
-
-                
               </div>
-
-
 
               <div class="md:px-0 px-2 mt-5">
                 <ButtonAuth
@@ -513,7 +509,7 @@
             </div>
 
             <div v-else-if="currentTab === 'provider'">
-              <RefisterProvider />
+              <RegisterProvider />
             </div>
           </div>
         </div>

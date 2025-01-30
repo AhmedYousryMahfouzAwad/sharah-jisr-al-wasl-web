@@ -175,23 +175,72 @@
 
       <p class="text-start my-2">
         <span class="text-red-2 font-semibold">*</span>
-        {{ t("pages.commercial_register") }}
+        {{ t("pages.choose_city") }}
       </p>
+      <Select
+        v-model="selectedCity"
+        :options="cities"
+        optionLabel="name"
+        :placeholder="t('pages.choose_city')"
+        class="w-full my-2"
+      />
+      <div v-if="selectedCity">
+        <div
+          v-if="selectedCity.name === t('pages.contracting_companies')"
+          class="mt-2 p-2 bg-green-100 border rounded"
+        >
+          <p>
+            🏡 و يوسف قالي المنصوره مشهوره المنصورة مدينة تقع في شمال مصر وتشتهر
+            بجامعتها.
+          </p>
+        </div>
+      </div>
 
-      <div class="w-full grid grid-cols-12 gap-2">
-        <div class="relative col-span-12">
-          <InputForm
-            name="commercial_register"
-            :loading="loading"
-            v-model="commercial_register"
-            type="text"
-            :placeholder="t('pages.commercial_register')"
-            class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
-          >
-            <template #startIcon>
-              <img src="/report.svg" class="w-4" />
-            </template>
-          </InputForm>
+      <div>
+        <p class="text-start my-2">
+          <span class="text-red-2 font-semibold">*</span>
+          {{ t("pages.location_map") }}
+        </p>
+
+        <div class="w-full grid grid-cols-12 gap-2">
+          <div class="relative col-span-12">
+            <InputForm
+              name="location_map"
+              :loading="loading"
+              v-model="location_map"
+              type="text"
+              :placeholder="t('pages.location_map')"
+              class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+            >
+              <template #startIcon>
+                <img src="/report.svg" class="w-4" />
+              </template>
+            </InputForm>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-start my-2">
+          <span class="text-red-2 font-semibold">*</span>
+          {{ t("pages.commercial_register") }}
+        </p>
+
+        <div class="w-full grid grid-cols-12 gap-2">
+          <div class="relative col-span-12">
+            <InputForm
+              name="commercial_register"
+              :loading="loading"
+              v-model="commercial_register"
+              type="text"
+              :placeholder="t('pages.commercial_register')"
+              class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+            >
+              <template #startIcon>
+                <img src="/report.svg" class="w-4" />
+              </template>
+            </InputForm>
+          </div>
         </div>
       </div>
 
@@ -254,20 +303,20 @@
           {{ t("pages.main_category") }}
         </p>
         <Select
-          v-model="selectedCity"
-          :options="cities"
+          v-model="selectedCompany"
+          :options="company"
           optionLabel="name"
           placeholder="Select a City"
-          class="w-full my-2 py-1"
+          class="w-full my-2"
         />
-        <div v-if="selectedCity">
+        <div v-if="selectedCompany">
           <div
-            v-if="selectedCity.name === t('pages.contracting_companies')"
+            v-if="selectedCompany.name === t('pages.contracting_companies')"
             class="mt-2 p-2 bg-green-100 border rounded"
           >
             <p>
-              🏡 و يوسف قالي المنصوره مشهوره بنسونها المنصورة مدينة تقع في شمال
-              مصر وتشتهر بجامعتها.
+              🏡 و يوسف قالي المنصوره مشهوره المنصورة مدينة تقع في شمال مصر
+              وتشتهر بجامعتها.
             </p>
           </div>
         </div>
@@ -350,8 +399,14 @@ const uploadedImage = ref("");
 const fileInputCompany = ref(null);
 const imagePreview = ref(null);
 const selectedCity = ref(null);
+const selectedCompany = ref(null);
 
 const cities = ref([
+  { name: t("pages.engineering_consultancy_office") },
+  { name: t("pages.building_materials_companies") },
+  { name: t("pages.contracting_companies") },
+]);
+const company = ref([
   { name: t("pages.engineering_consultancy_office") },
   { name: t("pages.building_materials_companies") },
   { name: t("pages.contracting_companies") },
