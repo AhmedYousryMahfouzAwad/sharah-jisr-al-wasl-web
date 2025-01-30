@@ -8,7 +8,11 @@
     v-slot="{ field, errorMessage }"
   >
     <div>
-      <p class="font-bold mb-2 px-1 md:text-base text-sm" v-if="label">
+      <p
+        class="font-bold flex my-2 gap-x-1 px-1 md:text-base text-sm"
+        v-if="label"
+      >
+        <span class="text-red-2 font-semibold">*</span>
         {{ label }}
       </p>
       <div class="relative flex items-center justify-center">

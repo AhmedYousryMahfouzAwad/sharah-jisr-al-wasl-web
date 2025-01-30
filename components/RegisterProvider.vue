@@ -47,209 +47,184 @@
           <span class="text-gray-500"> {{ t("pages.optional") }} </span>
         </p>
       </div>
-
-      <p class="text-start my-2">
-        <span class="text-red-2 font-semibold">*</span>
-        {{ t("pages.name") }}
-      </p>
-
-      <!-- Name Input individual -->
-      <div class="w-full grid grid-cols-12 gap-2">
-        <!-- Name Input individual -->
-        <div class="relative col-span-12">
-          <InputForm
-            name="full_name"
-            :loading="loading"
-            v-model="full_name"
-            type="text"
-            :placeholder="t('pages.name')"
-            class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
-          >
-            <template #startIcon>
-              <img src="/img/name.svg" class="w-4" />
-            </template>
-          </InputForm>
-        </div>
-      </div>
-
-      <p class="text-start my-2">
-        <span class="text-red-2 font-semibold">*</span>
-        {{ t("pages.mobile_number") }}
-      </p>
-
-      <!-- Phone Input  company-->
-      <div class="w-full grid grid-cols-12 gap-2">
-        <!-- Country Select -->
-        <div
-          class="relative col-span-12 sm:col-span-5 md:col-span-4 self-start"
-        >
-          <Select
-            v-model="country"
-            :options="list_countries"
-            optionLabel="key"
-            class="w-full py-1 h-full flex border-2 text-sm rounded-lg !bg-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-1"
-          >
-            <!-- Selected Value Display -->
-            <template #value="slotProps">
-              <div v-if="slotProps.value" class="flex items-center">
-                <img
-                  :alt="slotProps.value.label"
-                  :src="slotProps.value.image"
-                  class="mr-2"
-                  style="
-                    width: 25px;
-                    height: 15px;
-                    object-fit: cover;
-                    border-radius: 3px;
-                  "
-                />
-                <span class="text-gray-700 font-medium">{{
-                  `${slotProps.value.key}`
-                }}</span>
-              </div>
-              <span v-else class="text-gray-400">{{
-                slotProps.placeholder
-              }}</span>
-            </template>
-
-            <!-- Dropdown Options -->
-            <template #option="slotProps">
-              <div
-                class="flex items-center justify-start w-full py-1 hover:bg-gray-300 cursor-pointer"
-                :key="slotProps.option.key"
-              >
-                <img
-                  :alt="slotProps.option.label"
-                  :src="slotProps.option.image"
-                  style="
-                    width: 25px;
-                    height: 15px;
-                    object-fit: cover;
-                    border-radius: 3px;
-                  "
-                />
-                <span class="text-gray-700 font-medium">{{
-                  `${slotProps.option.key}`
-                }}</span>
-              </div>
-            </template>
-          </Select>
-        </div>
-
-        <!-- Phone Input -->
-        <div class="relative col-span-12 sm:col-span-7 md:col-span-8">
-          <InputForm
-            name="phone"
-            :loading="loading"
-            v-model="phone"
-            type="text"
-            :placeholder="t('pages.mobile_number')"
-            class="w-full pl-3 pr-3 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
-          />
-        </div>
-      </div>
-
-      <!-- Email company -->
-      <p class="text-start my-2">
-        <span class="text-red-2 font-semibold">*</span>
-        {{ t("pages.auth.email") }}
-      </p>
-
-      <div class="w-full grid grid-cols-12 gap-2">
-        <!-- Email co -->
-        <div class="relative col-span-12">
-          <InputForm
-            name="email"
-            :loading="loading"
-            v-model="email"
-            type="text"
-            :placeholder="t('pages.auth.email')"
-            class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
-          >
-            <template #startIcon>
-              <img src="/img/email.svg" class="w-4" />
-            </template>
-          </InputForm>
-        </div>
-      </div>
-
-      <p class="text-start my-2">
-        <span class="text-red-2 font-semibold">*</span>
-        {{ t("pages.choose_city") }}
-      </p>
-      <Select
-        v-model="selectedCity"
-        :options="cities"
-        optionLabel="name"
-        :placeholder="t('pages.choose_city')"
-        class="w-full my-2"
-      />
-      <div v-if="selectedCity">
-        <div
-          v-if="selectedCity.name === t('pages.contracting_companies')"
-          class="mt-2 p-2 bg-green-100 border rounded"
-        >
-          <p>
-            🏡 و يوسف قالي المنصوره مشهوره المنصورة مدينة تقع في شمال مصر وتشتهر
-            بجامعتها.
-          </p>
-        </div>
-      </div>
-
+      <!--name-->
       <div>
-        <p class="text-start my-2">
-          <span class="text-red-2 font-semibold">*</span>
-          {{ t("pages.location_map") }}
+        <p class="text-start my-2 font-bold">
+          <span class="text-red-2">*</span>
+          {{ t("pages.name") }}
         </p>
-
         <div class="w-full grid grid-cols-12 gap-2">
           <div class="relative col-span-12">
             <InputForm
-              name="location_map"
+              name="full_name"
               :loading="loading"
-              v-model="location_map"
+              v-model="full_name"
               type="text"
-              :placeholder="t('pages.location_map')"
+              :placeholder="t('pages.name')"
               class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
             >
               <template #startIcon>
-                <img src="/report.svg" class="w-4" />
+                <img src="/img/name.svg" class="w-4" />
               </template>
             </InputForm>
           </div>
         </div>
       </div>
-
       <div>
-        <p class="text-start my-2">
-          <span class="text-red-2 font-semibold">*</span>
-          {{ t("pages.commercial_register") }}
+        <p class="text-start my-2 font-bold">
+          <span class="text-red-2">*</span>
+          {{ t("pages.mobile_number") }}
         </p>
-
+        <!-- Phone Input  company-->
         <div class="w-full grid grid-cols-12 gap-2">
+          <!-- Country Select -->
+          <div
+            class="relative col-span-12 sm:col-span-5 md:col-span-4 self-start"
+          >
+            <Select
+              v-model="country"
+              :options="list_countries"
+              optionLabel="key"
+              class="w-full py-1 h-full flex border-2 text-sm rounded-lg !bg-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-1"
+            >
+              <!-- Selected Value Display -->
+              <template #value="slotProps">
+                <div v-if="slotProps.value" class="flex items-center">
+                  <img
+                    :alt="slotProps.value.label"
+                    :src="slotProps.value.image"
+                    class="mr-2"
+                    style="
+                      width: 25px;
+                      height: 15px;
+                      object-fit: cover;
+                      border-radius: 3px;
+                    "
+                  />
+                  <span class="text-gray-700 font-medium">{{
+                    `${slotProps.value.key}`
+                  }}</span>
+                </div>
+                <span v-else class="text-gray-400">{{
+                  slotProps.placeholder
+                }}</span>
+              </template>
+
+              <!-- Dropdown Options -->
+              <template #option="slotProps">
+                <div
+                  class="flex items-center justify-start w-full py-1 hover:bg-gray-300 cursor-pointer"
+                  :key="slotProps.option.key"
+                >
+                  <img
+                    :alt="slotProps.option.label"
+                    :src="slotProps.option.image"
+                    style="
+                      width: 25px;
+                      height: 15px;
+                      object-fit: cover;
+                      border-radius: 3px;
+                    "
+                  />
+                  <span class="text-gray-700 font-medium">{{
+                    `${slotProps.option.key}`
+                  }}</span>
+                </div>
+              </template>
+            </Select>
+          </div>
+
+          <!-- Phone Input -->
+          <div class="relative col-span-12 sm:col-span-7 md:col-span-8">
+            <InputForm
+              name="phone"
+              :loading="loading"
+              v-model="phone"
+              type="text"
+              :placeholder="t('pages.mobile_number')"
+              class="w-full pl-3 pr-3 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Email -->
+      <div>
+        <div class="w-full grid grid-cols-12 gap-2">
+          <!-- Email co -->
           <div class="relative col-span-12">
             <InputForm
-              name="commercial_register"
+              name="email"
               :loading="loading"
-              v-model="commercial_register"
+              v-model="email"
+              :label="t('pages.auth.email')"
               type="text"
-              :placeholder="t('pages.commercial_register')"
+              :placeholder="t('pages.auth.email')"
               class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
             >
               <template #startIcon>
-                <img src="/report.svg" class="w-4" />
+                <img src="/img/email.svg" class="w-4" />
               </template>
             </InputForm>
           </div>
         </div>
       </div>
-
-      <div class="w-full">
-        <p class="text-start my-2">
-          <span class="text-red-2 font-semibold">*</span>
-          {{ t("pages.auth.email") }}
+      <!-- City -->
+      <div>
+        <p class="text-start my-2 font-bold">
+          <span class="text-red-2">*</span>
+          {{ t("pages.choose_city") }}
         </p>
+        <Select
+          v-model="selectedCity"
+          :options="cities"
+          optionLabel="name"
+          :placeholder="t('pages.choose_city')"
+          class="w-full"
+        />
+      </div>
+      <!--map-->
+      <div>
+        <div class="relative w-full">
+          <InputForm
+            name="map"
+            v-model="sendedAddress"
+            readonly
+            :label="t('pages.location_map')"
+            type="text"
+            :placeholder="t('pages.location_map')"
+            class="col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2"
+            @click="openModal"
+          >
+            <template #endIcon>
+              <div class="flex items-center ps-3">
+                <img
+                  class="h-5 w-5 text-gray-500 float-right"
+                  style="transform: scaleX(-1)"
+                  alt="Map icon"
+                />
+              </div>
+            </template>
+          </InputForm>
+        </div>
 
+        <Dialog v-model:visible="visible" :style="{ width: '25rem' }">
+          <div>
+            <OnlineStoreMapComp
+              @getLocation="getMyLoc"
+              :currentLocation="true"
+            />
+          </div>
+          <Button
+            type="button"
+            :label="t('pages.cancel')"
+            severity="secondary"
+            class="w-full mt-5 rounded-3xl"
+            @click="visible = false"
+          ></Button>
+        </Dialog>
+      </div>
+
+      <div class="w-full my-5">
         <div
           class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100"
           @dragover.prevent
@@ -298,8 +273,8 @@
             </svg>
           </template>
         </div>
-        <p class="text-start my-2">
-          <span class="text-red-2 font-semibold">*</span>
+        <p class="text-start mt-2 font-bold">
+          <span class="text-red-2">*</span>
           {{ t("pages.main_category") }}
         </p>
         <Select
@@ -312,12 +287,106 @@
         <div v-if="selectedCompany">
           <div
             v-if="selectedCompany.name === t('pages.contracting_companies')"
-            class="mt-2 p-2 bg-green-100 border rounded"
+            class="rounded"
           >
-            <p>
-              🏡 و يوسف قالي المنصوره مشهوره المنصورة مدينة تقع في شمال مصر
-              وتشتهر بجامعتها.
-            </p>
+            <!-- name_bank -->
+            <div>
+              <div class="w-full grid grid-cols-12 gap-2">
+                <div class="relative col-span-12">
+                  <InputForm
+                    name="name_bank"
+                    :loading="loading"
+                    v-model="name_bank"
+                    :label="t('pages.auth.name_bank')"
+                    type="text"
+                    :placeholder="t('pages.auth.name_bank')"
+                    class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+                  >
+                    <template #startIcon>
+                      <img src="/home.svg" class="w-4" />
+                    </template>
+                  </InputForm>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            v-if="selectedCompany.name === t('pages.contracting_companies')"
+            class="rounded"
+          >
+            <!-- Name_of_the_account_holder -->
+            <div>
+              <div class="w-full grid grid-cols-12 gap-2">
+                <!-- Email co -->
+                <div class="relative col-span-12">
+                  <InputForm
+                    name="Name_of_the_account_holder"
+                    :loading="loading"
+                    v-model="Name_of_the_account_holder"
+                    :label="t('pages.auth.Name_of_the_account_holder')"
+                    type="text"
+                    :placeholder="t('pages.auth.Name_of_the_account_holder')"
+                    class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+                  >
+                    <template #startIcon>
+                      <img src="/home.svg" class="w-4" />
+                    </template>
+                  </InputForm>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            v-if="selectedCompany.name === t('pages.contracting_companies')"
+            class="rounded"
+          >
+            <!-- account_number -->
+            <div>
+              <div class="w-full grid grid-cols-12 gap-2">
+                <!-- Email co -->
+                <div class="relative col-span-12">
+                  <InputForm
+                    name="account_number"
+                    :loading="loading"
+                    v-model="account_number"
+                    :label="t('pages.auth.account_number')"
+                    type="text"
+                    :placeholder="t('pages.auth.account_number')"
+                    class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+                  >
+                    <template #startIcon>
+                      <img src="/home.svg" class="w-4" />
+                    </template>
+                  </InputForm>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            v-if="selectedCompany.name === t('pages.contracting_companies')"
+            class="rounded"
+          >
+            <!-- iban -->
+            <div>
+              <div class="w-full grid grid-cols-12 gap-2">
+                <!-- Email co -->
+                <div class="relative col-span-12">
+                  <InputForm
+                    name="iban"
+                    :loading="loading"
+                    v-model="iban"
+                    :label="t('pages.auth.iban')"
+                    type="text"
+                    :placeholder="t('pages.auth.iban')"
+                    class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+                  >
+                    <template #startIcon>
+                      <img src="/home.svg" class="w-4" />
+                    </template>
+                  </InputForm>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -348,18 +417,20 @@
         exercitationem.
       </template>
     </BaseDialog>
-    <div
-      class="text-center mt-3 mb-2 md:text-base text-xs flex justify-center items-center"
-    >
-      <p>{{ t("pages.auth.have_an_account") }}</p>
+
+    <div class="text-center mt-3 flex justify-center items-center">
+      <p class="md:text-base text-sm">
+        {{ t("pages.auth.have_an_account") }}
+      </p>
+
       <NuxtLink
-        :to="localeRoute({ name: 'auth-register' })"
+        :to="useLocaleRoute()({ name: 'auth-login' })"
         class="text-center flex justify-center items-center cursor-pointer"
       >
         <p
-          class="text-primary-1 hover:underline md:text-base text-xs transition duration-200 mx-2"
+          class="text-primary-1 hover:underline transition duration-200 mx-2 md:text-base text-sm"
         >
-          {{ t("pages.auth.create_a_new_account") }}
+          {{ t("pages.auth.login") }}
         </p>
       </NuxtLink>
     </div>

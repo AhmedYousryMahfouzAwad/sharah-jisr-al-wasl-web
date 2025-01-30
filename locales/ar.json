@@ -239,6 +239,7 @@
       "name_bank": "  اسم البنك   ",
       "iban": "    رقم الأيبان    ",
       "bank_account_number": "    رقم الحساب البنكي   ",
+      "account_number": "    رقم الحساب     ",
       "Please_upload": "من فضلك ارفع الصورة الخاصة بك",
       "available": "  صورة شخصية (إن وجدت) ",
       "service_history": "   تاريخ الخدمة  ",
