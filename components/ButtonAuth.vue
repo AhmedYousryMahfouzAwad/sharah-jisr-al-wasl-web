@@ -35,6 +35,5 @@ defineProps({
   },
 });
 
-// اللغة الحالية (ar للغة العربية)
 const currentLang = computed(() => locale.value);
 </script>

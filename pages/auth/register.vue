@@ -466,7 +466,31 @@
                   </div>
                 </div>
               </div>
+              <div class="w-full gap-2 mt-5">
+                <div class="flex items-center gap-2">
+                  <Checkbox
+                    v-model="check_box"
+                    inputId="ingredient1"
+                    name="check_box"
+                    :value="true"
+                  />
 
+                  <label
+                    for="ingredient1"
+                    class="text-start text-sm font-bold my-2 flex"
+                  >
+                    <span class="text-red-2 px-1 flex">*</span>
+                    {{ t("pages.auth.agree") }}
+                    <button
+                      type="button"
+                      @click="visible = true"
+                      class="text-primary-1 px-2"
+                    >
+                      {{ t("pages.terms_conditions") }}
+                    </button>
+                  </label>
+                </div>
+              </div>
               <div class="md:px-0 px-2 mt-5">
                 <ButtonAuth
                   :imageSrc="'/arrow.png'"
@@ -548,6 +572,7 @@ const { t } = useI18n();
 const activeSubTab = ref("individual");
 const setActiveSubTab = (tab) => (activeSubTab.value = tab);
 const currentTab = ref("client");
+const loading = ref(false);
 const check_box = ref(false);
 const visible = ref(false);
 const phone = ref("");
@@ -645,10 +670,9 @@ onMounted(async () => {
 // Wrapping the submit logic
 const submit = handleSubmit(async () => {
   if (check_box.value == false) {
-    alert("يجب الموافقة على الشروط والأحكام قبل المتابعة!");
+    alert("pages.message.alert");
     return;
   }
-  loading.value = true;
 });
 </script>
 

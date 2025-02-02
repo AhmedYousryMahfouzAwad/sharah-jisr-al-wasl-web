@@ -9,6 +9,7 @@
   },
   "pages": {
     "main_category": "القسم الرئيسي",
+    "message_alert": "يجب الموافقة على الشروط والأحكام قبل المتابعة!",
     "location_map": "الموقع الجغرافي ",
     "engineering_consultancy_office": "مكتب الاستشارات الهندسية",
     "building_materials_companies": "شركات مواد البناء",

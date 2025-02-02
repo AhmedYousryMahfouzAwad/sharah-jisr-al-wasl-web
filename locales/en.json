@@ -8,6 +8,8 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "message": "You must agree to the terms and conditions before proceeding!",
+
     "choose_country": "Choose Country",
     "location_map": "Geographical location",
     "choose_city": "Choose City",
