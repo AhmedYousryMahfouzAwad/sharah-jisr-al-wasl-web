@@ -66,6 +66,7 @@
           <Select
             v-model="lang"
             :options="languages"
+            @update:model-value="lang"
             optionLabel="name"
             class="border-0 shadow-none outline-none text-xs font-semibold"
           >

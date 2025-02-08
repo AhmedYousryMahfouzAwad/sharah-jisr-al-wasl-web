@@ -57,7 +57,7 @@
 
       <button
         v-else
-        @click="resendCode()"
+        @click="resendOtp()"
         :disabled="loading"
         class="text-center mx-auto flex justify-center items-center cursor-pointer"
         type="button"
@@ -100,13 +100,12 @@ import * as yup from "yup";
 import { Field, useForm } from "vee-validate";
 
 // state
+const otpInput = ref("");
 const loading = ref(false);
 const { t } = useI18n();
 const loginStore = useLoginStore();
-const { sendOtp, resendOtp } = loginStore;
-const { phone, otpInput, country_code, device_type, timerActive } = storeToRefs(
-  useLoginStore()
-);
+const { sendOtp } = loginStore;
+const { country_code, device_type, timerActive } = storeToRefs(useLoginStore());
 
 const { setError } = useErrorStore();
 const { country } = storeToRefs(useCountries());
@@ -136,8 +135,8 @@ const onCountdownEnd = async () => {
 const otpLogin = handleSubmit(async () => {
   submitLoading.value = true;
   await sendOtp({
-    phone: phone.value,
-    country_code: country.value.key,
+    phone: useCookie("phone").value,
+    country_code: useCookie("country_code").value,
     code: otpInput.value,
     device_type: device_type.value,
     device_id: 111,
@@ -152,27 +151,20 @@ onMounted(async () => {
   timerActive.value = true;
 });
 
-const resendCode = async () => {
-  loading.value = true;
-  try {
-    await resendOtp({
-      phone: phone.value,
-      country_code: country_code.value,
-      // iso: country.value.iso,
-    });
-  } catch (error) {
-    const errorMessage = error?.response?.data?.message || error.message;
-    if (
-      errorMessage === "The Phone field is required" ||
-      errorMessage === "الهاتف مطلوب"
-    ) {
-      setError(errorMessage);
-      return navigateTo("/auth/login");
-    }
-    setError("An unexpected error occurred.");
-  } finally {
-    loading.value = false;
-  }
+const payload = {
+  phone: useCookie("phone").value,
+  country_code: useCookie("country_code").value,
+};
+const resendOtp = async () => {
+  await fetchData({
+    url: `api/provider/resend-code`,
+    method: "post",
+    body: payload,
+    getSuccess: true,
+    onSuccess: () => {
+      timerActive.value = true;
+    },
+  });
 };
 
 definePageMeta({

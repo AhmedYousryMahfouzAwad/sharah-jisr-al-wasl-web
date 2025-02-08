@@ -58,9 +58,9 @@
                 <!--   Individual -->
                 <button
                   type="button"
-                  @click="activeSubTab = 'individual'"
+                  @click="activeSubTab = 'person'"
                   :class="
-                    activeSubTab === 'individual'
+                    activeSubTab === 'person'
                       ? 'bg-primary-1 text-white'
                       : 'bg-primary-2 text-gray-600'
                   "
@@ -134,7 +134,7 @@
               </div>
 
               <!--  individual -->
-              <div v-if="activeSubTab === 'individual'" class="text-center">
+              <div v-if="activeSubTab === 'person'" class="text-center">
                 <p class="text-start my-2">
                   <span class="text-red-2">*</span>
                   {{ t("pages.name") }}
@@ -439,7 +439,7 @@
                         @click.stop="removeImageCompany"
                         class="mt-2 px-4 py-1 bg-red-500 text-white rounded-md"
                       >
-                        حذف الصورة
+                        {{ t("pages.remove") }}
                       </button>
                     </template>
 
@@ -552,10 +552,12 @@
 <script setup>
 // import
 import illustration from "../../public/img/Illustration.png";
+const { fetchData, resultData } = useFetchData();
+import { useCookie, useLocaleRoute, nextTick, navigateTo } from "#imports";
+
 import { Field, useForm } from "vee-validate";
 import * as yup from "yup";
-import defaultImg from "/public/img/Avatar.png";
-import { registerRuntimeCompiler } from "vue";
+import defaultImage from "/public/img/Avatar.png";
 
 //store
 const { list_countries, country } = storeToRefs(useCountries());
@@ -567,10 +569,7 @@ const localeRoute = useLocaleRoute();
 // i18n
 const { t } = useI18n();
 
-//state
-
-const activeSubTab = ref("individual");
-const setActiveSubTab = (tab) => (activeSubTab.value = tab);
+const activeSubTab = ref("person");
 const currentTab = ref("client");
 const loading = ref(false);
 const check_box = ref(false);
@@ -578,36 +577,42 @@ const visible = ref(false);
 const phone = ref("");
 const full_name = ref("");
 const email = ref("");
+const commercial_register = ref("");
 const fileInput = ref(null);
-const defaultImage = ref(defaultImg);
-const uploadedImage = ref("");
+const uploadedImage = ref(null);
 const fileInputCompany = ref(null);
 const imagePreview = ref(null);
 
-// Define validation schema
-const validationSchema = yup.object({
-  phone: yup
-    .string()
-    .trim()
-    .required(t("validation.required"))
-    .matches(/^[0-9]+$/, t("validation.only_digits"))
-    .min(9, t("validation.min_n", { min: 9 }))
-    .max(10, t("validation.max_n", { max: 10 })),
-  full_name: yup
-    .string()
-    .trim()
-    .required(t("validation.required"))
-    .min(3, t("validation.min", { min: 3 }))
-    .max(250, t("validation.max", { max: 250 })),
+const validationSchema = computed(() => {
+  return yup.object({
+    phone: yup
+      .string()
+      .trim()
+      .required(t("validation.required"))
+      .matches(/^[0-9]+$/, t("validation.only_digits"))
+      .min(9, t("validation.min_n", { min: 9 }))
+      .max(10, t("validation.max_n", { max: 10 })),
 
-  email: yup
-    .string()
-    .email(t("validation.email"))
-    .trim()
-    .matches(
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net)$/,
-      t("validation.emailDomain")
-    ),
+    full_name: yup
+      .string()
+      .trim()
+      .required(t("validation.required"))
+      .min(3, t("validation.min", { min: 3 }))
+      .max(250, t("validation.max", { max: 250 })),
+
+    commercial_register:
+      activeSubTab.value === "company"
+        ? yup.string().trim().required(t("validation.required"))
+        : yup.string().notRequired(),
+  });
+});
+
+onMounted(async () => {
+  try {
+    await getCountries();
+  } catch (error) {
+    console.error("Error fetching countries:", error);
+  }
 });
 
 // Image Upload
@@ -635,12 +640,26 @@ const triggerFileInputCompany = () => {
   fileInputCompany.value.click();
 };
 
-const handleFileUpload = (event) => {
+const handleFileUpload = async (event) => {
   const file = event.target.files[0];
+
   if (file) {
+    // ✅ التأكد من أن الملف صورة
+    if (!file.type.startsWith("image/")) {
+      alert("Please upload a valid image file.");
+      return;
+    }
+
+    // ✅ حفظ الصورة محليًا للمعاينة فقط
     const reader = new FileReader();
-    reader.onload = () => (imagePreview.value = reader.result);
+    reader.onload = () => {
+      imagePreview.value = reader.result; // ✅ العرض فقط
+    };
     reader.readAsDataURL(file);
+
+    // ✅ إنشاء FormData وإرسال الصورة بصيغة binary
+    const formData = new FormData();
+    formData.append("commercial_register_image", file); // ✅ إرسال الصورة مباشرةً كـ ملف
   }
 };
 
@@ -667,11 +686,63 @@ onMounted(async () => {
   } finally {
   }
 });
+
 // Wrapping the submit logic
 const submit = handleSubmit(async () => {
-  if (check_box.value == false) {
-    alert("pages.message.alert");
+  if (!check_box.value) {
+    alert("يجب الموافقة على الشروط والأحكام.");
     return;
+  }
+
+  const formData = new FormData();
+  formData.append("image", fileInput.value.files[0] || "");
+  formData.append("phone", phone.value || "");
+  formData.append("name", full_name.value || "");
+  formData.append("email", email.value || "");
+  formData.append("country_code", country.value?.key || "+20");
+  formData.append("type", activeSubTab.value);
+  formData.append("is_terms", Boolean(check_box.value));
+  formData.append("device_id", "111");
+  formData.append("device_type", "web");
+
+  if (activeSubTab.value === "company" && fileInputCompany.value.files[0]) {
+    formData.append("commercial_register", commercial_register.value || "");
+    formData.append(
+      "commercial_register_image",
+      fileInputCompany.value.files[0]
+    );
+  }
+
+  try {
+    await fetchData({
+      url: `api/user/register`,
+      method: "post",
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+      body: formData,
+      getSuccess: true,
+
+      onSuccess: () => {
+        useCookie("country_code").value = country.value.key;
+        useCookie("phone").value = phone.value;
+        const authCookie = useCookie("auth", {
+          watch: true,
+          sameSite: "lax",
+          maxAge: 365 * 24 * 60 * 60,
+        });
+
+        authCookie.value = resultData.value;
+
+        nextTick(async () => {
+          navigateTo(localeRoute({ name: "auth-Otp" }), {
+            replace: true,
+          });
+        });
+      },
+    });
+  } catch (error) {
+    console.error("❌ Error in API request:", error);
   }
 });
 </script>

@@ -5,12 +5,12 @@ export const useLoginStore = defineStore("login", () => {
   // STATE
   const { fetchData, loading, resultData } = useFetchData();
   const localePath = useLocalePath();
+  const localeRoute = useLocaleRoute();
   const router = useRouter();
   const { setAuth } = useAuthStore();
   const { locale } = useI18n();
   const token = ref("");
   const device_type = ref("web");
-
   const phone = ref(null || useCookie("phone").value);
   const code = ref(null);
   const otpInput = ref("");
@@ -95,10 +95,10 @@ export const useLoginStore = defineStore("login", () => {
         nextTick(async () => {
           setAuth();
           setTimeout(() => {
-            router.push(localePath("index"));
+            navigateTo(localeRoute({ name: "index" }), {
+              replace: true,
+            });
             otpInput.value = "";
-            // country_code.value = "";
-            // phone.value = "";
           }, 1000);
         });
       },
@@ -112,49 +112,17 @@ export const useLoginStore = defineStore("login", () => {
       },
     });
   };
-  //resendOtp
-  const resendOtp = async (payload) => {
-    await fetchData({
-      url: `api/user/resend-code`,
-      method: "post",
-      body: payload,
-      getSuccess: true,
-      onSuccess: () => {
-        timerActive.value = true;
-      },
-    });
-  };
-
-  const register = async (payload) => {
-    await fetchData({
-      url: `user/sign-up`,
-      method: "post",
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-      body: payload,
-      getSuccess: true,
-      onSuccess: () => {
-        setTimeout(() => {
-          router.push(localePath("auth-login"));
-        }, 1000);
-      },
-    });
-  };
 
   return {
     //ACTIONS
     sendLogin,
     sendOtp,
-    resendOtp,
-    register,
     generateRandomMacAddress,
 
     //STATE
     loading,
     code,
     device_type,
-
     phone,
     otpInput,
     email,

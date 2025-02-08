@@ -9,7 +9,7 @@
       </p>
 
       <p class="text-center text-sm font-bold">
-        {{ t("pages.please_enter_verification") }} {{ phone }}
+        {{ t("pages.please_enter_verification") }} {{ useCookie("phone") }}
         {{ useCookie("country_code") }}
       </p>
 
@@ -69,7 +69,7 @@
       >
         <p>{{ t("pages.no_resend_code") }}</p>
         <button
-          @click="resendCode()"
+          @click="resendOtp"
           :disabled="loading"
           class="text-center px-2 flex justify-center font-bold items-center cursor-pointer"
           type="button"
@@ -97,22 +97,25 @@
 
 <script setup>
 // imports
+
 import illustration from "../../public/img/Illustration.png";
 import * as yup from "yup";
 import { Field, useForm } from "vee-validate";
+import OtpInput from "vue3-otp-input";
+const { fetchData, resultData } = useFetchData();
+
+// on mounted
+onMounted(async () => {
+  timerActive.value = true;
+});
 
 // state
 const loading = ref(false);
+const otpInput = ref("");
 const { t } = useI18n();
 const loginStore = useLoginStore();
-const { sendOtp, resendOtp } = loginStore;
-const { phone, otpInput, device_type, timerActive } = storeToRefs(
-  useLoginStore()
-);
-
-const { setError } = useErrorStore();
-const { country } = storeToRefs(useCountries());
-
+const { sendOtp } = loginStore;
+const { device_type, timerActive } = storeToRefs(useLoginStore());
 const submitLoading = ref(false);
 
 // Define validation schema
@@ -134,45 +137,37 @@ const { handleSubmit } = useForm({
 const onCountdownEnd = async () => {
   timerActive.value = false;
 };
+
+onMounted(async () => {
+  timerActive.value = true;
+});
+
 // Wrapping the submit logic
 const otpLogin = handleSubmit(async () => {
   submitLoading.value = true;
   await sendOtp({
-    phone: phone.value,
-    country_code: country.value.key,
+    phone: useCookie("phone").value,
+    country_code: useCookie("country_code").value,
     code: otpInput.value,
     device_type: device_type.value,
     device_id: 111,
   });
   submitLoading.value = false;
 });
-
-// on mounted
-onMounted(async () => {
-  timerActive.value = true;
-});
-
-const resendCode = async () => {
-  loading.value = true;
-  try {
-    await resendOtp({
-      phone: phone.value,
-      country_code: country_code.value,
-      // iso: country.value.iso,
-    });
-  } catch (error) {
-    const errorMessage = error?.response?.data?.message || error.message;
-    if (
-      errorMessage === "The Phone field is required" ||
-      errorMessage === "الهاتف مطلوب"
-    ) {
-      setError(errorMessage);
-      return navigateTo("/auth/login");
-    }
-    setError("An unexpected error occurred.");
-  } finally {
-    loading.value = false;
-  }
+const payload = {
+  phone: useCookie("phone").value,
+  country_code: useCookie("country_code").value,
+};
+const resendOtp = async () => {
+  await fetchData({
+    url: `api/user/resend-code`,
+    method: "post",
+    body: payload,
+    getSuccess: true,
+    onSuccess: () => {
+      timerActive.value = true;
+    },
+  });
 };
 
 definePageMeta({
