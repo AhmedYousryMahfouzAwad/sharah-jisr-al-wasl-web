@@ -33,11 +33,13 @@
 }
 
 .p-carousel-indicator-active .p-carousel-indicator-button {
-  @apply !bg-primary-1 !h-3 !w-3 !rounded-full;
+  @apply !bg-primary-1 !h-3 !w-3 !pt-2  !rounded-full;
 }
-
+.p-carousel .p-component .p-carousel-horizontal {
+  margin: 2px !important;
+}
 .p-carousel-indicator .p-carousel-indicator-button {
-  @apply !h-3 !w-3   !rounded-full;
+  @apply !h-3 !w-3 !pt-2;
 }
 .p-radiobutton-checked .p-radiobutton-box {
   @apply !bg-primary-1;
