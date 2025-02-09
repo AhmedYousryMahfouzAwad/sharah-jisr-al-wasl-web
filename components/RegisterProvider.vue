@@ -175,21 +175,22 @@
           {{ t("pages.choose_city") }}
         </p>
         <Field
-          name="city"
+          name="selectedCity"
           v-model="selectedCity"
           v-slot="{ field, errorMessage }"
         >
           <Select
             v-model="selectedCity"
-            v-bind="field"
             :options="cities"
             optionLabel="name"
+            optionValue="id"
             :placeholder="t('pages.choose_city')"
-            class="w-full"
+            class="w-full border border-gray-300 rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
           />
+
           <span
             v-if="errorMessage"
-            class="error-message font-bold text-red-2 text-sm flex flex-col justify-center items-center"
+            class="text-red-500 text-sm font-bold flex justify-center items-center mt-1"
           >
             {{ errorMessage }}
           </span>
@@ -261,7 +262,7 @@
               @click.stop="removeImageCompany"
               class="mt-2 px-4 py-1 bg-red-500 text-white rounded-md"
             >
-              حذف الصورة
+              {{ t("pages.remove") }}
             </button>
           </template>
 
@@ -294,7 +295,6 @@
           v-model="selectedCompany"
           :options="company"
           optionLabel="name"
-          option-value="id"
           :label="t('pages.main_category')"
           :placeholder="t('pages.main_category')"
           class="w-full my-2"
@@ -394,6 +394,7 @@
       </div>
     </form>
   </div>
+
   <!-- BaseDialog -->
   <div class="w-[100%] md:px-0 px-2">
     <BaseDialog
@@ -460,11 +461,14 @@ const visible_map = ref(false);
 const phone = ref("");
 const full_name = ref("");
 const email = ref("");
+const Name_of_the_account_holder = ref("");
+const account_number = ref("");
 const commercial_register = ref("");
 const fileInput = ref(null);
 const uploadedImage = ref(null);
 const fileInputCompany = ref(null);
 const imagePreview = ref(null);
+const iban = ref(null);
 const loading = ref(false);
 
 const company = ref([
@@ -483,13 +487,13 @@ function openModal() {
   visible_map.value = true;
 }
 
-// const sendedLat = ref("32.2215");
-// const sendedLng = ref("29.5156");
-// const sendedAddress = ref("fsdfsdfdsfsdfsdfsdfالمنصوره");
+const sendedLat = ref("32.2215");
+const sendedLng = ref("29.5156");
+const sendedAddress = ref("fsdfsdfdsfsdfsdfsdfالمنصوره");
 
-const sendedLat = ref(null);
-const sendedLng = ref(null);
-const sendedAddress = ref("");
+// const sendedLat = ref(null);
+// const sendedLng = ref(null);
+// const sendedAddress = ref("");
 
 // get lat, lng, address from change marker position
 const getMyLoc = (lat, lng, address) => {
@@ -519,7 +523,7 @@ const validationSchema = yup.object({
     .required(t("validation.required"))
     .min(3, t("validation.min", { min: 3 }))
     .max(250, t("validation.max", { max: 250 })),
-  city: yup.string().required(t("validation.required")),
+  selectedCity: yup.number().required(t("validation.required")),
 });
 
 // Image Upload
@@ -600,8 +604,9 @@ const submit = handleSubmit(async () => {
   }
 
   const formData = new FormData();
+
   formData.append("image", fileInput.value.files[0] || "");
-  formData.append("city_id", selectedCity.value?.id || "");
+  formData.append("city_id", selectedCity.value || "");
   formData.append("phone", phone.value || "");
   formData.append("name", full_name.value || "");
   formData.append("email", email.value || "");
@@ -610,14 +615,6 @@ const submit = handleSubmit(async () => {
   formData.append("is_terms", Boolean(check_box.value));
   formData.append("device_id", "111");
   formData.append("device_type", "web");
-
-  if (activeSubTab.value === "company" && fileInputCompany.value.files[0]) {
-    formData.append("commercial_register", commercial_register.value || "");
-    formData.append(
-      "commercial_register_image",
-      fileInputCompany.value.files[0]
-    );
-  }
 
   try {
     loading.value = true;
