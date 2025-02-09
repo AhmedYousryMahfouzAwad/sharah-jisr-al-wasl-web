@@ -174,13 +174,26 @@
           <span class="text-red-2">*</span>
           {{ t("pages.choose_city") }}
         </p>
-        <Select
+        <Field
+          name="city"
           v-model="selectedCity"
-          :options="cities"
-          optionLabel="name"
-          :placeholder="t('pages.choose_city')"
-          class="w-full"
-        />
+          v-slot="{ field, errorMessage }"
+        >
+          <Select
+            v-model="selectedCity"
+            v-bind="field"
+            :options="cities"
+            optionLabel="name"
+            :placeholder="t('pages.choose_city')"
+            class="w-full"
+          />
+          <span
+            v-if="errorMessage"
+            class="error-message font-bold text-red-2 text-sm flex flex-col justify-center items-center"
+          >
+            {{ errorMessage }}
+          </span>
+        </Field>
       </div>
       <!--map-->
       <div>
@@ -207,7 +220,7 @@
           </InputForm>
         </div>
 
-        <Dialog v-model:visible="visible" :style="{ width: '25rem' }">
+        <Dialog v-model:visible="visible_map" :style="{ width: '25rem' }">
           <div>
             <OnlineStoreMapComp
               @getLocation="getMyLoc"
@@ -281,110 +294,88 @@
           v-model="selectedCompany"
           :options="company"
           optionLabel="name"
-          placeholder="Select a City"
+          option-value="id"
+          :label="t('pages.main_category')"
+          :placeholder="t('pages.main_category')"
           class="w-full my-2"
         />
+
         <div v-if="selectedCompany">
-          <div
-            v-if="selectedCompany.name === t('pages.contracting_companies')"
-            class="rounded"
-          >
-            <!-- name_bank -->
-            <div>
-              <div class="w-full grid grid-cols-12 gap-2">
-                <div class="relative col-span-12">
-                  <InputForm
-                    name="name_bank"
-                    :loading="loading"
-                    v-model="name_bank"
-                    :label="t('pages.auth.name_bank')"
-                    type="text"
-                    :placeholder="t('pages.auth.name_bank')"
-                    class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
-                  >
-                    <template #startIcon>
-                      <img src="/home.svg" class="w-4" />
-                    </template>
-                  </InputForm>
-                </div>
+          <!-- Always show these inputs regardless of the selected company -->
+          <div class="rounded">
+            <!-- Name Bank -->
+            <div class="w-full grid grid-cols-12 gap-2">
+              <div class="relative col-span-12">
+                <InputForm
+                  name="name_bank"
+                  :loading="loading"
+                  v-model="name_bank"
+                  :label="t('pages.auth.name_bank')"
+                  type="text"
+                  :placeholder="t('pages.auth.name_bank')"
+                  class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+                >
+                  <template #startIcon>
+                    <img src="/home.svg" class="w-4" />
+                  </template>
+                </InputForm>
               </div>
             </div>
-          </div>
-          <div
-            v-if="selectedCompany.name === t('pages.contracting_companies')"
-            class="rounded"
-          >
-            <!-- Name_of_the_account_holder -->
-            <div>
-              <div class="w-full grid grid-cols-12 gap-2">
-                <!-- Email co -->
-                <div class="relative col-span-12">
-                  <InputForm
-                    name="Name_of_the_account_holder"
-                    :loading="loading"
-                    v-model="Name_of_the_account_holder"
-                    :label="t('pages.auth.Name_of_the_account_holder')"
-                    type="text"
-                    :placeholder="t('pages.auth.Name_of_the_account_holder')"
-                    class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
-                  >
-                    <template #startIcon>
-                      <img src="/home.svg" class="w-4" />
-                    </template>
-                  </InputForm>
-                </div>
+
+            <!-- Name of the Account Holder -->
+            <div class="w-full grid grid-cols-12 gap-2">
+              <div class="relative col-span-12">
+                <InputForm
+                  name="Name_of_the_account_holder"
+                  :loading="loading"
+                  v-model="Name_of_the_account_holder"
+                  :label="t('pages.auth.Name_of_the_account_holder')"
+                  type="text"
+                  :placeholder="t('pages.auth.Name_of_the_account_holder')"
+                  class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+                >
+                  <template #startIcon>
+                    <img src="/home.svg" class="w-4" />
+                  </template>
+                </InputForm>
               </div>
             </div>
-          </div>
-          <div
-            v-if="selectedCompany.name === t('pages.contracting_companies')"
-            class="rounded"
-          >
-            <!-- account_number -->
-            <div>
-              <div class="w-full grid grid-cols-12 gap-2">
-                <!-- Email co -->
-                <div class="relative col-span-12">
-                  <InputForm
-                    name="account_number"
-                    :loading="loading"
-                    v-model="account_number"
-                    :label="t('pages.auth.account_number')"
-                    type="text"
-                    :placeholder="t('pages.auth.account_number')"
-                    class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
-                  >
-                    <template #startIcon>
-                      <img src="/home.svg" class="w-4" />
-                    </template>
-                  </InputForm>
-                </div>
+
+            <!-- Account Number -->
+            <div class="w-full grid grid-cols-12 gap-2">
+              <div class="relative col-span-12">
+                <InputForm
+                  name="account_number"
+                  :loading="loading"
+                  v-model="account_number"
+                  :label="t('pages.auth.account_number')"
+                  type="text"
+                  :placeholder="t('pages.auth.account_number')"
+                  class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+                >
+                  <template #startIcon>
+                    <img src="/home.svg" class="w-4" />
+                  </template>
+                </InputForm>
               </div>
             </div>
-          </div>
-          <div
-            v-if="selectedCompany.name === t('pages.contracting_companies')"
-            class="rounded"
-          >
-            <!-- iban -->
-            <div>
-              <div class="w-full grid grid-cols-12 gap-2">
-                <!-- Email co -->
-                <div class="relative col-span-12">
-                  <InputForm
-                    name="iban"
-                    :loading="loading"
-                    v-model="iban"
-                    :label="t('pages.auth.iban')"
-                    type="text"
-                    :placeholder="t('pages.auth.iban')"
-                    class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
-                  >
-                    <template #startIcon>
-                      <img src="/home.svg" class="w-4" />
-                    </template>
-                  </InputForm>
-                </div>
+
+            <!-- IBAN -->
+            <div class="w-full grid grid-cols-12 gap-2">
+              <div class="relative col-span-12">
+                <InputForm
+                  name="iban"
+                  :loading="loading"
+                  v-model="iban"
+                  :label="t('pages.auth.iban')"
+                  type="text"
+                  :placeholder="t('pages.auth.iban')"
+                  class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+                >
+                  <template #startIcon>
+                    <img src="/home.svg" class="w-4" />
+                  </template>
+                </InputForm>
               </div>
             </div>
           </div>
@@ -445,8 +436,9 @@ import * as yup from "yup";
 import defaultImg from "/public/img/Avatar.png";
 
 //store
-const { list_countries, country } = storeToRefs(useCountries());
-const { getCountries } = useCountries();
+const { list_countries, country, cities } = storeToRefs(useCountries());
+const { getCountries, getCities } = useCountries();
+const { fetchData, resultData } = useFetchData();
 
 //router
 const localeRoute = useLocaleRoute();
@@ -459,24 +451,22 @@ const { t } = useI18n();
 const activeSubTab = ref("individual");
 const setActiveSubTab = (tab) => (activeSubTab.value = tab);
 const currentTab = ref("client");
+const defaultImage = ref(defaultImg);
+const selectedCity = ref(null);
+const selectedCompany = ref(null);
 const check_box = ref(false);
 const visible = ref(false);
+const visible_map = ref(false);
 const phone = ref("");
 const full_name = ref("");
 const email = ref("");
+const commercial_register = ref("");
 const fileInput = ref(null);
-const defaultImage = ref(defaultImg);
-const uploadedImage = ref("");
+const uploadedImage = ref(null);
 const fileInputCompany = ref(null);
 const imagePreview = ref(null);
-const selectedCity = ref(null);
-const selectedCompany = ref(null);
+const loading = ref(false);
 
-const cities = ref([
-  { name: t("pages.engineering_consultancy_office") },
-  { name: t("pages.building_materials_companies") },
-  { name: t("pages.contracting_companies") },
-]);
 const company = ref([
   { name: t("pages.engineering_consultancy_office") },
   { name: t("pages.building_materials_companies") },
@@ -488,6 +478,31 @@ const inputs = ref([]);
 const addInput = () => {
   inputs.value.push("");
 };
+
+function openModal() {
+  visible_map.value = true;
+}
+
+// const sendedLat = ref("32.2215");
+// const sendedLng = ref("29.5156");
+// const sendedAddress = ref("fsdfsdfdsfsdfsdfsdfالمنصوره");
+
+const sendedLat = ref(null);
+const sendedLng = ref(null);
+const sendedAddress = ref("");
+
+// get lat, lng, address from change marker position
+const getMyLoc = (lat, lng, address) => {
+  sendedLat.value = lat;
+  sendedLng.value = lng;
+  sendedAddress.value = address;
+  visible.value = false;
+};
+
+defineExpose({
+  sendedLat,
+  sendedLng,
+});
 
 // Define validation schema
 const validationSchema = yup.object({
@@ -504,15 +519,7 @@ const validationSchema = yup.object({
     .required(t("validation.required"))
     .min(3, t("validation.min", { min: 3 }))
     .max(250, t("validation.max", { max: 250 })),
-
-  email: yup
-    .string()
-    .email(t("validation.email"))
-    .trim()
-    .matches(
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net)$/,
-      t("validation.emailDomain")
-    ),
+  city: yup.string().required(t("validation.required")),
 });
 
 // Image Upload
@@ -540,12 +547,23 @@ const triggerFileInputCompany = () => {
   fileInputCompany.value.click();
 };
 
-const handleFileUpload = (event) => {
+const handleFileUpload = async (event) => {
   const file = event.target.files[0];
+
   if (file) {
+    if (!file.type.startsWith("image/")) {
+      alert("Please upload a valid image file.");
+      return;
+    }
+
     const reader = new FileReader();
-    reader.onload = () => (imagePreview.value = reader.result);
+    reader.onload = () => {
+      imagePreview.value = reader.result;
+    };
     reader.readAsDataURL(file);
+
+    const formData = new FormData();
+    formData.append("commercial_register_image", file);
   }
 };
 
@@ -567,18 +585,73 @@ const removeImageCompany = () => {
 onMounted(async () => {
   try {
     await getCountries(); // Wait until getCountries() completes
+    await getCities();
   } catch (error) {
     console.error("Error fetching countries:", error);
   } finally {
   }
 });
+
 // Wrapping the submit logic
 const submit = handleSubmit(async () => {
-  if (check_box.value == false) {
-    alert("يجب الموافقة على الشروط والأحكام قبل المتابعة!");
+  if (!check_box.value) {
+    alert("يجب الموافقة على الشروط والأحكام.");
     return;
   }
-  loading.value = true;
+
+  const formData = new FormData();
+  formData.append("image", fileInput.value.files[0] || "");
+  formData.append("city_id", selectedCity.value?.id || "");
+  formData.append("phone", phone.value || "");
+  formData.append("name", full_name.value || "");
+  formData.append("email", email.value || "");
+  formData.append("country_code", country.value?.key || "+20");
+  formData.append("type", activeSubTab.value);
+  formData.append("is_terms", Boolean(check_box.value));
+  formData.append("device_id", "111");
+  formData.append("device_type", "web");
+
+  if (activeSubTab.value === "company" && fileInputCompany.value.files[0]) {
+    formData.append("commercial_register", commercial_register.value || "");
+    formData.append(
+      "commercial_register_image",
+      fileInputCompany.value.files[0]
+    );
+  }
+
+  try {
+    loading.value = true;
+
+    await fetchData({
+      url: `api/provider/register`,
+      method: "post",
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+      body: formData,
+      getSuccess: true,
+
+      onSuccess: () => {
+        useCookie("country_code").value = country.value.key;
+        useCookie("phone").value = phone.value;
+
+        const authCookie = useCookie("auth", {
+          watch: true,
+          sameSite: "lax",
+          maxAge: 365 * 24 * 60 * 60,
+        });
+        authCookie.value = resultData.value;
+
+        nextTick(async () => {
+          navigateTo(localeRoute({ name: "otp-provider" }), { replace: true });
+        });
+      },
+    });
+  } catch (error) {
+    console.error("❌ Error in API request:", error);
+  } finally {
+    loading.value = false; // Ensures loading resets no matter what happens
+  }
 });
 </script>
 

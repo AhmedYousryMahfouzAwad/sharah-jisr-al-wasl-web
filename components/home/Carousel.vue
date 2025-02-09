@@ -9,11 +9,11 @@
     >
       <template #item="{ data }">
         <div>
-          <div class="px-1 !rounded-xl">
+          <div class="px-1">
             <img
               :src="data.image || '/img/default.jpg'"
               :alt="data.title || 'Banner Image'"
-              class="!w-full !h-96 cover !rounded-xl"
+              class="!w-full !h-96 object-cover"
             />
           </div>
         </div>

@@ -45,7 +45,7 @@ export default defineNuxtConfig({
   // i18n module configuration
   i18n: {
     // lazy: true,
-    // strategy: "prefix_except_default",
+    strategy: "prefix_except_default",
     langDir: "locales",
     defaultLocale: "ar",
     defaultDirection: "rtl",
@@ -58,6 +58,7 @@ export default defineNuxtConfig({
         name: "العربية",
         file: { path: "ar.json", cache: false },
         dir: "rtl",
+        image: "/img/saudi.png",
       },
       {
         code: "en",
@@ -65,6 +66,7 @@ export default defineNuxtConfig({
         name: "English",
         file: { path: "en.json", cache: false },
         dir: "ltr",
+        image: "/img/Flag_of_the_United.webp",
       },
     ],
   },

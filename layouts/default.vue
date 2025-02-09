@@ -65,11 +65,13 @@
           </button>
           <Select
             v-model="lang"
-            :options="languages"
-            @update:model-value="lang"
+            :options="locales"
+            @update:model-value="$router.push(switchLocalePath(lang))"
             optionLabel="name"
+            option-value="code"
             class="border-0 shadow-none outline-none text-xs font-semibold"
           >
+
             <template #option="slotProps">
               <div class="flex items-center">
                 <img
@@ -162,8 +164,10 @@
 </template>
 
 <script setup>
-import saudi from "../public/img/saudi.png";
-import Flag_of_the_United from "../public/img/Flag_of_the_United.webp";
+const switchLocalePath = useSwitchLocalePath();
+
+// i18n setup
+const { t, locale, locales } = useI18n();
 
 const isSidebarOpen = ref(false);
 const toggleSidebar = () => {
@@ -172,26 +176,13 @@ const toggleSidebar = () => {
 const closeSidebar = () => {
   isSidebarOpen.value = false;
 };
-// Function to close the sidebar
-
-// const { logOut } = useLogoutStore();
-// const logoutAuth = async () => {
-//   await logOut();
-// };
-
-// i18n setup
-const { t, locale } = useI18n();
 
 const lang = ref(locale.value);
-const languages = ref([
-  { name: "Saudi Arabia", image: saudi },
-  { name: "English", image: Flag_of_the_United },
-]);
+
 // Current route
 const route = useRoute();
 const localePath = useLocalePath();
 
-// watch(isToastVisible, (newValue) => {
 //   if (newValue) {
 //     toast.add(
 //       {

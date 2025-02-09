@@ -32,6 +32,10 @@
   border-top-right-radius: 8px !important;
 }
 
+.p-carousel-item-list {
+  direction: rtl !important;
+}
+
 .p-carousel-indicator-active .p-carousel-indicator-button {
   @apply !bg-primary-1 !h-3 !w-3 !pt-2  !rounded-full;
 }

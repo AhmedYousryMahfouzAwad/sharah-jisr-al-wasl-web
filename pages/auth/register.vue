@@ -378,7 +378,7 @@
                       :loading="loading"
                       v-model="email"
                       type="text"
-                      :placeholder="t('pages.auth.email')"
+                      :placeholder="t('pages.Commercial_Register_Image')"
                       class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
                     >
                       <template #startIcon>
@@ -413,7 +413,7 @@
                 <div class="w-full">
                   <p class="text-start my-2">
                     <span class="text-red-2 font-semibold">*</span>
-                    {{ t("pages.auth.email") }}
+                    {{ t("pages.Commercial_Register_Image") }}
                   </p>
 
                   <div
@@ -571,7 +571,6 @@ const { t } = useI18n();
 
 const activeSubTab = ref("person");
 const currentTab = ref("client");
-const loading = ref(false);
 const check_box = ref(false);
 const visible = ref(false);
 const phone = ref("");
@@ -582,6 +581,7 @@ const fileInput = ref(null);
 const uploadedImage = ref(null);
 const fileInputCompany = ref(null);
 const imagePreview = ref(null);
+const loading = ref(false);
 
 const validationSchema = computed(() => {
   return yup.object({
@@ -605,14 +605,6 @@ const validationSchema = computed(() => {
         ? yup.string().trim().required(t("validation.required"))
         : yup.string().notRequired(),
   });
-});
-
-onMounted(async () => {
-  try {
-    await getCountries();
-  } catch (error) {
-    console.error("Error fetching countries:", error);
-  }
 });
 
 // Image Upload
@@ -644,22 +636,19 @@ const handleFileUpload = async (event) => {
   const file = event.target.files[0];
 
   if (file) {
-    // ✅ التأكد من أن الملف صورة
     if (!file.type.startsWith("image/")) {
       alert("Please upload a valid image file.");
       return;
     }
 
-    // ✅ حفظ الصورة محليًا للمعاينة فقط
     const reader = new FileReader();
     reader.onload = () => {
-      imagePreview.value = reader.result; // ✅ العرض فقط
+      imagePreview.value = reader.result;
     };
     reader.readAsDataURL(file);
 
-    // ✅ إنشاء FormData وإرسال الصورة بصيغة binary
     const formData = new FormData();
-    formData.append("commercial_register_image", file); // ✅ إرسال الصورة مباشرةً كـ ملف
+    formData.append("commercial_register_image", file);
   }
 };
 
@@ -714,6 +703,8 @@ const submit = handleSubmit(async () => {
   }
 
   try {
+    loading.value = true;
+
     await fetchData({
       url: `api/user/register`,
       method: "post",
@@ -726,27 +717,38 @@ const submit = handleSubmit(async () => {
       onSuccess: () => {
         useCookie("country_code").value = country.value.key;
         useCookie("phone").value = phone.value;
+
         const authCookie = useCookie("auth", {
           watch: true,
           sameSite: "lax",
           maxAge: 365 * 24 * 60 * 60,
         });
-
         authCookie.value = resultData.value;
 
         nextTick(async () => {
-          navigateTo(localeRoute({ name: "auth-Otp" }), {
-            replace: true,
-          });
+          navigateTo(localeRoute({ name: "auth-Otp" }), { replace: true });
         });
       },
     });
   } catch (error) {
     console.error("❌ Error in API request:", error);
+  } finally {
+    loading.value = false; // Ensures loading resets no matter what happens
   }
 });
-</script>
 
+// await fetchData({
+//   url: `api/user/register`,
+//   method: "post",
+//   headers: {
+//     "content-type": "multipart/form-data",
+//   },
+//   body: formData,
+//   getSuccess: true,
+
+//   onSuccess: () => {},
+// });
+</script>
 <style scoped>
 /* Ensure white background is applied */
 .bg-white {

@@ -4,6 +4,10 @@ import { useToast } from "primevue/usetoast";
 export const useFetchData = () => {
   const { showSuccess, showError, showWarning, showInfo } = usePrimeToast();
   const { locale } = useI18n();
+  const { RemoveAuth } = useAuthStore();
+  const localePath = useLocalePath();
+  const router = useRouter();
+  const route = useRoute();
 
   const { isAuth, userInfo } = storeToRefs(useAuthStore());
 

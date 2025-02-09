@@ -9,6 +9,7 @@
   },
   "pages": {
     "message": "You must agree to the terms and conditions before proceeding!",
+    "Commercial_Register_Image": "Commercial Register Image",
 
     "choose_country": "Choose Country",
     "location_map": "Geographical location",

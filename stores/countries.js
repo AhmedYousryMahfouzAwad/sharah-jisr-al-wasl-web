@@ -5,6 +5,7 @@ export const useCountries = defineStore("countries", () => {
   //STATE
   const { fetchData, resultData } = useFetchData();
   const list_countries = ref([]);
+  const cities = ref([]);
 
   const country = ref({
     key: "+966", // Default country code for Saudi Arabia
@@ -20,12 +21,24 @@ export const useCountries = defineStore("countries", () => {
     });
   };
 
+  const getCities = async () => {
+    await fetchData({
+      url: `api/cities`,
+      method: "get",
+      onSuccess: () => {
+        cities.value = resultData.value;
+      },
+    });
+  };
+
   return {
     //STATE
     list_countries,
     country,
+    cities,
 
     //ACTIONS
     getCountries,
+    getCities,
   };
 });
