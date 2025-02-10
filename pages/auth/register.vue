@@ -10,7 +10,7 @@
             {{ t("pages.title_register") }}
           </h1>
           <h1
-            class="font-semibold my-1 md:text-sm text-xs text-center text-gray-600"
+            class="font-bold my-1 md:text-sm text-xs text-center text-gray-600"
           >
             {{ t("pages.des_register") }}
           </h1>
@@ -64,7 +64,7 @@
                       ? 'bg-primary-1 text-white'
                       : 'bg-primary-2 text-gray-600'
                   "
-                  class="col-span-6 text-center font-semibold rounded-full py-2"
+                  class="col-span-6 text-center font-bold rounded-full py-2"
                 >
                   {{ t("pages.individual") }}
                 </button>
@@ -78,7 +78,7 @@
                       ? 'bg-primary-1 text-white'
                       : 'bg-pr-200 text-gray-600'
                   "
-                  class="col-span-6 text-center font-semibold rounded-full py-2"
+                  class="col-span-6 text-center font-bold rounded-full py-2"
                 >
                   {{ t("pages.company") }}
                 </button>
@@ -264,7 +264,7 @@
               <!--company-->
               <div v-else-if="activeSubTab === 'company'" class="text-center">
                 <p class="text-start my-2">
-                  <span class="text-red-2 font-semibold">*</span>
+                  <span class="text-red-2 font-bold">*</span>
                   {{ t("pages.name") }}
                 </p>
 
@@ -288,7 +288,7 @@
                 </div>
 
                 <p class="text-start my-2">
-                  <span class="text-red-2 font-semibold">*</span>
+                  <span class="text-red-2 font-bold">*</span>
                   {{ t("pages.mobile_number") }}
                 </p>
 
@@ -366,7 +366,7 @@
 
                 <!-- Email company -->
                 <p class="text-start my-2">
-                  <span class="text-red-2 font-semibold">*</span>
+                  <span class="text-red-2 font-bold">*</span>
                   {{ t("pages.auth.email") }}
                 </p>
 
@@ -378,7 +378,7 @@
                       :loading="loading"
                       v-model="email"
                       type="text"
-                      :placeholder="t('pages.Commercial_Register_Image')"
+                      :placeholder="t('pages.auth.email')"
                       class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
                     >
                       <template #startIcon>
@@ -389,7 +389,7 @@
                 </div>
 
                 <p class="text-start my-2">
-                  <span class="text-red-2 font-semibold">*</span>
+                  <span class="text-red-2 font-bold">*</span>
                   {{ t("pages.commercial_register") }}
                 </p>
 
@@ -412,7 +412,7 @@
 
                 <div class="w-full">
                   <p class="text-start my-2">
-                    <span class="text-red-2 font-semibold">*</span>
+                    <span class="text-red-2 font-bold">*</span>
                     {{ t("pages.Commercial_Register_Image") }}
                   </p>
 
@@ -498,7 +498,7 @@
                   type="submit"
                   :label="t('pages.auth.login')"
                   :disabled="loading"
-                  class="!mx-auto !justify-center !items-center !flex !bg-primary-1 text-white font-semibold"
+                  class="!mx-auto !justify-center !items-center !flex !bg-primary-1 text-white font-bold"
                 />
               </div>
               <div class="w-[100%] md:px-0 px-2">
@@ -726,7 +726,7 @@ const submit = handleSubmit(async () => {
         authCookie.value = resultData.value;
 
         nextTick(async () => {
-          navigateTo(localeRoute({ name: "auth-Otp" }), { replace: true });
+          navigateTo(localeRoute({ name: "auth-Otp" }));
         });
       },
     });

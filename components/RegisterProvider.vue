@@ -2,8 +2,8 @@
   <div class="mx-auto">
     <form @submit.prevent="submit" class="text-start w-full">
       <div class="flex flex-col items-center mt-4 justify-center mx-auto">
+        <!-- Profile Image -->
         <div class="flex">
-          <!-- Profile Image -->
           <div class="relative">
             <Avatar
               :image="uploadedImage || defaultImage"
@@ -70,6 +70,8 @@
           </div>
         </div>
       </div>
+
+      <!--phone-->
       <div>
         <p class="text-start my-2 font-bold">
           <span class="text-red-2">*</span>
@@ -181,16 +183,16 @@
         >
           <Select
             v-model="selectedCity"
-            :options="cities"
+            :options="list_cities"
             optionLabel="name"
             optionValue="id"
             :placeholder="t('pages.choose_city')"
-            class="w-full border border-gray-300 rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+            class="w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
           />
 
           <span
             v-if="errorMessage"
-            class="text-red-500 text-sm font-bold flex justify-center items-center mt-1"
+            class="text-red-500 text-sm font-bold flex justify-start items-start mt-1"
           >
             {{ errorMessage }}
           </span>
@@ -215,6 +217,7 @@
                   class="h-5 w-5 text-gray-500 float-right"
                   style="transform: scaleX(-1)"
                   alt="Map icon"
+                  src="/location.png"
                 />
               </div>
             </template>
@@ -238,7 +241,35 @@
         </Dialog>
       </div>
 
-      <div class="w-full my-5">
+      <!-- Commercial Register -->
+      <p class="text-start my-2 font-bold">
+        <span class="text-red-2">*</span>
+        {{ t("pages.commercial_register") }}
+      </p>
+
+      <div class="w-full grid grid-cols-12 gap-2">
+        <div class="relative col-span-12">
+          <InputForm
+            name="commercial_register"
+            :loading="loading"
+            v-model="commercial_register"
+            type="text"
+            :placeholder="t('pages.commercial_register')"
+            class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+          >
+            <template #startIcon>
+              <img src="/report.svg" class="w-4" />
+            </template>
+          </InputForm>
+        </div>
+      </div>
+      <!-- Commercial Register Image -->
+      <div class="w-full">
+        <p class="text-start my-2">
+          <span class="text-red-2 font-semibold">*</span>
+          {{ t("pages.Commercial_Register_Image") }}
+        </p>
+
         <div
           class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100"
           @dragover.prevent
@@ -287,21 +318,36 @@
             </svg>
           </template>
         </div>
+      </div>
+
+      <div class="w-full my-3">
         <p class="text-start mt-2 font-bold">
           <span class="text-red-2">*</span>
           {{ t("pages.main_category") }}
         </p>
-        <Select
-          v-model="selectedCompany"
-          :options="company"
-          optionLabel="name"
-          :label="t('pages.main_category')"
-          :placeholder="t('pages.main_category')"
-          class="w-full my-2"
-        />
 
+        <Field
+          name="selectedCompany"
+          v-model="selectedCompany"
+          v-slot="{ field, errorMessage }"
+        >
+          <Select
+            v-model="selectedCompany"
+            :options="list_categories"
+            optionLabel="name"
+            optionValue="id"
+            :label="t('pages.main_category')"
+            :placeholder="t('pages.main_category')"
+            class="w-full my-2"
+          />
+          <span
+            v-if="errorMessage"
+            class="text-red-500 text-sm font-bold flex justify-start items-start mt-1"
+          >
+            {{ errorMessage }}
+          </span>
+        </Field>
         <div v-if="selectedCompany">
-          <!-- Always show these inputs regardless of the selected company -->
           <div class="rounded">
             <!-- Name Bank -->
             <div class="w-full grid grid-cols-12 gap-2">
@@ -344,19 +390,32 @@
             <!-- Account Number -->
             <div class="w-full grid grid-cols-12 gap-2">
               <div class="relative col-span-12">
-                <InputForm
+                <Field
                   name="account_number"
-                  :loading="loading"
                   v-model="account_number"
-                  :label="t('pages.auth.account_number')"
-                  type="text"
-                  :placeholder="t('pages.auth.account_number')"
-                  class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+                  v-slot="{ field, errorMessage }"
                 >
-                  <template #startIcon>
-                    <img src="/home.svg" class="w-4" />
-                  </template>
-                </InputForm>
+                  <InputForm
+                    name="account_number"
+                    :loading="loading"
+                    v-model="account_number"
+                    :label="t('pages.auth.account_number')"
+                    type="text"
+                    :placeholder="t('pages.auth.account_number')"
+                    class="w-full !pr-10 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
+                  >
+                    <template #startIcon>
+                      <img src="/home.svg" class="w-4" />
+                    </template>
+
+                    <span
+                      v-if="errorMessage"
+                      class="text-red-500 text-sm font-bold flex justify-start items-start mt-1"
+                    >
+                      {{ errorMessage }}
+                    </span>
+                  </InputForm>
+                </Field>
               </div>
             </div>
 
@@ -382,6 +441,31 @@
         </div>
       </div>
 
+      <div class="w-full gap-2 mt-5">
+        <div class="flex items-center gap-2">
+          <Checkbox
+            v-model="check_box"
+            inputId="ingredient1"
+            name="check_box"
+            :value="true"
+          />
+
+          <label
+            for="ingredient1"
+            class="text-start text-sm font-bold my-2 flex"
+          >
+            <span class="text-red-2 px-1 flex">*</span>
+            {{ t("pages.auth.agree") }}
+            <button
+              type="button"
+              @click="visible = true"
+              class="text-primary-1 px-2"
+            >
+              {{ t("pages.terms_conditions") }}
+            </button>
+          </label>
+        </div>
+      </div>
       <div class="md:px-0 px-2 mt-5">
         <ButtonAuth
           :imageSrc="'/arrow.png'"
@@ -437,8 +521,10 @@ import * as yup from "yup";
 import defaultImg from "/public/img/Avatar.png";
 
 //store
-const { list_countries, country, cities } = storeToRefs(useCountries());
-const { getCountries, getCities } = useCountries();
+const { list_countries, country, list_cities, list_categories } = storeToRefs(
+  useCountries()
+);
+const { getCountries, getCities, getCategories } = useCountries();
 const { fetchData, resultData } = useFetchData();
 
 //router
@@ -464,6 +550,7 @@ const email = ref("");
 const Name_of_the_account_holder = ref("");
 const account_number = ref("");
 const commercial_register = ref("");
+const name_bank = ref("");
 const fileInput = ref(null);
 const uploadedImage = ref(null);
 const fileInputCompany = ref(null);
@@ -524,6 +611,31 @@ const validationSchema = yup.object({
     .min(3, t("validation.min", { min: 3 }))
     .max(250, t("validation.max", { max: 250 })),
   selectedCity: yup.number().required(t("validation.required")),
+  selectedCompany: yup.string().trim().required(t("validation.required")),
+  name_bank: yup.string().trim().required(t("validation.required")),
+  Name_of_the_account_holder: yup
+    .string()
+    .trim()
+    .required(t("validation.required")),
+  account_number: yup
+    .string()
+    .trim() // Remove extra whitespace
+    .min(9, t("validation.min_n", { min: 9 })) // Minimum length of 9 digits
+    .max(18, t("validation.max_n", { max: 18 })) // Maximum length of 18 digits
+    .matches(/^[0-9]+$/, t("validation.only_digits")) // Ensures only digits
+    .required(t("validation.required")),
+
+  commercial_register: yup
+    .string()
+    .trim()
+    .min(11, t("validation.min_n", { min: 11 })) // Minimum length of 9 digits
+    .max(16, t("validation.max_n", { max: 16 })) // Maximum length of 18 digits
+    .required(t("validation.required")),
+  iban: yup
+    .string()
+    .trim()
+    .required(t("validation.required"))
+    .matches(/^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/, t("validation.invalid_iban")),
 });
 
 // Image Upload
@@ -590,6 +702,7 @@ onMounted(async () => {
   try {
     await getCountries(); // Wait until getCountries() completes
     await getCities();
+    await getCategories();
   } catch (error) {
     console.error("Error fetching countries:", error);
   } finally {
@@ -598,7 +711,7 @@ onMounted(async () => {
 
 // Wrapping the submit logic
 const submit = handleSubmit(async () => {
-  if (!check_box.value) {
+  if (check_box.value == false) {
     alert("يجب الموافقة على الشروط والأحكام.");
     return;
   }
@@ -607,15 +720,23 @@ const submit = handleSubmit(async () => {
 
   formData.append("image", fileInput.value.files[0] || "");
   formData.append("city_id", selectedCity.value || "");
+  formData.append("category_id", selectedCompany.value || "");
   formData.append("phone", phone.value || "");
   formData.append("name", full_name.value || "");
   formData.append("email", email.value || "");
-  formData.append("country_code", country.value?.key || "+20");
-  formData.append("type", activeSubTab.value);
+  formData.append("country_code", country.value?.key || "+996");
   formData.append("is_terms", Boolean(check_box.value));
   formData.append("device_id", "111");
   formData.append("device_type", "web");
-
+  formData.append("lat", sendedLat.value);
+  formData.append("lng", sendedLng.value);
+  formData.append("map_desc", sendedAddress.value);
+  formData.append("bank_name", name_bank.value || "");
+  formData.append("account_name", Name_of_the_account_holder.value || "");
+  formData.append("account_number", account_number.value || "");
+  formData.append("iban", iban.value || "");
+  formData.append("commercial_register", commercial_register.value || "");
+  formData.append("commercial_register_image", fileInputCompany.value.files[0]);
   try {
     loading.value = true;
 
@@ -639,9 +760,7 @@ const submit = handleSubmit(async () => {
         });
         authCookie.value = resultData.value;
 
-        nextTick(async () => {
-          navigateTo(localeRoute({ name: "otp-provider" }), { replace: true });
-        });
+        navigateTo(localeRoute({ name: "auth-otp-provider" }));
       },
     });
   } catch (error) {

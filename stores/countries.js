@@ -5,7 +5,8 @@ export const useCountries = defineStore("countries", () => {
   //STATE
   const { fetchData, resultData } = useFetchData();
   const list_countries = ref([]);
-  const cities = ref([]);
+  const list_cities = ref([]);
+  const list_categories = ref([]);
 
   const country = ref({
     key: "+966", // Default country code for Saudi Arabia
@@ -26,7 +27,16 @@ export const useCountries = defineStore("countries", () => {
       url: `api/cities`,
       method: "get",
       onSuccess: () => {
-        cities.value = resultData.value;
+        list_cities.value = resultData.value;
+      },
+    });
+  };
+  const getCategories = async () => {
+    await fetchData({
+      url: `api/categories`,
+      method: "get",
+      onSuccess: () => {
+        list_categories.value = resultData.value;
       },
     });
   };
@@ -35,10 +45,12 @@ export const useCountries = defineStore("countries", () => {
     //STATE
     list_countries,
     country,
-    cities,
+    list_cities,
+    list_categories,
 
     //ACTIONS
     getCountries,
     getCities,
+    getCategories,
   };
 });

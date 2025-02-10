@@ -9,9 +9,8 @@
       </p>
 
       <p class="text-center text-sm font-bold">
-        {{ t("pages.please_enter_verification") }} {{ phone }} +{{
-          country_code
-        }}
+        {{ t("pages.please_enter_verification") }} {{ useCookie("phone") }}
+        {{ useCookie("country_code") }}
       </p>
 
       <div class="card flex-col flex justify- items-center mx-auto">
@@ -95,7 +94,6 @@
 <script setup>
 // imports
 import illustration from "../../public/img/Illustration.png";
-import img_otp from "@/assets/img/otp.png";
 import * as yup from "yup";
 import { Field, useForm } from "vee-validate";
 
