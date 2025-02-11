@@ -3,7 +3,8 @@
   <div class="max-w-7xl mx-auto my-10">
     <HomeWhoWeAre :loading="loading" :who_we_are="who_we_are" />
   </div>
-  <HomeWhatWeOffer :loading="loading" :categories="categories" />
+  <HomeWhatWeOffer class="px-2" :loading="loading" :categories="categories" />
+  <HomeContactUs class="px-2" :loading="loading" />
 </template>
 
 <script setup>
