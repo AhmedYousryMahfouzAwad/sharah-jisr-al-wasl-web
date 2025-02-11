@@ -71,7 +71,6 @@
             option-value="code"
             class="border-0 shadow-none outline-none text-xs font-semibold"
           >
-
             <template #option="slotProps">
               <div class="flex items-center">
                 <img
@@ -133,10 +132,6 @@
           ></NavList>
         </ul>
       </div>
-    </nav>
-
-    <nav class="bg-black shadow-md">
-      <p class="text-white p-3 max-w-[94rem] mx-auto">dsadsadsadsad</p>
     </nav>
 
     <slot />

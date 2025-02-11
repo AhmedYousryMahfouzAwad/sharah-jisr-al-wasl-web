@@ -8,9 +8,13 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "who_we_are": "Who We Are",
+    "what_we_offer": "What We Offer",
+    "learn_more": "Learn More",
     "message": "You must agree to the terms and conditions before proceeding!",
+    "agree": "You must agree to the terms and conditions.",
     "Commercial_Register_Image": "Commercial Register Image",
-
+    "remove": "Remove",
     "choose_country": "Choose Country",
     "location_map": "Geographical location",
     "choose_city": "Choose City",
@@ -260,11 +264,9 @@
       }
     }
   },
-
   "auth": {
     "logout": "Logout"
   },
-
   "inputs": {
     "site_search": {
       "label": "Search",

@@ -712,7 +712,7 @@ onMounted(async () => {
 // Wrapping the submit logic
 const submit = handleSubmit(async () => {
   if (check_box.value == false) {
-    alert("يجب الموافقة على الشروط والأحكام.");
+    alert("t('pages.agree')");
     return;
   }
 

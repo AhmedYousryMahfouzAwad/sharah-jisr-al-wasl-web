@@ -39,7 +39,6 @@ export const useLoginStore = defineStore("login", () => {
 
   //mac address
   if (!macCookie.value) {
-    // Generate and set a random MAC address in the cookie
     macCookie.value = generateRandomMacAddress();
     console.log("New MAC Address cookie set:", macCookie.value);
   } else {

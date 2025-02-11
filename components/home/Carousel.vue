@@ -8,13 +8,18 @@
       :responsiveOptions="responsiveOptions"
     >
       <template #item="{ data }">
-        <div>
+        <div class="relative">
           <div class="px-1">
             <img
               :src="data.image || '/img/default.jpg'"
               :alt="data.title || 'Banner Image'"
               class="!w-full !h-96 object-cover"
             />
+          </div>
+          <div
+            class="absolute bottom-[50%] left-0 w-full bg-opacity-50 text-white font-bold text-center p-2 text-2xl"
+          >
+            {{ data.title || "No Title" }}
           </div>
         </div>
       </template>

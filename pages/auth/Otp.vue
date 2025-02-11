@@ -1,4 +1,6 @@
 <template>
+  <Nav :title="t('pages.auth.login')" />
+
   <div class="!md:container">
     <form
       @submit.prevent="otpLogin"

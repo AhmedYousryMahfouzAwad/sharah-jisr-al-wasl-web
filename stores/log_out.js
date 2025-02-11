@@ -8,7 +8,7 @@ export const useLogoutStore = defineStore("logout", () => {
   const localePath = useLocalePath();
   const router = useRouter();
   const { RemoveAuth } = useAuthStore();
-  const { locale } = useI18n();
+
   // fetch country codes data
 
   const logOut = async () => {

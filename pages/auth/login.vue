@@ -1,4 +1,5 @@
 <template>
+  <Nav :title="t('pages.auth.login')" />
   <div class="mx-auto !mt-20">
     <div
       class="flex col-span-12 flex-col items-center relative shadow-lg p-2 rounded-lg bg-white max-w-lg mx-auto justify-center w-full z-10"
@@ -325,7 +326,7 @@
                 type="submit"
                 :label="t('pages.auth.login')"
                 :disabled="loading"
-                class="!mx-auto !justify-center !items-center !flex !bg-primary-1 text-white font-semibold"
+                class="!mx-auto !justify-center !items-center !flex !bg-primary-1 text-white font-bold"
               />
             </div>
           </div>
@@ -392,6 +393,8 @@
 </template>
 
 <script setup>
+const { t } = useI18n();
+import * as yup from "yup";
 import illustration from "../../public/img/Illustration.png";
 const activeSubTab = ref("individual");
 const setActiveSubTab = (tab) => (activeSubTab.value = tab);
@@ -417,28 +420,6 @@ const { isAuth } = storeToRefs(useAuthStore());
 const { getCountries } = useCountries();
 const { logOutAuth } = useLogoutStore();
 
-// const logoutGuestAuth = async () => {
-//   if (isAuth.value) {
-//     isLoading.value = true; // Start loading
-//     try {
-//       await logOutAuth(); // logout
-//       visible.value = true;
-//       setTimeout(() => {
-//         visible.value = false;
-//         router.push(localePath("/")); //
-//         isLoading.value = false; // Stop loading
-//       }, 1000);
-//     } catch (error) {
-//       console.error("Logout failed:", error);
-//       isLoading.value = false; // Stop loading even on error
-//     }
-//   } else {
-//     router.push(localePath("/"));
-//   }
-// };
-
-const { t } = useI18n();
-import * as yup from "yup";
 const loading = ref(false);
 const validationSchema = yup.object({
   phone: yup

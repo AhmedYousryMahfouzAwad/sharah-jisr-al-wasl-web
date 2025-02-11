@@ -1,4 +1,6 @@
 <template>
+  <Nav :title="t('pages.auth.register')" />
+
   <div class="mx-auto !mt-20">
     <div
       class="flex col-span-12 flex-col items-center relative shadow-lg p-2 rounded-lg bg-white max-w-lg mx-auto justify-center w-full z-10"
@@ -679,7 +681,7 @@ onMounted(async () => {
 // Wrapping the submit logic
 const submit = handleSubmit(async () => {
   if (!check_box.value) {
-    alert("يجب الموافقة على الشروط والأحكام.");
+    alert("t('pages.agree')");
     return;
   }
 
