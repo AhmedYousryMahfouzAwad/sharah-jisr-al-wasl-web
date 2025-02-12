@@ -36,7 +36,7 @@
 
       <img
         src="/bg-section.png"
-        class="w-full object-cover absolute z-0 bottom-0 right-0 max-w-[500px] left-0 top-3/4 transform -translate-y-1/2"
+        class="w-full object-cover absolute z-0 bottom-0 left-0 max-w-[500px] top-3/4 transform -translate-y-1/2"
         alt="Login Illustration"
       />
     </div>

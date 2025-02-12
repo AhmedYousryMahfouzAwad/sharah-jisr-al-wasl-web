@@ -92,7 +92,6 @@ export const useLoginStore = defineStore("login", () => {
         token.value = resultData.value.token;
 
         nextTick(async () => {
-          setAuth();
           setTimeout(() => {
             navigateTo(localeRoute({ name: "index" }), {
               replace: true,

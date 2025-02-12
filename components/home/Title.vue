@@ -1,6 +1,6 @@
 <template>
   <div class="!flex justify-start gap-2 items-center mx-auto">
-    <img :src="src" alt="Home Icon" class="w-6" />
+    <img :src="src" alt="Home Icon" class="w-6 mt-1" />
     <p class="font-bold text-lg">
       {{ t(title) }}
     </p>

@@ -166,10 +166,6 @@ const resendOtp = async () => {
     },
   });
 };
-
-definePageMeta({
-  middleware: ["redirect-login"],
-});
 </script>
 
 <style scoped>

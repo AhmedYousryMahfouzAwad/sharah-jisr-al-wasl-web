@@ -405,20 +405,15 @@ const tabs = [
   { name: "Provider", content: "محتوى مقدم الخدمة" },
 ];
 const localeRoute = useLocaleRoute();
-const localePath = useLocalePath();
-const router = useRouter();
-const route = useRoute();
-const isLoading = ref(false);
+
 const visible = ref(false);
 
 const { phone, macCookie } = storeToRefs(useLoginStore());
 const { sendLogin } = useLoginStore();
 
 const { list_countries, country } = storeToRefs(useCountries());
-const { isAuth } = storeToRefs(useAuthStore());
 
 const { getCountries } = useCountries();
-const { logOutAuth } = useLogoutStore();
 
 const loading = ref(false);
 const validationSchema = yup.object({

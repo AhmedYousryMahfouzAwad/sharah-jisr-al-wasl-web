@@ -1,6 +1,6 @@
 {
   "head": {
-    "title": "Swimmer"
+    "title": "Jisr El Wasl"
   },
   "buttons": {
     "add_to_cart": "Add to Cart",
@@ -8,6 +8,8 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "address": "ِAddress",
+    "contact_us_desc": "For inquiries and support - Contact us now.",
     "what_we_offer_desc": "Choose from the best contracting companies, engineering consulting firms, and building materials suppliers.",
     "who_we_are": "Who We Are",
     "enter_data": "Please fill in the following data:",

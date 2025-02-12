@@ -1,10 +1,89 @@
 <template>
-  <div class="mx-auto !mt-20 grid grid-cols-12 gap-2 max-w-7xl my-10">
+  <div class="  my-10 grid grid-cols-1 md:grid-cols-12  items-start text-sm mx-auto gap-5 max-w-7xl">
     <div
-      class="flex md:col-span-6 col-span-12 flex-col items-center rounded-lg mx-auto justify-center w-full"
-    ></div>
+  class="flex md:col-span-6 col-span-12 space-y-8 text-start justify-start items-start flex-col rounded-lg w-full"
+>
+  <div class="flex justify-start items-start">
+    <HomeTitle
+      :src="'/elements.png'"
+      class="flex !justify-start !items-start"
+      :title="t('pages.contact_us')"
+    />
+  </div>
+
+  <p class="text-gray-900 font-bold text-base mb-5 md:text-xl">
+    {{ t("pages.contact_us_desc") }}
+  </p>
+
+  <!-- رقم الهاتف -->
+  <div class="flex items-center gap-x-2">
     <div
-      class="flex md:col-span-6 col-span-12 flex-col items-center border-primary-1 border-2 p-2 rounded-lg bg-[#F9F5F1] mx-auto justify-center w-full"
+      class="relative p-4 rounded-full !bg-primary-2 cursor-pointer hover:bg-primary-3"
+    >
+      <img src="/phone.png" alt="notifications" class="w-5 h-5" />
+    </div>
+    <div>
+      <p>{{ t("pages.mobile_number") }}</p>
+      <p class="font-semibold">
+        <template v-if="contacts && contacts.phone">
+          <a
+            :href="`tel:${contacts.phone}`"
+            class="text-sm font-semibold flex underline"
+          >
+            {{ contacts.phone }}
+          </a>
+        </template>
+        <div v-else class="animate-pulse bg-gray-300 h-4 w-24 rounded"></div>
+      </p>
+    </div>
+  </div>
+
+  <!-- البريد الإلكتروني -->
+  <div class="flex items-center gap-x-2">
+    <div
+      class="relative p-4 rounded-full !bg-primary-2 cursor-pointer hover:bg-primary-3"
+    >
+      <img src="/img/email.svg" alt="notifications" class="w-5 h-5" />
+    </div>
+    <div>
+      <p>{{ t("pages.auth.email") }}</p>
+      <p class="font-semibold text-sm">
+        <template v-if="contacts && contacts.email">
+          {{ contacts.email }}
+        </template>
+        <div v-else class="animate-pulse bg-gray-300 h-4 w-32 rounded"></div>
+      </p>
+    </div>
+  </div>
+
+  <!-- العنوان والخريطة -->
+  <div class="flex items-center gap-x-2">
+    <div
+      class="relative p-4 rounded-full !bg-primary-2 cursor-pointer hover:bg-primary-3"
+    >
+      <img src="/location_map.png" alt="notifications" class="w-5 h-5" />
+    </div>
+    <div>
+      <p>{{ t("pages.address") }}</p>
+      <p class="font-semibold">
+        <template v-if="contacts && contacts.lat && contacts.lng">
+          <a
+            :href="`https://www.google.com/maps?q=${contacts.lat},${contacts.lng}`"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs sm:text-sm font-semibold underline"
+          >
+            {{ contacts.map_desc }}
+          </a>
+        </template>
+        <div v-else class="animate-pulse bg-gray-300 h-4 w-40 rounded"></div>
+      </p>
+    </div>
+  </div>
+</div>
+
+    <div
+      class="flex md:col-span-6 col-span-12 flex-col items-center p-2 rounded-lg bg-[#F9F5F1] mx-auto  w-full"
     >
       <form @submit.prevent="submit" class="text-start space-y-10 w-full">
         <div class="card">
@@ -34,7 +113,6 @@
               {{ t("pages.mobile_number") }}
             </p>
 
-            <!-- Phone Input -->
             <div class="w-full grid grid-cols-12 gap-2">
               <!-- Country Select -->
               <div
@@ -99,47 +177,47 @@
                   name="phone"
                   v-model="phone"
                   type="text"
-                  :placeholder="t('pages.auth.call_number_placeholder')"
+                  :placeholder="t('pages.mobile_number')"
                   class="w-full pl-3 pr-3 py-3 border-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-1"
                 />
               </div>
-
-              <div class="col-span-12">
-                <p for="on_label" class="py-2 font-bold">
-                  {{ t("pages.massage") }}
-                </p>
-
-                <Field
-                  v-model="message"
-                  name="message"
-                  type="text"
-                  v-slot="{ errorMessage }"
-                >
-                  <Textarea
-                    id="over_label"
-                    :placeholder="t('pages.enter_massage')"
-                    class="!rounded-lg w-full"
-                    v-model="message"
-                    name="message"
-                    rows="5"
-                    style="
-                      resize: none;
-                      ::placeholder {
-                        color: #a3a3a3;
-                        font-size: 1rem;
-                      }
-                    "
-                  />
-
-                  <span
-                    v-if="errorMessage"
-                    class="error-message font-bold text-red-2 text-sm flex flex-col justify-center items-center"
-                    >{{ errorMessage }}</span
-                  >
-                </Field>
-              </div>
             </div>
 
+            <!-- Message Input -->
+            <div class="col-span-12">
+              <p for="on_label" class="py-2 font-bold">
+                {{ t("pages.massage") }}
+              </p>
+
+              <Field
+                v-model="message"
+                name="message"
+                type="text"
+                v-slot="{ errorMessage }"
+              >
+                <Textarea
+                  id="over_label"
+                  :placeholder="t('pages.enter_massage')"
+                  class="!rounded-lg w-full"
+                  v-model="message"
+                  name="message"
+                  rows="5"
+                  style="
+                    resize: none;
+                    ::placeholder {
+                      color: #a3a3a3;
+                      font-size: 1rem;
+                    }
+                  "
+                />
+
+                <span
+                  v-if="errorMessage"
+                  class="error-message font-bold text-red-2 text-sm flex flex-col justify-center items-center"
+                  >{{ errorMessage }}</span
+                >
+              </Field>
+            </div>
             <div class="md:px-0 px-2 mt-5">
               <ButtonAuth
                 :imageSrc="'/arrow_top.png'"
@@ -154,6 +232,13 @@
         </div>
       </form>
     </div>
+
+
+    <img
+        src="/bg_contactus.png"
+        class="w-full object-cover absolute z-0 bottom-0 right-0 max-w-[500px] top-3/4 transform -translate-y-1/2"
+        alt="Login Illustration"
+      />
   </div>
 </template>
 
@@ -161,8 +246,19 @@
 const { t } = useI18n();
 import * as yup from "yup";
 import { Field, useForm } from "vee-validate";
-const { fetchData } = useFetchData();
 
+defineProps({
+  contacts: {
+    type: Object,
+    default: {},
+  },
+
+  loading: {
+    type: Boolean,
+  },
+});
+
+const { fetchData } = useFetchData();
 const { list_countries, country } = storeToRefs(useCountries());
 const { getCountries } = useCountries();
 const loading_submit = ref(false);
@@ -214,6 +310,10 @@ const submit = handleSubmit(async () => {
       body: payload,
       getSuccess: true,
     });
+
+    full_name.value = "";
+    phone.value = "";
+    message.value = "";
   } catch (error) {
     console.error("❌ Error in API request:", error);
   } finally {
@@ -304,10 +404,7 @@ img.z-0 {
   justify-content: space-between;
   padding: 8px;
 }
-.grid {
-  align-items: center;
-}
-
+ 
 .relative {
   position: relative;
 }

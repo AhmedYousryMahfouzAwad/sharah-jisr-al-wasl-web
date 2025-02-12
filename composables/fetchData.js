@@ -4,12 +4,12 @@ import { useToast } from "primevue/usetoast";
 export const useFetchData = () => {
   const { showSuccess, showError, showWarning, showInfo } = usePrimeToast();
   const { locale } = useI18n();
-  const { RemoveAuth } = useAuthStore();
-  const localePath = useLocalePath();
-  const router = useRouter();
-  const route = useRoute();
 
   const { isAuth, userInfo } = storeToRefs(useAuthStore());
+  const { RemoveAuth } = useAuthStore();
+  const { logOutAuth } = useLogoutStore();
+
+  const localePath = useLocalePath();
 
   // Setup
   const toast = useToast();
@@ -88,10 +88,10 @@ export const useFetchData = () => {
       // result message
       resMsg.value = res.msg;
 
-      // response   code
+      // response ststus code
       if (response.status === 200) {
         // Handle different keys from the response
-        if (["success", "needCompleteInfo", "needActive"].includes(res.key)) {
+        if (["success", "needCompleteInfo"].includes(res.key)) {
           handleSuccess(res, options, res.key);
         } else if (res.key === "blocked" || res.key === "unauthenticated") {
           console.log("unauthed");
@@ -100,6 +100,10 @@ export const useFetchData = () => {
 
           RemoveAuth();
           navigateTo(localePath({ name: "auth-login" }));
+        } else if (res.key === "needActive") {
+          showError(resMsg.value);
+          navigateTo(localePath({ name: "auth-Otp" }));
+          console.log("error", resMsg.value);
         } else {
           throw new Error(resMsg.value);
         }
@@ -108,6 +112,7 @@ export const useFetchData = () => {
       }
     } catch (error) {
       console.error(error);
+
       showError(resMsg.value);
       if (options.onError) options.onError();
     } finally {

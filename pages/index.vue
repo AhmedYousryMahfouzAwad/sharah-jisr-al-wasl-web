@@ -4,7 +4,9 @@
     <HomeWhoWeAre :loading="loading" :who_we_are="who_we_are" />
   </div>
   <HomeWhatWeOffer class="px-2" :loading="loading" :categories="categories" />
-  <HomeContactUs class="px-2" :loading="loading" />
+  <div class="relative">
+    <HomeContactUs class="px-2" :loading="loading" :contacts="contacts" />
+  </div>
 </template>
 
 <script setup>
@@ -13,6 +15,7 @@ const sliders_list = ref([]);
 const categories = ref([]);
 const loading = ref(true);
 const who_we_are = ref({});
+const contacts = ref({});
 
 const home = async () => {
   try {
@@ -22,6 +25,7 @@ const home = async () => {
         sliders_list.value = resultData.value?.banners ?? [];
         who_we_are.value = resultData.value?.who_we_are ?? {};
         categories.value = resultData.value?.categories ?? [];
+        contacts.value = resultData.value?.contacts ?? {};
       },
     });
   } catch (error) {
