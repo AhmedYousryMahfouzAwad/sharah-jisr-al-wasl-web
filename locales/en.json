@@ -8,7 +8,11 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "new_orders": " New Orders",
+
     "address": "ِAddress",
+    "Requests": "Requests",
+    "contact_information": "Contact Information",
     "contact_us_desc": "For inquiries and support - Contact us now.",
     "what_we_offer_desc": "Choose from the best contracting companies, engineering consulting firms, and building materials suppliers.",
     "who_we_are": "Who We Are",
@@ -134,7 +138,9 @@
     "installation_price": "Installation Price",
     "delivery_price": "Delivery Price",
     "discount_price": "Discount Price",
-    "order_number": "Order Number",
+    "order_number": " :Order Number",
+    "type_of_activity": "Type of Activity",
+    "main_section": ":Main Section",
     "order_date": "Order Date",
     "reorder": "Reorder",
     "new": "New",

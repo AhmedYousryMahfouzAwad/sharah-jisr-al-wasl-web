@@ -1,9 +1,18 @@
 <template>
   <HomeCarousel :loading="loading" :sliders_list="sliders_list" />
-  <div class="max-w-7xl mx-auto my-10">
-    <HomeWhoWeAre :loading="loading" :who_we_are="who_we_are" />
+  <div class="max-w-7xl mx-auto">
+    <HomeTitle
+      :src="'/elements.png'"
+      class="my-5 flex"
+      :title="t('pages.Requests')"
+    />
+    <p class="text-gray-900 font-bold text-2xl mb-5">
+      {{ t("pages.new_orders") }}
+    </p>
   </div>
-  <HomeWhatWeOffer class="px-2" :loading="loading" :categories="categories" />
+  <div class="max-w-7xl grid grid-cols-12 mx-auto my-10">
+    <OrderProvider :loading="loading"  />
+  </div>
   <div class="relative">
     <HomeContactUs class="px-2" :loading="loading" :contacts="contacts" />
   </div>
@@ -15,6 +24,10 @@
 </template>
 
 <script setup>
+import OrderProvider from "~/components/home/OrderProvider.vue";
+
+const { t } = useI18n();
+
 const { fetchData, resultData } = useFetchData();
 const sliders_list = ref([]);
 const categories = ref([]);
@@ -27,7 +40,7 @@ const app_description = ref("");
 const home = async () => {
   try {
     await fetchData({
-      url: `api/user/home`,
+      url: `api/provider/home`,
       onSuccess: () => {
         sliders_list.value = resultData.value?.banners ?? [];
         who_we_are.value = resultData.value?.who_we_are ?? {};

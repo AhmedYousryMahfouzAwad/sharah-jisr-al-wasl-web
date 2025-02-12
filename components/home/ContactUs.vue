@@ -15,8 +15,7 @@
     {{ t("pages.contact_us_desc") }}
   </p>
 
-  <!-- رقم الهاتف -->
-  <div class="flex items-center gap-x-2">
+   <div class="flex items-center gap-x-2">
     <div
       class="relative p-4 rounded-full !bg-primary-2 cursor-pointer hover:bg-primary-3"
     >
@@ -38,8 +37,7 @@
     </div>
   </div>
 
-  <!-- البريد الإلكتروني -->
-  <div class="flex items-center gap-x-2">
+   <div class="flex items-center gap-x-2">
     <div
       class="relative p-4 rounded-full !bg-primary-2 cursor-pointer hover:bg-primary-3"
     >
@@ -56,8 +54,7 @@
     </div>
   </div>
 
-  <!-- العنوان والخريطة -->
-  <div class="flex items-center gap-x-2">
+   <div class="flex items-center gap-x-2">
     <div
       class="relative p-4 rounded-full !bg-primary-2 cursor-pointer hover:bg-primary-3"
     >

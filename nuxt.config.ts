@@ -2,7 +2,7 @@
 import Aura from "@primevue/themes/aura";
 
 export default defineNuxtConfig({
-  devtools: { enabled: false },
+  devtools: { enabled: true },
 
   modules: [
     "@nuxtjs/tailwindcss",
