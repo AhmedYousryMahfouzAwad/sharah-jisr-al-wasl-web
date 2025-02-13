@@ -7,11 +7,7 @@
   <div class="relative">
     <HomeContactUs class="px-2" :loading="loading" :contacts="contacts" />
   </div>
-  <Footer
-    :socials="socials"
-    :contacts="contacts"
-    :app_description="app_description"
-  />
+  <Footer />
 </template>
 
 <script setup>

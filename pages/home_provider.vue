@@ -11,7 +11,7 @@
     </p>
   </div>
   <div class="max-w-7xl grid grid-cols-12 mx-auto my-10">
-    <OrderProvider :loading="loading"  />
+    <OrderProvider :loading="loading" />
   </div>
   <div class="relative">
     <HomeContactUs class="px-2" :loading="loading" :contacts="contacts" />

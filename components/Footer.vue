@@ -42,7 +42,7 @@
         <HomeTitleFooter :src="'/footer_defult.png'" :title="t('pages.contact_us')" />
                 </div>
                 <div class=" col-span-6 space-y-2 ">
-        <HomeTitleFooter :src="'/footer_defult.png'" :title="t('pages.home')" />
+        <HomeTitleFooter :src="'/footer_defult.png'" :title="t('pages.about_the_website')" />
         <HomeTitleFooter :src="'/footer_defult.png'" :title="t('pages.auth.terms')" />
         <HomeTitleFooter :src="'/footer_defult.png'" :title="t('pages.privacy_policy')" />
         <HomeTitleFooter :src="'/footer_defult.png'" :title="t('pages.complaints_inquiries')" />
@@ -133,16 +133,42 @@
 const localeRoute = useLocaleRoute();
 const { t } = useI18n();
 
-defineProps({
-    app_description: String,
-  socials: {
-    type: Array,
-    default: [],
-  },
-  contacts: {
-    type: Object,
-    default: {},
-  },
-  
+ 
+ 
+const { fetchData, resultData } = useFetchData();
+ 
+const loading = ref(true);
+ 
+const contacts = ref({});
+const socials = ref([]);
+const app_description = ref("");
+
+const home = async () => {
+  try {
+    await fetchData({
+      url: `api/user/home`,
+      onSuccess: () => {
+        
+     
+        contacts.value = resultData.value?.contacts ?? {};
+        socials.value = resultData.value?.socials ?? [];
+        app_description.value = resultData.value?.app_description ?? "";
+      },
+    });
+  } catch (error) {
+    console.error("❌ Error fetching banners:", error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(() => {
+  home();
 });
 </script>
+<style scoped>
+:deep(.p-button-text.p-button-secondary) {
+  display: none !important;
+}
+</style>
+ 

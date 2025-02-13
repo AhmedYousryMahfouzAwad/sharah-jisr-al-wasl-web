@@ -6,7 +6,7 @@
     <div class="col-span-12 md:col-span-6 text-black px-5">
       <HomeTitle
         src="/elements.png"
-        :title="who_we_are?.title || 'Loading...'"
+        :title="t('pages.who_we_are')"
         class="my-5"
       />
 

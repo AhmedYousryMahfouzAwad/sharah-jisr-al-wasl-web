@@ -32,8 +32,8 @@
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           ></NavList>
           <NavList
-            :is-active="route.path === '/about-us'"
-            :to="localePath({ name: 'about-us' })"
+            :is-active="route.path === '/who_we_are'"
+            :to="localePath({ name: 'who_we_are' })"
             :title="t('pages.aboutUs')"
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           ></NavList>
@@ -44,9 +44,27 @@
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           ></NavList>
           <NavList
-            :is-active="route.path === '/contact-us'"
-            :to="localePath({ name: 'contact-us' })"
+            :is-active="route.path === '/contact_us'"
+            :to="localePath({ name: 'contact_us' })"
             :title="t('pages.contact_us')"
+            class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+          ></NavList>
+          <NavList
+            :is-active="route.path === '/about_the_website'"
+            :to="localePath({ name: 'about_the_website' })"
+            :title="t('pages.about_the_website')"
+            class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+          ></NavList>
+          <NavList
+            :is-active="route.path === '/privacy_policy'"
+            :to="localePath({ name: 'privacy_policy' })"
+            :title="t('pages.privacy_policy')"
+            class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+          ></NavList>
+          <NavList
+            :is-active="route.path === '/terms'"
+            :to="localePath({ name: 'terms' })"
+            :title="t('pages.auth.terms')"
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           ></NavList>
         </ul>
