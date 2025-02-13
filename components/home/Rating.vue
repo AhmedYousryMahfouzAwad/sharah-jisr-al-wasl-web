@@ -31,7 +31,7 @@
         </div>
         <div>
           <p class="text-sm">{{ rate.user.name }}</p>
-          <p class="font-semibold text-sm">asdasdadsadasd</p>
+          <Rating v-model="rate.rate" readonly />
         </div>
       </div>
       <p class="font-semibold text-sm pb-2 mx-5">
@@ -43,6 +43,7 @@
 
 <script setup>
 const { t, locale } = useI18n();
+import Rating from "primevue/rating";
 
 defineProps({
   list_rating: {
