@@ -1,6 +1,7 @@
 <template>
   <HomeCarousel :loading="loading" :sliders_list="sliders_list" />
-  <div class="max-w-7xl mx-auto">
+
+  <div v-if="userInfo.category.id == 1" class="max-w-7xl mx-auto">
     <HomeTitle
       :src="'/elements.png'"
       class="my-5 flex"
@@ -9,9 +10,26 @@
     <p class="text-gray-900 font-bold text-2xl mb-5">
       {{ t("pages.new_orders") }}
     </p>
+    <OrderProvider :loading="loading" :list_orders="list_orders" />
   </div>
-  <div class="max-w-7xl grid grid-cols-12 mx-auto my-10">
-    <OrderProvider :loading="loading" />
+  <div
+    v-if="userInfo.category.id == 2 || userInfo.category.id == 3"
+    class="max-w-7xl mx-auto"
+  >
+    <HomeTitle
+      :src="'/elements.png'"
+      class="my-5 flex"
+      :title="t('pages.reviews')"
+    />
+    <div class="flex justify-between items-center">
+      <p class="text-gray-900 font-bold text-2xl mb-5">
+        {{ t("pages.customer_reviews") }}
+      </p>
+
+      <ButtonAuth class="!w-[10%]" />
+    </div>
+
+    <Rating :loading="loading" :list_rating="list_rating" />
   </div>
   <div class="relative">
     <HomeContactUs class="px-2" :loading="loading" :contacts="contacts" />
@@ -25,6 +43,7 @@
 
 <script setup>
 import OrderProvider from "~/components/home/OrderProvider.vue";
+import Rating from "~/components/home/Rating.vue";
 
 const { t } = useI18n();
 
@@ -35,7 +54,10 @@ const loading = ref(true);
 const who_we_are = ref({});
 const contacts = ref({});
 const socials = ref([]);
+const list_orders = ref([]);
+const list_rating = ref([]);
 const app_description = ref("");
+const { userInfo } = storeToRefs(useAuthStore());
 
 const home = async () => {
   try {
@@ -47,6 +69,8 @@ const home = async () => {
         categories.value = resultData.value?.categories ?? [];
         contacts.value = resultData.value?.contacts ?? {};
         socials.value = resultData.value?.socials ?? [];
+        list_orders.value = resultData.value?.orders ?? [];
+        list_rating.value = resultData.value?.rates ?? [];
         app_description.value = resultData.value?.app_description ?? "";
       },
     });

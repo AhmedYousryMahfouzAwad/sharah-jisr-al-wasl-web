@@ -8,6 +8,8 @@
     "warranty": "الضمان"
   },
   "pages": {
+    "customer_reviews": "تقييمات العملاء",
+    "reviews": "التقييمات",
     "about_the_website": "   حول الموقع  ",
     "new_orders": "الطلبات الجديدة ",
     "contact_information": "معلومات التواصل",
@@ -993,7 +995,7 @@
     "image": "الصورة",
     "name": "الاسم",
     "create": "اضافة",
-    "date": "التاريخ",
+    "date": "التاريخ:",
     "title": "العنوان",
     "reports": { "report": "التقرير", "ip": "IP" }
   },

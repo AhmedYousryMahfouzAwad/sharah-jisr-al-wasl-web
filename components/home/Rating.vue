@@ -19,37 +19,24 @@
   </div>
   <div v-else class="grid grid-cols-12 mx-auto my-10 gap-2">
     <div
-      v-for="order in list_orders"
-      :key="order.id"
+      v-for="rate in list_rating"
+      :key="rate.id"
       class="bg-[#F5F5F5] md:col-span-4 col-span-12 rounded-lg"
     >
-      <div class="p-5">
-        <p class="text-start text-sm my-2">
-          {{ t("pages.order_number") }}
-          <span>{{ order.order_num }} </span>
-        </p>
-        <p class="text-start text-sm my-2">
-          {{ t("pages.main_section") }}
-          <span> {{ order.category }} </span>
-        </p>
-        <p class="text-start text-sm my-2">
-          {{ t("pages.type_of_activity") }}
-          <span>{{ order.activity }} </span>
-        </p>
-
-        <NuxtLink class="flex items-center justify-end">
-          <p class="px-2 text-end text-[#866037] text-sm">
-            {{ t("pages.order_details") }}
-          </p>
-          <img
-            src="/arrow_brown.svg"
-            :class="[
-              'h-4 w-4 mx-2 object-contain justify-center items-center flex mt-1',
-              currentLang === 'en' ? 'rotate-180' : '',
-            ]"
-          />
-        </NuxtLink>
+      <div class="flex items-center gap-x-2 p-3">
+        <div
+          class="relative p-3 rounded-full border-2 border-primary-1 cursor-pointer hover:bg-primary-3"
+        >
+          <img :src="rate.user.image" alt="notifications" class="w-4 h-4" />
+        </div>
+        <div>
+          <p class="text-sm">{{ rate.user.name }}</p>
+          <p class="font-semibold text-sm">asdasdadsadasd</p>
+        </div>
       </div>
+      <p class="font-semibold text-sm pb-2 mx-5">
+        {{ t("table.date") }} <span>dasdasd</span>
+      </p>
     </div>
   </div>
 </template>
@@ -58,7 +45,7 @@
 const { t, locale } = useI18n();
 
 defineProps({
-  list_orders: {
+  list_rating: {
     type: Array,
     default: [],
   },
@@ -67,8 +54,6 @@ defineProps({
     type: Boolean,
   },
 });
-
-const currentLang = computed(() => locale.value);
 </script>
 
 <style></style>

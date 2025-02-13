@@ -202,7 +202,7 @@
                   style="
                     resize: none;
                     ::placeholder {
-                      color: #a3a3a3;
+                      color: #f0f0f0;
                       font-size: 1rem;
                     }
                   "
@@ -210,7 +210,7 @@
 
                 <span
                   v-if="errorMessage"
-                  class="error-message font-bold text-red-2 text-sm flex flex-col justify-center items-center"
+                  class="error-message font-bold text-red-2 text-sm flex flex-col justify-start items-start"
                   >{{ errorMessage }}</span
                 >
               </Field>

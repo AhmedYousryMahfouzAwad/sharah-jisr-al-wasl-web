@@ -52,10 +52,16 @@ const loading = ref(true);
 
 const { t } = useI18n();
 
+const { userInfo } = storeToRefs(useAuthStore());
+
 const who_we_are_request = async () => {
   try {
+    const url =
+      userInfo.value.model_type == "provider"
+        ? "api/static_page/provider_about"
+        : "api/static_page/user_about";
     await fetchData({
-      url: `api/static_page/user_about`,
+      url,
       onSuccess: () => {
         who_we_are.value = resultData.value ?? {};
       },

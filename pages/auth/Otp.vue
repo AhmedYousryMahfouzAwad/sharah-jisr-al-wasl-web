@@ -153,6 +153,7 @@ const otpLogin = handleSubmit(async () => {
     code: otpInput.value,
     device_type: device_type.value,
     device_id: 111,
+    
   });
   submitLoading.value = false;
 });

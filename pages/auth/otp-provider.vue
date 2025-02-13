@@ -3,7 +3,7 @@
 
   <div class="!md:container">
     <form
-      @submit.prevent="otpLogin"
+      @submit.prevent="otpLoginProvider"
       class="max-w-xl flex flex-col !bg-white justify-center relative items-center w-full rounded-lg shadow-lg p-4 md:!h-[350px] h-full !mt-28 gap-3 z-10 space-y-4 sm:mx-auto"
     >
       <p class="text-center text-lg font-bold">
@@ -98,17 +98,22 @@
 import illustration from "../../public/img/Illustration.png";
 import * as yup from "yup";
 import { Field, useForm } from "vee-validate";
+const { fetchData, resultData } = useFetchData();
+import { useCookie, useLocaleRoute, nextTick, navigateTo } from "#imports";
 
 // state
 const otpInput = ref("");
 const loading = ref(false);
 const { t } = useI18n();
 const loginStore = useLoginStore();
-const { sendOtp } = loginStore;
-const { country_code, device_type, timerActive } = storeToRefs(useLoginStore());
+const { sendOtpProvider } = loginStore;
+const { country_code, device_type, timerActive, macCookie } = storeToRefs(
+  useLoginStore()
+);
 
 const { setError } = useErrorStore();
 const { country } = storeToRefs(useCountries());
+const localeRoute = useLocaleRoute;
 
 const submitLoading = ref(false);
 
@@ -131,17 +136,16 @@ const { handleSubmit } = useForm({
 const onCountdownEnd = async () => {
   timerActive.value = false;
 };
-// Wrapping the submit logic
-const otpLogin = handleSubmit(async () => {
+
+const otpLoginProvider = handleSubmit(async () => {
   submitLoading.value = true;
-  await sendOtp({
+  await sendOtpProvider({
     phone: useCookie("phone").value,
     country_code: useCookie("country_code").value,
     code: otpInput.value,
     device_type: device_type.value,
     device_id: 111,
-
-    // Make the login request
+    mac_address: macCookie.value,
   });
   submitLoading.value = false;
 });

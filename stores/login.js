@@ -110,12 +110,50 @@ export const useLoginStore = defineStore("login", () => {
       },
     });
   };
+  const sendOtpProvider = async (payload) => {
+    await fetchData({
+      url: `api/provider/verify-login`,
+      method: "post",
+      body: payload,
+      getSuccess: true,
+      onSuccess: () => {
+        timerActive.value = true;
+
+        const authCookie = useCookie("auth", {
+          watch: true,
+          sameSite: "lax",
+          maxAge: 365 * 24 * 60 * 60,
+        });
+
+        authCookie.value = resultData.value;
+        token.value = resultData.value.token;
+
+        nextTick(async () => {
+          setTimeout(() => {
+            navigateTo(localeRoute({ name: "home_provider" }), {
+              replace: true,
+            });
+            otpInput.value = "";
+          }, 1000);
+        });
+      },
+
+      onNeedActive: () => {
+        if (phone.value === null) {
+          setTimeout(() => {
+            router.push(localePath("auth-login"));
+          }, 1000);
+        }
+      },
+    });
+  };
 
   return {
     //ACTIONS
     sendLogin,
     sendOtp,
     generateRandomMacAddress,
+    sendOtpProvider,
 
     //STATE
     loading,
