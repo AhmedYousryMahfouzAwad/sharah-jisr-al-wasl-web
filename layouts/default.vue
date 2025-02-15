@@ -4,7 +4,9 @@
       <div class="container mx-auto px-4 flex items-center justify-between">
         <!-- Logo -->
         <div class="flex items-center">
-          <img src="../public/logo.png" alt="Logo" class="w-24" />
+          <NuxtLink :to="localeRoute({ name: 'index' })">
+            <img src="../public/logo.png" alt="Logo" class="w-24" />
+          </NuxtLink>
           <div
             class="hidden md:flex items-center space-x-2 rtl:space-x-reverse"
           >
@@ -32,37 +34,49 @@
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           ></NavList>
           <NavList
-            :is-active="route.path === '/who_we_are'"
+            :is-active="
+              route.path === '/who_we_are' || route.path === '/en/who_we_are'
+            "
             :to="localePath({ name: 'who_we_are' })"
             :title="t('pages.aboutUs')"
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           ></NavList>
           <NavList
-            :is-active="route.path === '/my-orders'"
+            :is-active="
+              route.path === '/my_orders' || route.path === '/en/my_orders'
+            "
             :to="localePath({ name: 'my-orders' })"
             :title="t('pages.my_orders')"
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           ></NavList>
           <NavList
-            :is-active="route.path === '/contact_us'"
+            :is-active="
+              route.path === '/contact_us' || route.path === '/en/contact_us'
+            "
             :to="localePath({ name: 'contact_us' })"
             :title="t('pages.contact_us')"
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           ></NavList>
           <NavList
-            :is-active="route.path === '/about_the_website'"
+            :is-active="
+              route.path === '/about_the_website' ||
+              route.path === '/en/about_the_website'
+            "
             :to="localePath({ name: 'about_the_website' })"
             :title="t('pages.about_the_website')"
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           ></NavList>
           <NavList
-            :is-active="route.path === '/privacy_policy'"
+            :is-active="
+              route.path === '/privacy_policy' ||
+              route.path === '/en/privacy_police'
+            "
             :to="localePath({ name: 'privacy_policy' })"
             :title="t('pages.privacy_policy')"
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           ></NavList>
           <NavList
-            :is-active="route.path === '/terms'"
+            :is-active="route.path === '/terms' || route.path === '/en/terms'"
             :to="localePath({ name: 'terms' })"
             :title="t('pages.auth.terms')"
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
@@ -77,10 +91,21 @@
             <img src="../public/img/notification.png" alt="notification" />
           </button>
           <button
+            v-if="!isAuth"
             class="text-black px-4 py-1 rounded-md border border-primary-1 flex justify-center items-center"
           >
             <span class="text-sm font-semibold"> حساب جديد </span>
           </button>
+
+          <NuxtLink
+            v-if="isAuth"
+            :to="localeRoute({ name: 'auth-profile' })"
+            class="text-black px-4 py-1 rounded-md flex justify-center items-center"
+          >
+            <span class="text-sm font-semibold"> {{ userInfo.name }} </span>
+            <Avatar :image="userInfo.image" class="mx-2" shape="circle" />
+            <i :class="arrowIcon" class="mx-1 !w-2"> </i>
+          </NuxtLink>
           <Select
             v-model="lang"
             :options="locales"
@@ -140,7 +165,8 @@
             :title="t('pages.my_orders')"
             class="cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
             @click.native="closeSidebar"
-          ></NavList>
+          >
+          </NavList>
           <NavList
             :is-active="route.path === '/contact-us'"
             :to="localePath({ name: 'contact-us' })"
@@ -178,6 +204,9 @@
 
 <script setup>
 const switchLocalePath = useSwitchLocalePath();
+const { userInfo, isAuth } = storeToRefs(useAuthStore());
+const localeRoute = useLocaleRoute();
+// const localePath = useLocaleRoute();
 
 // i18n setup
 const { t, locale, locales } = useI18n();
@@ -196,6 +225,10 @@ const lang = ref(locale.value);
 const route = useRoute();
 const localePath = useLocalePath();
 
+const arrowIcon = computed(() =>
+  locale.value === "ar" ? "pi pi-chevron-left" : "pi pi-chevron-right"
+); // Right for RTL, left for LTR
+
 //   if (newValue) {
 //     toast.add(
 //       {
@@ -213,8 +246,6 @@ const head = useLocaleHead({
   identifierAttribute: "id",
   addSeoAttributes: true,
 });
-
-const { isAuth } = storeToRefs(useAuthStore());
 </script>
 
 <style scoped>
