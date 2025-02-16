@@ -347,7 +347,7 @@
             {{ errorMessage }}
           </span>
         </Field>
-        <div v-if="selectedCompany">
+        <div v-if="selectedCompany === 1">
           <div class="rounded">
             <!-- Name Bank -->
             <div class="w-full grid grid-cols-12 gap-2">
@@ -466,6 +466,7 @@
           </label>
         </div>
       </div>
+
       <div class="md:px-0 px-2 mt-5">
         <ButtonAuth
           :imageSrc="'/arrow.png'"
@@ -612,18 +613,46 @@ const validationSchema = yup.object({
     .max(250, t("validation.max", { max: 250 })),
   selectedCity: yup.number().required(t("validation.required")),
   selectedCompany: yup.string().trim().required(t("validation.required")),
-  name_bank: yup.string().trim().required(t("validation.required")),
+
+  name_bank: yup
+    .string()
+    .trim()
+    .when("selectedCompany", (selectedCompany, schema) => {
+      return selectedCompany === 1
+        ? schema.required(t("validation.required"))
+        : schema;
+    }),
+
   Name_of_the_account_holder: yup
     .string()
     .trim()
-    .required(t("validation.required")),
+    .when("selectedCompany", (selectedCompany, schema) => {
+      return selectedCompany === 1
+        ? schema.required(t("validation.required"))
+        : schema;
+    }),
+
   account_number: yup
     .string()
-    .trim() // Remove extra whitespace
-    .min(9, t("validation.min_n", { min: 9 })) // Minimum length of 9 digits
-    .max(18, t("validation.max_n", { max: 18 })) // Maximum length of 18 digits
-    .matches(/^[0-9]+$/, t("validation.only_digits")) // Ensures only digits
-    .required(t("validation.required")),
+    .trim()
+    .when("selectedCompany", (selectedCompany, schema) => {
+      return selectedCompany === 1
+        ? schema.required(t("validation.required"))
+        : schema;
+    })
+    .matches(/^[0-9]+$/, t("validation.only_digits"))
+    .min(9, t("validation.min_n", { min: 9 }))
+    .max(18, t("validation.max_n", { max: 18 })),
+
+  iban: yup
+    .string()
+    .trim()
+    .when("selectedCompany", (selectedCompany, schema) => {
+      return selectedCompany === 1
+        ? schema.required(t("validation.required"))
+        : schema;
+    })
+    .matches(/^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/, t("validation.invalid_iban")),
 
   commercial_register: yup
     .string()
@@ -631,11 +660,6 @@ const validationSchema = yup.object({
     .min(11, t("validation.min_n", { min: 11 })) // Minimum length of 9 digits
     .max(16, t("validation.max_n", { max: 16 })) // Maximum length of 18 digits
     .required(t("validation.required")),
-  iban: yup
-    .string()
-    .trim()
-    .required(t("validation.required"))
-    .matches(/^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/, t("validation.invalid_iban")),
 });
 
 // Image Upload
@@ -731,10 +755,10 @@ const submit = handleSubmit(async () => {
   formData.append("lat", sendedLat.value);
   formData.append("lng", sendedLng.value);
   formData.append("map_desc", sendedAddress.value);
-  formData.append("bank_name", name_bank.value || "");
-  formData.append("account_name", Name_of_the_account_holder.value || "");
-  formData.append("account_number", account_number.value || "");
-  formData.append("iban", iban.value || "");
+  formData.append("bank_name", name_bank.value || null);
+  formData.append("account_name", Name_of_the_account_holder.value || null);
+  formData.append("account_number", account_number.value || null);
+  formData.append("iban", iban.value || null);
   formData.append("commercial_register", commercial_register.value || "");
   formData.append("commercial_register_image", fileInputCompany.value.files[0]);
   try {

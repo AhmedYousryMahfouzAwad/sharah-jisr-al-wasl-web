@@ -32,7 +32,7 @@
             :to="localePath('/auth/profile')"
             :title="t('pages.profile')"
             @click="closeSidebar"
-            class="hover:bg-primary-2 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform"
+            class="hover:bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform"
           >
             <IconsProfileIcon
               :is-active="route.path === '/' || route.path === '/en'"
@@ -46,9 +46,9 @@
             :to="localePath({ name: 'orders' })"
             :title="t('pages.orders')"
             @click="closeSidebar"
-            class="hover:bg-primary-2 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+            class="hover:bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
-            <IconsOrderIcon
+            <IconsFavourtieIcon
               :is-active="
                 route.path === '/orders' || route.path === '/en/orders'
               "
@@ -63,16 +63,16 @@
             :to="localePath({ name: 'more' })"
             @click="closeSidebar"
             :title="t('pages.more')"
-            class="hover:bg-primary-2 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+            class="hover:bg-primary-3 rounded-lg hover:rounded-lg hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
-            <IconsMoreIcon
+            <IconsWalletIcon
               :is-active="route.path === '/more' || route.path === '/en/more'"
               :to="localePath('more')"
               class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
             />
           </SliderBar>
 
-          <SliderBar
+          <!-- <SliderBar
             v-if="isAuth"
             :is-active="
               route.path === '/profile' || route.path === '/en/profile'
@@ -89,7 +89,7 @@
               :to="localePath('profile')"
               class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
             />
-          </SliderBar>
+          </SliderBar> -->
 
           <SliderBar
             :is-active="
@@ -98,7 +98,7 @@
             :to="localePath({ name: 'settings' })"
             @click="closeSidebar"
             :title="t('pages.settings')"
-            class="hover:bg-primary-2 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+            class="hover:bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             <IconsSettingIcon
               :is-active="
@@ -109,7 +109,7 @@
             />
           </SliderBar>
 
-          <SliderBar
+          <!-- <SliderBar
             :is-active="
               route.path === '/contact_us' || route.path === '/en/contact_us'
             "
@@ -124,7 +124,7 @@
               "
               class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
             />
-          </SliderBar>
+          </SliderBar> -->
 
           <SliderBar
             v-if="isAuth"
@@ -133,7 +133,7 @@
             "
             @click="logoutAuth"
             :title="t('auth.logout')"
-            class="hover:bg-primary-2 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+            class="hover:bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             <IconsLogoutIcon
               :is-active="

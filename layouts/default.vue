@@ -1,6 +1,6 @@
 <template>
   <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
-    <nav class="bg-white shadow-md w-full">
+    <nav class="bg-white shadow-md w-full container">
       <div class="container mx-auto px-4 flex items-center justify-between">
         <!-- Logo -->
         <div class="flex items-center">
