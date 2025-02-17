@@ -32,7 +32,7 @@
             :to="localePath('/auth/profile')"
             :title="t('pages.profile')"
             @click="closeSidebar"
-            class="hover:bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform"
+            class="hover:bg-primary-3 bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform"
           >
             <IconsProfileIcon
               :is-active="route.path === '/' || route.path === '/en'"
@@ -48,7 +48,7 @@
             :to="localePath({ name: 'auth-settings' })"
             @click="closeSidebar"
             :title="t('pages.settings')"
-            class="hover:bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+            class="hover:bg-primary-3 bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             <IconsSettingIcon
               :is-active="
@@ -63,7 +63,7 @@
             :to="localePath({ name: 'orders' })"
             :title="t('pages.orders')"
             @click="closeSidebar"
-            class="hover:bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+            class="hover:bg-primary-3 bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             <IconsFavourtieIcon
               :is-active="
@@ -80,7 +80,7 @@
             :to="localePath({ name: 'more' })"
             @click="closeSidebar"
             :title="t('pages.more')"
-            class="hover:bg-primary-3 rounded-lg hover:rounded-lg hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+            class="hover:bg-primary-3 bg-primary-3 rounded-lg hover:rounded-lg hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             <IconsWalletIcon
               :is-active="route.path === '/more' || route.path === '/en/more'"
@@ -132,7 +132,7 @@
             "
             @click="logoutAuth"
             :title="t('auth.logout')"
-            class="hover:bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+            class="hover:border-primary-1 bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             <IconsLogoutIcon
               :is-active="

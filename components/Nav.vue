@@ -1,9 +1,11 @@
 <template>
-  <nav class="bg-black shadow-md px-5 p-3 justify-start items-center flex">
-    <p class="text-white text-sm">{{ t("pages.home") }}</p>
+  <nav class="bg-black shadow-md p-3">
+    <div class="!max-w-7xl justify-start items-center flex mx-auto">
+      <p class="text-white text-sm">{{ t("pages.home") }}</p>
 
-    <i :class="arrowIcon" class="mx-3 pt-1"> </i>
-    <p class="text-white">{{ title }}</p>
+      <i :class="arrowIcon" class="mx-3 pt-1"> </i>
+      <p class="text-white text-sm">{{ title }}</p>
+    </div>
   </nav>
 </template>
 <script setup>

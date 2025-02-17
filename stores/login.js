@@ -114,6 +114,9 @@ export const useLoginStore = defineStore("login", () => {
     await fetchData({
       url: `api/provider/verify-login`,
       method: "post",
+      headers: {
+        "content-type": "multipart/form-data",
+      },
       body: payload,
       getSuccess: true,
       onSuccess: () => {
@@ -145,6 +148,96 @@ export const useLoginStore = defineStore("login", () => {
       },
     });
   };
+  const sendOtpChangeMobileOld = async (payload) => {
+    await fetchData({
+      url: `api/user/verify-old-phone`,
+      method: "post",
+      body: payload,
+      getSuccess: true,
+      onSuccess: () => {
+        timerActive.value = true;
+
+        nextTick(async () => {
+          setTimeout(() => {
+            navigateTo(localeRoute("/auth/change_mobile_number"));
+            otpInput.value = "";
+          }, 1000);
+        });
+      },
+
+      onNeedActive: () => {
+        if (phone.value === null) {
+          setTimeout(() => {
+            router.push(localePath("auth-login"));
+          }, 1000);
+        }
+      },
+    });
+  };
+  const sendOtpChangeMobileNew = async (payload) => {
+    await fetchData({
+      url: `api/user/verify-new-phone`,
+      method: "post",
+      body: payload,
+      getSuccess: true,
+      onSuccess: () => {
+        timerActive.value = true;
+        const authCookie = useCookie("auth", {
+          watch: true,
+          sameSite: "lax",
+          maxAge: 365 * 24 * 60 * 60,
+        });
+
+        authCookie.value = resultData.value;
+        nextTick(async () => {
+          setTimeout(() => {
+            navigateTo(localeRoute("/"));
+            otpInput.value = "";
+          }, 1000);
+        });
+      },
+
+      onNeedActive: () => {
+        if (phone.value === null) {
+          setTimeout(() => {
+            router.push(localePath("auth-login"));
+          }, 1000);
+        }
+      },
+    });
+  };
+  const sendChangePhone = async (payload) => {
+    await fetchData({
+      url: `api/user/send-code-to-old-phone`,
+      method: "post",
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+      body: payload,
+      getSuccess: true,
+      onSuccess: () => {
+        setTimeout(() => {
+          navigateTo(localePath("/auth/change_mobile_number_otp"));
+        }, 500);
+      },
+    });
+  };
+  const sendChangePhoneNew = async (payload) => {
+    await fetchData({
+      url: `api/user/send-code-to-new-phone`,
+      method: "post",
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+      body: payload,
+      getSuccess: true,
+      onSuccess: () => {
+        setTimeout(() => {
+          navigateTo(localePath("/auth/change_mobile_number_otp_new"));
+        }, 500);
+      },
+    });
+  };
 
   return {
     //ACTIONS
@@ -152,6 +245,10 @@ export const useLoginStore = defineStore("login", () => {
     sendOtp,
     generateRandomMacAddress,
     sendOtpProvider,
+    sendChangePhone,
+    sendOtpChangeMobileOld,
+    sendChangePhoneNew,
+    sendOtpChangeMobileNew,
 
     //STATE
     loading,

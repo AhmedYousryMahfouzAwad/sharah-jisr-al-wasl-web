@@ -1,0 +1,185 @@
+<template>
+  <Nav :title="t('pages.change_mobile_number')" />
+
+  <div class="!md:container">
+    <form
+      @submit.prevent="otpChangeMobileNew"
+      class="max-w-xl flex flex-col !bg-white justify-center relative items-center w-full rounded-lg shadow-lg p-4 md:!h-[350px] h-full !mt-28 gap-3 z-10 space-y-4 sm:mx-auto"
+    >
+      <p class="text-center text-lg font-bold">
+        {{ t("pages.verification_code") }}
+      </p>
+
+      <p class="text-center text-sm font-bold">
+        {{ t("pages.please_enter_verification") }} {{ useCookie("phone") }}
+        {{ useCookie("country_code") }}
+      </p>
+
+      <div class="card flex-col flex justify- items-center mx-auto">
+        <Field
+          v-model="otpInput"
+          name="otp"
+          type="text"
+          v-slot="{ errorMessage, field }"
+        >
+          <InputOtp
+            v-model="otpInput"
+            type="number"
+            integerOnly
+            class="focus:ring-2 focus:!ring-cyan-500"
+            dir="ltr"
+          />
+          <span
+            v-if="errorMessage"
+            class="error-message text-red-2 pt-3 font-bold text-sm flex flex-col justify-center items-center"
+            >{{ errorMessage }}</span
+          >
+        </Field>
+      </div>
+      <div class="sm:w-[50%] w-full md:px-0 mx-auto px-2">
+        <ButtonAuth
+          :imageSrc="'/arrow.png'"
+          :loading="submitLoading"
+          :label="t('pages.next')"
+          :disabled="submitLoading"
+          type="submit"
+        />
+      </div>
+
+      <div v-if="timerActive" class="flex justify-center items-center">
+        <p class="text-gray-400 font-bold text-center text-sm">
+          {{ t("pages.the_remaining_time") }}
+        </p>
+
+        <Countdown
+          v-if="timerActive"
+          :time="59999"
+          v-slot="{ minutes, seconds }"
+          dir="ltr"
+          @end="onCountdownEnd"
+          class="text-sm !text-primary-1 px-2 font-medium"
+        >
+          {{ minutes }}:{{ seconds }}
+        </Countdown>
+
+        <p v-else class="text-gray-400 font-bold text-center mt-1">00:00</p>
+      </div>
+
+      <div
+        v-else
+        class="text-center mt-3 space-x-3 mb-2 md:text-base text-xs flex justify-center items-center"
+      >
+        <p>{{ t("pages.no_resend_code") }}</p>
+        <button
+          @click="resendOtpNew"
+          :disabled="loading"
+          class="text-center px-2 flex justify-center font-bold items-center cursor-pointer"
+          type="button"
+          :loading="loading"
+        >
+          <p
+            v-if="!loading"
+            class="text-primary-1 hover:underline transition font-bold duration-200"
+          >
+            {{ t("pages.resend") }}
+          </p>
+          <p v-else class="text-primary-1 transition duration-200">
+            {{ t("pages.loading_send") }}
+          </p>
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- Background Image -->
+  <img
+    :src="illustration"
+    class="w-full h-auto object-cover bottom-0 fixed z-0"
+    alt="Login Illustration"
+  />
+</template>
+
+<script setup>
+// imports
+
+import illustration from "../../public/img/Illustration.png";
+import * as yup from "yup";
+import { Field, useForm } from "vee-validate";
+const { fetchData, resultData } = useFetchData();
+
+// on mounted
+onMounted(async () => {
+  timerActive.value = true;
+});
+
+// state
+const loading = ref(false);
+const otpInput = ref("");
+const { t } = useI18n();
+const loginStore = useLoginStore();
+const { sendOtpChangeMobileNew } = useLoginStore();
+const { device_type, timerActive } = storeToRefs(useLoginStore());
+const submitLoading = ref(false);
+
+// Define validation schema
+const validationSchema = yup.object({
+  otp: yup
+    .string()
+    .required(t("validation.required"))
+    .matches(/^[0-9]+$/, t("validation.only_digits"))
+    .min(4, t("validation.min", { min: 4 }))
+    .max(4, t("validation.max", { max: 4 })),
+});
+
+// Set up the form with VeeValidate
+const { handleSubmit } = useForm({
+  validationSchema,
+});
+
+// ========================= methods
+const onCountdownEnd = async () => {
+  timerActive.value = false;
+};
+
+onMounted(async () => {
+  `    `;
+  timerActive.value = true;
+});
+
+// Wrapping the submit logic
+const otpChangeMobileNew = handleSubmit(async () => {
+  submitLoading.value = true;
+  await sendOtpChangeMobileNew({
+    phone: useCookie("phone").value,
+    country_code: useCookie("country_code").value,
+    code: otpInput.value,
+    // device_type: device_type.value,
+    // device_id: 111,
+  });
+  submitLoading.value = false;
+});
+const payload = {
+  phone: useCookie("phone").value,
+  country_code: useCookie("country_code").value,
+};
+const resendOtpNew = async () => {
+  await fetchData({
+    url: `api/user/resend-code-to-new-phone`,
+    method: "post",
+    body: payload,
+    getSuccess: true,
+    onSuccess: () => {
+      timerActive.value = true;
+    },
+  });
+};
+</script>
+
+<style scoped>
+.p-inputotp {
+  gap: 2rem !important;
+}
+
+.p-inputtext:enabled:focus {
+  border-color: rgb(7, 8, 8) !important;
+}
+</style>

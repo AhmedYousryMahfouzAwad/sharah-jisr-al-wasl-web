@@ -54,6 +54,13 @@
 .p-toggleswitch.p-toggleswitch-checked .p-toggleswitch-slider {
   @apply !bg-primary-1 border-primary-1;
 }
+.p-toggleswitch-slider:before {
+  top: 40% !important;
+}
+
+.p-toggleswitch-slider {
+  height: 80% !important;
+}
 .pac-container {
   z-index: 9999;
 }

@@ -141,13 +141,11 @@
                   </InputForm>
                 </div>
               </div>
-
+              <p v-if="userInfo.type === 'company'" class="text-start my-2">
+                <span class="text-red-2 font-bold">*</span>
+                {{ t("pages.Commercial_Register_Image") }}
+              </p>
               <div v-if="userInfo.type === 'company'" class="md:w-1/4 w-full">
-                <p class="text-start my-2">
-                  <span class="text-red-2 font-bold">*</span>
-                  {{ t("pages.Commercial_Register_Image") }}
-                </p>
-
                 <div
                   class="border-2 border-dashed border-gray-300 rounded-lg p-1 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100"
                 >

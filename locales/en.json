@@ -9,7 +9,10 @@
   },
   "pages": {
     "view_your_profile": "View Your Profile",
-    "view_your_profile": "View Your Profile",
+    "next": "  Next ",
+
+    "enter_phone": "Please enter the mobile number registered in the system.",
+    "enable_notifications": "  Enable Notifications ",
     "change_phone": "If you want to change your mobile number, press the button",
     "manage_your_profile": "Manage your profile from here.",
     "edit_account": "   :Edit Account ",

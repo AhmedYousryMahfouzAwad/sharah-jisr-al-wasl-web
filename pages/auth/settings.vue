@@ -211,14 +211,43 @@
 
                   <div>
                     <button
+                      @click="navigate"
                       type="button"
                       class="bg-primary-2 px-8 py-2 rounded-lg mt-3"
                     >
-                      <p class="font-bold text-sm">
-                        {{ t("pages.change_mobile_number") }}
-                      </p>
+                      <div class="flex items-center justify-center">
+                        <p class="font-bold text-sm">
+                          {{ t("pages.change_mobile_number") }}
+                        </p>
+                        <!-- <img src="/arrow_top.png" alt="image" /> -->
+                      </div>
                     </button>
                   </div>
+                </div>
+              </div>
+              <!--Notification-->
+              <div class="flex items-center justify-start border-t py-2">
+                <div>
+                  <p class="font-bold text-sm">
+                    {{ t("pages.enable_notifications") }}
+                  </p>
+                </div>
+                <div>
+                  <ToggleSwitch v-model="localChecked" class="mx-2 mt-1" />
+                </div>
+              </div>
+              <!--delete account-->
+              <div class="flex flex-col items-start justify-between border-t">
+                <div
+                  class="flex cursor-pointer text-red-2 justify-center items-center mt-5"
+                >
+                  <button
+                    type="button"
+                    class="w-full flex items-center justify-start"
+                  >
+                    <img src="/delete.svg" alt="delete_account" />
+                    <p>{{ t("pages.delete_account") }}</p>
+                  </button>
                 </div>
               </div>
             </div>
@@ -246,6 +275,13 @@ const { t } = useI18n();
 const { userInfo } = storeToRefs(useAuthStore());
 const { profile } = storeToRefs(useProfileStore());
 const { getProfile } = useProfileStore();
+
+const localePath = useLocalePath();
+
+const navigate = () => {
+  navigateTo(localePath("/auth/change_mobile_number_old"));
+};
+
 const loading = ref(true);
 
 const validationSchema = computed(() => {
