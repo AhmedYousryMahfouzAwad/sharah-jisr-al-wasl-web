@@ -103,7 +103,6 @@
 import illustration from "../../public/img/Illustration.png";
 import * as yup from "yup";
 import { Field, useForm } from "vee-validate";
-import OtpInput from "vue3-otp-input";
 const { fetchData, resultData } = useFetchData();
 
 // on mounted
@@ -153,7 +152,6 @@ const otpLogin = handleSubmit(async () => {
     code: otpInput.value,
     device_type: device_type.value,
     device_id: 111,
-    
   });
   submitLoading.value = false;
 });

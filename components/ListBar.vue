@@ -40,7 +40,24 @@
               class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
             />
           </SliderBar>
-
+          <SliderBar
+            :is-active="
+              route.path === '/auth/settings' ||
+              route.path === '/en/auth/settings'
+            "
+            :to="localePath({ name: 'auth-settings' })"
+            @click="closeSidebar"
+            :title="t('pages.settings')"
+            class="hover:bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+          >
+            <IconsSettingIcon
+              :is-active="
+                route.path === '/settings' || route.path === '/en/settings'
+              "
+              :to="localePath('settings')"
+              class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
+            />
+          </SliderBar>
           <SliderBar
             :is-active="route.path === '/orders' || route.path === '/en/orders'"
             :to="localePath({ name: 'orders' })"
@@ -90,24 +107,6 @@
               class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
             />
           </SliderBar> -->
-
-          <SliderBar
-            :is-active="
-              route.path === '/settings' || route.path === '/en/settings'
-            "
-            :to="localePath({ name: 'settings' })"
-            @click="closeSidebar"
-            :title="t('pages.settings')"
-            class="hover:bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
-          >
-            <IconsSettingIcon
-              :is-active="
-                route.path === '/settings' || route.path === '/en/settings'
-              "
-              :to="localePath('settings')"
-              class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
-            />
-          </SliderBar>
 
           <!-- <SliderBar
             :is-active="

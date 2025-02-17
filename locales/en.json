@@ -8,6 +8,10 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "view_your_profile": "View Your Profile",
+    "manage_your_profile": "Manage your profile from here.",
+    "edit_account": "   :Edit Account ",
+    "save_edit": " Save changes ",
     "new_orders": "New Orders",
     "customer_reviews": "Customer Reviews",
     "reviews": "Reviews",

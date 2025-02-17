@@ -11,9 +11,10 @@ export const useProfileStore = defineStore("profile", () => {
     email: "",
     avatar: "",
     country_code: "",
-    image: "",
     commercial_register: "",
     commercial_register_image: null,
+    imagePreview: null,
+    image: null,
   });
 
   const getProfile = async () => {

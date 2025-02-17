@@ -130,9 +130,7 @@ export const useLoginStore = defineStore("login", () => {
 
         nextTick(async () => {
           setTimeout(() => {
-            navigateTo(localeRoute({ name: "home_provider" }), {
-              replace: true,
-            });
+            navigateTo(localeRoute({ name: "home_provider" }));
             otpInput.value = "";
           }, 1000);
         });

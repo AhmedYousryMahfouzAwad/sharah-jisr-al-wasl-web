@@ -23,18 +23,18 @@
             <div class="flex items-center justify-between border-b pb-4">
               <div class="flex items-center gap-x-2">
                 <div
-                  class="relative p-1 rounded-full bg-primary-2 cursor-pointer hover:bg-primary-3"
+                  class="relative p-2 rounded-full bg-primary-2 cursor-pointer hover:bg-primary-3"
                 >
                   <img
-                    :src="profile.image ? profile.image : image"
-                    alt="notifications"
-                    class="w-10 h-10 rounded-full object-cover"
+                    src="/user.svg"
+                    alt="user"
+                    class="w-6 h-6 rounded-full object-cover"
                   />
                 </div>
                 <div>
-                  <p class="text-base font-bold">{{ t("pages.profile") }}</p>
-                  <p class="font-semibold text-sm">
-                    {{ profile.full_name }}
+                  <p class="font-bold text-sm">{{ t("pages.profile") }}</p>
+                  <p class="font-semibold text-xs text-gray-700">
+                    {{ t("pages.view_your_profile") }}
                   </p>
                 </div>
               </div>
@@ -127,6 +127,7 @@
                 </p>
                 <div class="relative col-span-12">
                   <InputForm
+                    readonly
                     name="commercial_register"
                     :loading="loading"
                     v-model="profile.commercial_register"
@@ -169,7 +170,7 @@ const { userInfo } = storeToRefs(useAuthStore());
 const { profile } = storeToRefs(useProfileStore());
 const { getProfile } = useProfileStore();
 const loading = ref(true);
-
+const token = ref([""]);
 onMounted(async () => {
   try {
     await getProfile();

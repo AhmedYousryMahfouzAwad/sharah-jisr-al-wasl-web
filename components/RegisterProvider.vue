@@ -617,28 +617,22 @@ const validationSchema = yup.object({
   name_bank: yup
     .string()
     .trim()
-    .when("selectedCompany", (selectedCompany, schema) => {
-      return selectedCompany === 1
-        ? schema.required(t("validation.required"))
-        : schema;
+    .test("is-required", t("validation.required"), function (value) {
+      return selectedCompany.value === 1 ? !!value : true;
     }),
 
   Name_of_the_account_holder: yup
     .string()
     .trim()
-    .when("selectedCompany", (selectedCompany, schema) => {
-      return selectedCompany === 1
-        ? schema.required(t("validation.required"))
-        : schema;
+    .test("is-required", t("validation.required"), function (value) {
+      return selectedCompany.value === 1 ? !!value : true;
     }),
 
   account_number: yup
     .string()
     .trim()
-    .when("selectedCompany", (selectedCompany, schema) => {
-      return selectedCompany === 1
-        ? schema.required(t("validation.required"))
-        : schema;
+    .test("is-required", t("validation.required"), function (value) {
+      return selectedCompany.value === 1 ? !!value : true;
     })
     .matches(/^[0-9]+$/, t("validation.only_digits"))
     .min(9, t("validation.min_n", { min: 9 }))
@@ -647,10 +641,8 @@ const validationSchema = yup.object({
   iban: yup
     .string()
     .trim()
-    .when("selectedCompany", (selectedCompany, schema) => {
-      return selectedCompany === 1
-        ? schema.required(t("validation.required"))
-        : schema;
+    .test("is-required", t("validation.required"), function (value) {
+      return selectedCompany.value === 1 ? !!value : true;
     })
     .matches(/^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/, t("validation.invalid_iban")),
 
@@ -755,12 +747,19 @@ const submit = handleSubmit(async () => {
   formData.append("lat", sendedLat.value);
   formData.append("lng", sendedLng.value);
   formData.append("map_desc", sendedAddress.value);
-  formData.append("bank_name", name_bank.value || null);
-  formData.append("account_name", Name_of_the_account_holder.value || null);
-  formData.append("account_number", account_number.value || null);
-  formData.append("iban", iban.value || null);
-  formData.append("commercial_register", commercial_register.value || "");
-  formData.append("commercial_register_image", fileInputCompany.value.files[0]);
+  name_bank.value && formData.append("bank_name", name_bank.value || null);
+  Name_of_the_account_holder.value &&
+    formData.append("account_name", Name_of_the_account_holder.value || null);
+  account_number.value &&
+    formData.append("account_number", account_number.value || null);
+  iban.value && formData.append("iban", iban.value || null);
+  commercial_register.value &&
+    formData.append("commercial_register", commercial_register.value || "");
+  fileInputCompany.value.files[0] &&
+    formData.append(
+      "commercial_register_image",
+      fileInputCompany.value.files[0]
+    );
   try {
     loading.value = true;
 
@@ -777,12 +776,12 @@ const submit = handleSubmit(async () => {
         useCookie("country_code").value = country.value.key;
         useCookie("phone").value = phone.value;
 
-        const authCookie = useCookie("auth", {
-          watch: true,
-          sameSite: "lax",
-          maxAge: 365 * 24 * 60 * 60,
-        });
-        authCookie.value = resultData.value;
+        // const authCookie = useCookie("auth", {
+        //   watch: true,
+        //   sameSite: "lax",
+        //   maxAge: 365 * 24 * 60 * 60,
+        // });
+        // authCookie.value = resultData.value;
 
         navigateTo(localeRoute({ name: "auth-otp-provider" }));
       },

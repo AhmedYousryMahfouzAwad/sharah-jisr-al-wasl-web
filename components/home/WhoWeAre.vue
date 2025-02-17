@@ -23,6 +23,7 @@
         </p>
         <p class="text-black my-5">{{ who_we_are.content }}</p>
         <ButtonAuth
+          @click="navigate"
           :label="t('pages.learn_more')"
           :disabled="loading"
           class="my-5 !w-[30%] !text-xs text-center !flex !bg-primary-1 text-white font-bold"
@@ -51,6 +52,12 @@
 
 <script setup>
 const { t } = useI18n();
+const router = useRouter();
+const localePath = useLocalePath();
+
+const navigate = () => {
+  router.push(localePath("/who_we_are"));
+};
 
 defineProps({
   loading: { type: Boolean, default: true },

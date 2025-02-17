@@ -8,6 +8,10 @@
     "warranty": "الضمان"
   },
   "pages": {
+    "view_your_profile": "  اطلع على ملفك الشخصي   ",
+    "save_edit": " حفظ التعديلات ",
+    "manage_your_profile": "تحكم فى ملفك الشخصي من هنا ",
+    "edit_account": " تعديل بيانات الحساب :",
     "customer_reviews": "تقييمات العملاء",
     "reviews": "التقييمات",
     "about_the_website": "   حول الموقع  ",

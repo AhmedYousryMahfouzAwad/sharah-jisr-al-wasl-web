@@ -720,12 +720,12 @@ const submit = handleSubmit(async () => {
         useCookie("country_code").value = country.value.key;
         useCookie("phone").value = phone.value;
 
-        const authCookie = useCookie("auth", {
-          watch: true,
-          sameSite: "lax",
-          maxAge: 365 * 24 * 60 * 60,
-        });
-        authCookie.value = resultData.value;
+        // const authCookie = useCookie("auth", {
+        //   watch: true,
+        //   sameSite: "lax",
+        //   maxAge: 365 * 24 * 60 * 60,
+        // });
+        // authCookie.value = resultData.value;
 
         nextTick(async () => {
           navigateTo(localeRoute({ name: "auth-Otp" }));
