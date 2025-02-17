@@ -9,6 +9,7 @@
   },
   "pages": {
     "view_your_profile": "  اطلع على ملفك الشخصي   ",
+    "change_phone": "اذا كنت تريد تغيير رقم الجوال اضغط على الزر ",
     "save_edit": " حفظ التعديلات ",
     "manage_your_profile": "تحكم فى ملفك الشخصي من هنا ",
     "edit_account": " تعديل بيانات الحساب :",
@@ -104,7 +105,7 @@
     "how_want_delete_account": "  هل أنت متأكد أنك تريد حذف حسابك؟     ",
     "delete_account": "حذف الحساب",
     "edit_profile": "تعديل الملف الشخصي",
-    "change_mobile_number": "تغيير رقم الهاتف",
+    "change_mobile_number": "تغيير رقم الجوال",
     "change_mobile_number_sa": "تغيير رقم  الجوال",
     "change_language": "تغيير اللغة",
     "complaint_details": "تفاصيل الشكوى",

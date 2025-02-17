@@ -200,6 +200,27 @@
                   class="!w-[25%] my-5 !bg-primary-1 text-white font-bold"
                 />
               </div>
+
+              <div
+                class="flex flex-col items-start justify-between border-t pb-4"
+              >
+                <div class="flex flex-col items-start gap-x-2 mt-2">
+                  <p class="font-bold text-xs">
+                    {{ t("pages.change_phone") }}
+                  </p>
+
+                  <div>
+                    <button
+                      type="button"
+                      class="bg-primary-2 px-8 py-2 rounded-lg mt-3"
+                    >
+                      <p class="font-bold text-sm">
+                        {{ t("pages.change_mobile_number") }}
+                      </p>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

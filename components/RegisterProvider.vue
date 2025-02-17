@@ -753,13 +753,10 @@ const submit = handleSubmit(async () => {
   account_number.value &&
     formData.append("account_number", account_number.value || null);
   iban.value && formData.append("iban", iban.value || null);
-  commercial_register.value &&
-    formData.append("commercial_register", commercial_register.value || "");
-  fileInputCompany.value.files[0] &&
-    formData.append(
-      "commercial_register_image",
-      fileInputCompany.value.files[0]
-    );
+
+  formData.append("commercial_register", commercial_register.value || "");
+
+  formData.append("commercial_register_image", fileInputCompany.value.files[0]);
   try {
     loading.value = true;
 
