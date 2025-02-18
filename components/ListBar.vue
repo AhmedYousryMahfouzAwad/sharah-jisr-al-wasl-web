@@ -1,9 +1,9 @@
 <template>
-  <div class="flex h-screen w-full overflow-hidden">
+  <div class="flex w-full overflow-hidden">
     <!-- Sidebar -->
     <aside
       :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-      class="w-full md:relative md:translate-x-0 bg-white !shadow-lg z-50 fixed md:static top-0 left-0 h-full transform transition-transform duration-300 ease-in-out"
+      class="w-full lg:relative md:translate-x-0 bg-white !shadow-lg z-50 fixed md:static top-0 left-0 h-full transform transition-transform duration-300 ease-in-out"
     >
       <!-- Close Button (Only visible on small screens) -->
       <nav class="mt-8 w-full">
@@ -27,15 +27,22 @@
           <SliderBar
             :is-active="
               route.path === '/auth/profile' ||
-              route.path === '/en/auth/profile'
+              route.path === '/en/auth/profile' ||
+              route.path === '/en/auth/profile-provider' ||
+              route.path === '/auth/profile-provider'
             "
-            :to="localePath('/auth/profile')"
+            :to="userRoute"
             :title="t('pages.profile')"
             @click="closeSidebar"
-            class="hover:bg-primary-3 bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform"
+            class="hover:bg-primary-3 rounded-lg bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform"
           >
             <IconsProfileIcon
-              :is-active="route.path === '/' || route.path === '/en'"
+              :is-active="
+                route.path === '/auth/profile' ||
+                route.path === '/en/auth/profile' ||
+                route.path === '/en/auth/profile-provider' ||
+                route.path === '/auth/profile-provider'
+              "
               :to="localePath('index')"
               class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
             />
@@ -43,16 +50,21 @@
           <SliderBar
             :is-active="
               route.path === '/auth/settings' ||
-              route.path === '/en/auth/settings'
+              route.path === '/en/auth/settings' ||
+              route.path === '/auth/settings-provider' ||
+              route.path === '/en/auth/settings-provider'
             "
-            :to="localePath({ name: 'auth-settings' })"
-            @click="closeSidebar"
+            :to="userRouteSettings"
             :title="t('pages.settings')"
-            class="hover:bg-primary-3 bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+            @click="closeSidebar"
+            class="hover:bg-primary-3 rounded-lg bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             <IconsSettingIcon
               :is-active="
-                route.path === '/settings' || route.path === '/en/settings'
+                route.path === '/auth/settings' ||
+                route.path === '/en/auth/settings' ||
+                route.path === '/auth/settings-provider' ||
+                route.path === '/en/auth/settings-provider'
               "
               :to="localePath('settings')"
               class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
@@ -63,7 +75,7 @@
             :to="localePath({ name: 'orders' })"
             :title="t('pages.orders')"
             @click="closeSidebar"
-            class="hover:bg-primary-3 bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+            class="hover:bg-primary-3 rounded-lg bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             <IconsFavourtieIcon
               :is-active="
@@ -132,7 +144,7 @@
             "
             @click="logoutAuth"
             :title="t('auth.logout')"
-            class="hover:border-primary-1 bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+            class="hover:border-primary-1 rounded-lg bg-primary-3 hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             <IconsLogoutIcon
               :is-active="
@@ -147,11 +159,12 @@
 
     <button
       @click="toggleSidebar"
-      class="p-1 rounded-full flex md:hidden fixed top-19 right-3 z-50 bg-blue-100 hover:bg-blue-200"
+      class="p-2 rounded-full flex md:hidden fixed top-20 right-4 z-50 bg-primary-2 hover:bg-primary-2 shadow-lg"
+      style="position: fixed !important"
     >
       <i
         :class="sidebarOpen ? 'pi pi-times' : 'pi pi-bars'"
-        class="text-primary-1 text-xl"
+        class="text-black text-xl"
       ></i>
     </button>
   </div>
@@ -187,6 +200,17 @@ const logoutAuth = async () => {
   await logOut();
   await closeSidebar();
 };
+
+const userRoute = computed(() => {
+  return userInfo.value?.model_type === "provider"
+    ? localeRoute({ name: "auth-profile-provider" })
+    : localeRoute({ name: "auth-profile" });
+});
+const userRouteSettings = computed(() => {
+  return userInfo.value?.model_type === "provider"
+    ? localeRoute({ name: "auth-settings-provider" })
+    : localeRoute({ name: "auth-settings" });
+});
 
 if (isAuth.value) {
   watch(

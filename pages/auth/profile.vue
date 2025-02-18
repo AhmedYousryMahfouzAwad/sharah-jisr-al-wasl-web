@@ -9,12 +9,12 @@
   <!-- Main Content -->
   <div
     v-else
-    class="grid grid-cols-12 md:container !mx-auto justify-center items-start"
+    class="grid grid-cols-12 lg:container !mx-auto justify-center items-start"
   >
-    <div class="md:col-span-3 col-span-1 mx-5 my-5">
+    <div class="lg:col-span-3 md:col-span-5 col-span-1 mx-5 my-5">
       <ListBar />
     </div>
-    <div class="md:col-span-9 col-span-11 my-5">
+    <div class="lg:col-span-9 md:col-span-7 col-span-11 my-5">
       <form @submit.prevent="submit" class="text-start space-y-10 mt-8 w-full">
         <!-- Card Container -->
         <div class="flex justify-start items-center">
@@ -23,7 +23,7 @@
             <div class="flex items-center justify-between border-b pb-4">
               <div class="flex items-center gap-x-2">
                 <div
-                  class="relative p-2 rounded-full bg-primary-2 cursor-pointer hover:bg-primary-3"
+                  class="relative p-2 rounded-full bg-primary-2 cursor-pointer"
                 >
                   <img
                     src="/user.svg"
@@ -168,7 +168,6 @@ const { userInfo } = storeToRefs(useAuthStore());
 const { profile } = storeToRefs(useProfileStore());
 const { getProfile } = useProfileStore();
 const loading = ref(true);
-const token = ref([""]);
 onMounted(async () => {
   try {
     await getProfile();

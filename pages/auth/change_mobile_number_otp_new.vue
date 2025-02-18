@@ -119,6 +119,7 @@ const loginStore = useLoginStore();
 const { sendOtpChangeMobileNew } = useLoginStore();
 const { device_type, timerActive } = storeToRefs(useLoginStore());
 const submitLoading = ref(false);
+const { userInfo } = storeToRefs(useAuthStore());
 
 // Define validation schema
 const validationSchema = yup.object({
@@ -162,8 +163,12 @@ const payload = {
   country_code: useCookie("country_code").value,
 };
 const resendOtpNew = async () => {
+  const url =
+    userInfo.value.model_type == "provider"
+      ? "api/provider/resend-code-to-new-phone"
+      : "`api/user/resend-code-to-new-phone`";
   await fetchData({
-    url: `api/user/resend-code-to-new-phone`,
+    url,
     method: "post",
     body: payload,
     getSuccess: true,

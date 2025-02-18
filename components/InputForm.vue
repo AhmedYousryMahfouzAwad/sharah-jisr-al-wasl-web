@@ -62,7 +62,12 @@ import { Field } from "vee-validate";
 // تعريف props بما فيها modelValue
 defineProps({
   disabled: Boolean,
-  name: String,
+
+  name: {
+    type: [String, Number],
+    default: "",
+  },
+
   type: String,
   label: String,
   placeholder: String,

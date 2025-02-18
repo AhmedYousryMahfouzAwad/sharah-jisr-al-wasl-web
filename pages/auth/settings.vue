@@ -3,12 +3,12 @@
 
   <!-- Main Content -->
   <div
-    class="grid grid-cols-12 md:container !mx-auto justify-center items-start"
+    class="grid grid-cols-12 lg:container !mx-auto justify-center items-start"
   >
-    <div class="md:col-span-3 col-span-1 mx-5 my-5">
+    <div class="lg:col-span-3 md:col-span-5 col-span-1 mx-5 my-5">
       <ListBar />
     </div>
-    <div class="md:col-span-9 col-span-11 my-5">
+    <div class="lg:col-span-9 md:col-span-7 col-span-11 my-5">
       <form @submit="submit" class="text-start space-y-10 mt-8 w-full">
         <!-- Card Container -->
         <div class="flex justify-start items-center">
@@ -17,7 +17,7 @@
             <div class="flex items-center justify-between border-b pb-4">
               <div class="flex items-center gap-x-2">
                 <div
-                  class="relative p-2 rounded-full bg-primary-2 cursor-pointer hover:bg-primary-3"
+                  class="relative p-2 rounded-full bg-primary-2 cursor-pointer"
                 >
                   <img
                     src="/settings.svg"
@@ -197,7 +197,7 @@
                   type="submit"
                   :label="t('pages.save_edit')"
                   :disabled="loading"
-                  class="!w-[25%] my-5 !bg-primary-1 text-white font-bold"
+                  class="!w-[25%] my-5 !bg-primary-1 text-sm text-white font-bold"
                 />
               </div>
 
@@ -213,7 +213,7 @@
                     <button
                       @click="navigate"
                       type="button"
-                      class="bg-primary-2 px-8 py-2 rounded-lg mt-3"
+                      class="bg-primary-2 px-16 !w-[100%] py-2 rounded-lg mt-3"
                     >
                       <div class="flex items-center justify-center">
                         <p class="font-bold text-sm">
@@ -264,25 +264,21 @@ import default_image from "/public/img/Avatar.png";
 import { Field, useForm } from "vee-validate";
 import * as yup from "yup";
 import { useCookie, useLocaleRoute, nextTick, navigateTo } from "#imports";
-
 const { fetchData, resultData } = useFetchData();
 
 const fileInput = ref(null);
 const fileInputCompany = ref(null);
 const token = ref("");
-
 const { t } = useI18n();
 const { userInfo } = storeToRefs(useAuthStore());
 const { profile } = storeToRefs(useProfileStore());
 const { getProfile } = useProfileStore();
-
 const localePath = useLocalePath();
-
 const navigate = () => {
   navigateTo(localePath("/auth/change_mobile_number_old"));
 };
 
-const loading = ref(true);
+const loading = ref(false);
 
 const validationSchema = computed(() => {
   return yup.object({

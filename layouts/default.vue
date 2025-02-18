@@ -1,7 +1,9 @@
 <template>
   <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
-    <nav class="bg-white shadow-md w-full container">
-      <div class="container mx-auto px-4 flex items-center justify-between">
+    <nav class="bg-white shadow-md w-full">
+      <div
+        class="container mx-auto max-w-[85rem] px-4 flex items-center justify-between"
+      >
         <!-- Logo -->
         <div class="flex items-center">
           <NuxtLink :to="localeRoute({ name: 'index' })">
@@ -26,7 +28,7 @@
         </div>
 
         <!-- Navigation Links (Desktop View) -->
-        <ul class="hidden md:flex items-center space-x-4 rtl:space-x-reverse">
+        <ul class="hidden lg:flex items-center space-x-4 rtl:space-x-reverse">
           <NavList
             :is-active="route.path === '/' || route.path === '/en'"
             :to="localePath('index')"
@@ -84,7 +86,7 @@
         </ul>
 
         <!-- User Actions (Desktop View) -->
-        <div class="hidden md:flex items-center space-x-4 rtl:space-x-reverse">
+        <div class="hidden lg:flex items-center space-x-4 rtl:space-x-reverse">
           <button
             class="text-gray-700 hover:text-gray-900 p-1 rounded-md bg-primary-2"
           >
@@ -94,12 +96,14 @@
             v-if="!isAuth"
             class="text-black px-4 py-1 rounded-md border border-primary-1 flex justify-center items-center"
           >
-            <span class="text-sm font-semibold"> حساب جديد </span>
+            <span class="text-sm font-semibold">
+              {{ t("pages.new_account") }}
+            </span>
           </button>
 
           <NuxtLink
             v-if="isAuth"
-            :to="localeRoute({ name: 'auth-profile' })"
+            :to="userRoute"
             class="text-black px-4 py-1 rounded-md flex justify-center items-center"
           >
             <span class="text-sm font-semibold"> {{ userInfo.name }} </span>
@@ -109,11 +113,23 @@
           <Select
             v-model="lang"
             :options="locales"
-            @update:model-value="$router.push(switchLocalePath(lang))"
+            @update:model-value="$router.push(switchLocalePath(lang.code))"
             optionLabel="name"
-            option-value="code"
             class="border-0 shadow-none outline-none text-xs font-semibold"
           >
+            <template #value="slotProps">
+              <div class="flex items-center">
+                <img
+                  class="w-4 h-4 rounded-md mx-1"
+                  :alt="slotProps.value?.label"
+                  :src="slotProps.value?.image || lang.s"
+                  style="width: 18px"
+                />
+                <div class="text-xs font-semibold">
+                  {{ slotProps.value?.name }}
+                </div>
+              </div>
+            </template>
             <template #option="slotProps">
               <div class="flex items-center">
                 <img
@@ -131,7 +147,7 @@
         </div>
 
         <!-- Mobile Menu Button -->
-        <button class="md:hidden text-gray-700" @click="toggleSidebar">
+        <button class="lg:hidden text-gray-700" @click="toggleSidebar">
           <i class="pi pi-bars text-2xl"></i>
         </button>
       </div>
@@ -211,6 +227,12 @@ const localeRoute = useLocaleRoute();
 // i18n setup
 const { t, locale, locales } = useI18n();
 
+const userRoute = computed(() => {
+  return userInfo.value.model_type === "provider"
+    ? localeRoute({ name: "auth-profile-provider" })
+    : localeRoute({ name: "auth-profile" });
+});
+
 const isSidebarOpen = ref(false);
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
@@ -245,6 +267,10 @@ const head = useLocaleHead({
   addDirAttribute: true,
   identifierAttribute: "id",
   addSeoAttributes: true,
+});
+
+onMounted(() => {
+  lang.value = locales.value.find((l) => l.code === locale.value);
 });
 </script>
 

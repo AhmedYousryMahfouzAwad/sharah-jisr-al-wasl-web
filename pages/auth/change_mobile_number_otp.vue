@@ -104,6 +104,7 @@ import illustration from "../../public/img/Illustration.png";
 import * as yup from "yup";
 import { Field, useForm } from "vee-validate";
 const { fetchData, resultData } = useFetchData();
+const { userInfo } = storeToRefs(useAuthStore());
 
 // on mounted
 onMounted(async () => {
@@ -161,8 +162,12 @@ const payload = {
   country_code: useCookie("country_code").value,
 };
 const resendOtpOld = async () => {
+  const url =
+    userInfo.value.model_type == "provider"
+      ? "api/provider/resend-code-to-old-phone"
+      : "api/user/resend-code-to-old-phone";
   await fetchData({
-    url: `api/user/resend-code-to-old-phone`,
+    url,
     method: "post",
     body: payload,
     getSuccess: true,

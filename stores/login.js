@@ -1,11 +1,13 @@
 import { defineStore } from "pinia";
 
 import { useCookie, useLocaleRoute, nextTick, navigateTo } from "#imports";
+
 export const useLoginStore = defineStore("login", () => {
   // STATE
   const { fetchData, loading, resultData } = useFetchData();
   const localePath = useLocalePath();
   const localeRoute = useLocaleRoute();
+  const { userInfo } = storeToRefs(useAuthStore());
   const router = useRouter();
   const { setAuth } = useAuthStore();
   const { locale } = useI18n();
@@ -149,8 +151,12 @@ export const useLoginStore = defineStore("login", () => {
     });
   };
   const sendOtpChangeMobileOld = async (payload) => {
+    const url =
+      userInfo.value.model_type === "provider"
+        ? "api/provider/verify-old-phone"
+        : "api/user/verify-old-phone";
     await fetchData({
-      url: `api/user/verify-old-phone`,
+      url,
       method: "post",
       body: payload,
       getSuccess: true,
@@ -175,8 +181,12 @@ export const useLoginStore = defineStore("login", () => {
     });
   };
   const sendOtpChangeMobileNew = async (payload) => {
+    const url =
+      userInfo.value.model_type == "provider"
+        ? "api/provider/verify-new-phone"
+        : "api/user/verify-new-phone";
     await fetchData({
-      url: `api/user/verify-new-phone`,
+      url,
       method: "post",
       body: payload,
       getSuccess: true,
@@ -207,8 +217,12 @@ export const useLoginStore = defineStore("login", () => {
     });
   };
   const sendChangePhone = async (payload) => {
+    const url =
+      userInfo.value.model_type == "provider"
+        ? "api/provider/send-code-to-old-phone"
+        : "api/user/send-code-to-old-phone";
     await fetchData({
-      url: `api/user/send-code-to-old-phone`,
+      url,
       method: "post",
       headers: {
         "content-type": "multipart/form-data",
@@ -223,8 +237,12 @@ export const useLoginStore = defineStore("login", () => {
     });
   };
   const sendChangePhoneNew = async (payload) => {
+    const url =
+      userInfo.value.model_type == "provider"
+        ? "api/provider/send-code-to-new-phone"
+        : "api/user/send-code-to-new-phone";
     await fetchData({
-      url: `api/user/send-code-to-new-phone`,
+      url,
       method: "post",
       headers: {
         "content-type": "multipart/form-data",
