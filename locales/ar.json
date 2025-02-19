@@ -8,6 +8,10 @@
     "warranty": "الضمان"
   },
   "pages": {
+    "no_reviews": "  لا توجد تقييمات حتى الان  ",
+
+    "check_reviews": " اطلع على تقييمات العملاء لك من هنا. ",
+    "my_reviews": "تقييماتي",
     "no_notifications": "  لا يوجد اشعارت   ",
     "the_balance": "الرصيد",
     "recharge_wallet": "شحن المحفظة",

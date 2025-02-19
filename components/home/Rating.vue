@@ -35,7 +35,7 @@
         </div>
       </div>
       <p class="font-semibold text-sm pb-2 mx-5">
-        {{ t("table.date") }} <span>dasdasd</span>
+        {{ t("table.date") }} <span>{{ rate.created_at }}</span>
       </p>
     </div>
   </div>

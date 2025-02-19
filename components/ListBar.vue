@@ -103,6 +103,23 @@
             />
           </SliderBar>
 
+          <SliderBar
+            v-if="userInfo.model_type === 'provider'"
+            :is-active="route.path === '/rating' || route.path === '/en/rating'"
+            :to="localePath({ name: 'rating' })"
+            @click="closeSidebar"
+            :title="t('pages.my_reviews')"
+            class="hover:bg-primary-3 bg-primary-3 rounded-lg hover:rounded-lg hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+          >
+            <IconsRatingIcon
+              :is-active="
+                route.path === '/rating' || route.path === '/en/rating'
+              "
+              :to="localePath('/rating')"
+              class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
+            />
+          </SliderBar>
+
           <!-- <SliderBar
             v-if="isAuth"
             :is-active="

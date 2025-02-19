@@ -281,17 +281,17 @@ const head = useLocaleHead({
   identifierAttribute: "id",
   addSeoAttributes: true,
 });
-if (isAuth.value) {
-  watch(
-    () => route.path,
-    async () => {
-      await countNotification();
-    }
-  );
-}
+// if (isAuth.value) {
+//   watch(
+//     () => route.path,
+//     async () => {
+//       await countNotification();
+//     }
+//   );
+// }
 onMounted(() => {
   lang.value = locales.value.find((l) => l.code === locale.value);
-  countNotification();
+  // countNotification();
 });
 </script>
 

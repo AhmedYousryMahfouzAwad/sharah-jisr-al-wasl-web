@@ -8,7 +8,10 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "no_reviews": " No reviews yet", 
+    "check_reviews": "Check out your customer reviews from here. ",
     "no_notifications": "No Notifications",
+    "my_reviews": "My reviews",
     "the_balance": "The balance",
     "recharge_wallet": " Recharge Wallet ",
     "view_your_profile": "View Your Profile",
