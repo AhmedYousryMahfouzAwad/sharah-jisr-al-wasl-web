@@ -88,15 +88,17 @@
 
           <!-- ===================================== -->
           <SliderBar
-            :is-active="route.path === '/more' || route.path === '/en/more'"
-            :to="localePath({ name: 'more' })"
+            :is-active="route.path === '/wallet' || route.path === '/en/wallet'"
+            :to="localePath({ name: 'wallet' })"
             @click="closeSidebar"
-            :title="t('pages.more')"
+            :title="t('pages.the_wallet')"
             class="hover:bg-primary-3 bg-primary-3 rounded-lg hover:rounded-lg hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             <IconsWalletIcon
-              :is-active="route.path === '/more' || route.path === '/en/more'"
-              :to="localePath('more')"
+              :is-active="
+                route.path === '/wallet' || route.path === '/en/wallet'
+              "
+              :to="localePath('/wallet')"
               class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
             />
           </SliderBar>
@@ -216,11 +218,7 @@ if (isAuth.value) {
   watch(
     () => route.path,
     async () => {
-      try {
-        await countNotification(); // Call the function to count notifications
-      } catch (error) {
-        console.error("Error counting notifications:", error);
-      }
+      await countNotification();
     }
   );
 }

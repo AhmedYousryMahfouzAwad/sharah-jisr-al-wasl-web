@@ -86,12 +86,21 @@
         </ul>
 
         <!-- User Actions (Desktop View) -->
-        <div class="hidden lg:flex items-center space-x-4 rtl:space-x-reverse">
-          <button
-            class="text-gray-700 hover:text-gray-900 p-1 rounded-md bg-primary-2"
+        <div class="flex items-center space-x-4 rtl:space-x-reverse">
+          <NuxtLink
+            :to="localeRoute({ name: 'notification' })"
+            class="text-gray-700 relative hover:text-gray-900 p-1 rounded-md bg-primary-2"
           >
             <img src="../public/img/notification.png" alt="notification" />
-          </button>
+
+            <span
+              v-if="count"
+              class="absolute top-0 right-0 flex items-center justify-center min-w-[20px] h-5 px-2 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white transform translate-x-1/2 -translate-y-1/2"
+            >
+              {{ count }}
+            </span>
+          </NuxtLink>
+
           <button
             v-if="!isAuth"
             class="text-black px-4 py-1 rounded-md border border-primary-1 flex justify-center items-center"
@@ -222,6 +231,10 @@
 const switchLocalePath = useSwitchLocalePath();
 const { userInfo, isAuth } = storeToRefs(useAuthStore());
 const localeRoute = useLocaleRoute();
+
+const { countNotification } = useNotification();
+
+const { count } = storeToRefs(useNotification());
 // const localePath = useLocaleRoute();
 
 // i18n setup
@@ -268,9 +281,17 @@ const head = useLocaleHead({
   identifierAttribute: "id",
   addSeoAttributes: true,
 });
-
+if (isAuth.value) {
+  watch(
+    () => route.path,
+    async () => {
+      await countNotification();
+    }
+  );
+}
 onMounted(() => {
   lang.value = locales.value.find((l) => l.code === locale.value);
+  countNotification();
 });
 </script>
 

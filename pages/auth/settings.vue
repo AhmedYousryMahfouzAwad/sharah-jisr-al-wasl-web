@@ -12,7 +12,7 @@
       <form @submit="submit" class="text-start space-y-10 mt-8 w-full">
         <!-- Card Container -->
         <div class="flex justify-start items-center">
-          <div class="bg-white shadow-2xl rounded-xl p-8 w-full max-w-3xl">
+          <div class="bg-white shadow-2xl rounded-xl p-4 w-full max-w-3xl">
             <!-- Header Section -->
             <div class="flex items-center justify-between border-b pb-4">
               <div class="flex items-center gap-x-2">

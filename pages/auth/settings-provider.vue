@@ -18,7 +18,7 @@
       <form @submit.prevent="submit" class="text-start space-y-10 mt-8 w-full">
         <!-- Card Container -->
         <div class="flex justify-start items-center">
-          <div class="bg-white shadow-2xl rounded-xl p-8 w-full max-w-3xl">
+          <div class="bg-white shadow-2xl rounded-xl p-4 w-full max-w-3xl">
             <!-- Header Section -->
 
             <div class="flex items-center justify-between border-b pb-4">
@@ -50,7 +50,7 @@
                 <!-- Profile Image -->
                 <div class="relative">
                   <Avatar
-                    :image="profile.image || default_image"
+                    :image="profile.image ? profile.image : default_image"
                     class="rounded-full border bg-transparent relative border-gray-300 object-cover bg-gradient-to-t from-gray-800/80 to-transparent dark:from-gray-900/80"
                     size="xlarge"
                     shape="circle"
@@ -604,19 +604,28 @@ const submit = handleSubmit(async () => {
 
   fileInput.value.files[0] &&
     formData.append("image", fileInput.value.files[0] || default_image);
-  profile.value.email && formData.append("email", profile.value?.email || "");
-  profile.value.name && formData.append("name", profile.value?.name || "");
+
+  profile.value?.email && formData.append("email", profile.value?.email || "");
+
+  formData.append("name", profile.value?.name || "");
+
   profile.value.city &&
     formData.append("city_id", profile.value?.city?.id || "");
+
   profile.value.category &&
     formData.append("category_id", profile.value?.category?.id || "");
+
   profile.value.account_name &&
     formData.append("bank_name", profile.value?.account_name || "");
+
   profile.value.account_name &&
     formData.append("bank_name", profile.value?.bank_name || "");
+
   profile.value.iban && formData.append("bank_name", profile.value?.iban || "");
+
   profile.value.iban &&
     formData.append("account_number", profile.value?.account_number || "");
+
   profile.value.commercial_register &&
     formData.append(
       "commercial_register",

@@ -12,45 +12,6 @@ export const useNotification = defineStore("notification", () => {
     current_page: 1,
   });
 
-  //getNotification
-  const getNotification = async (page = 1) => {
-    await fetchData({
-      url: `user/notifications`,
-      params: {
-        page: page,
-      },
-      onSuccess: () => {
-        list_notifications.value = resultData.value?.notifications.data;
-        pagination.value = resultData?.value?.pagination || {};
-        pagination.value.current_page = page;
-      },
-    });
-  };
-  //removeNotification
-  const removeNotification = async (id) => {
-    await fetchData({
-      url: `user/delete-notification/${id}`,
-
-      onSuccess: () => {
-        getNotification();
-      },
-
-      method: "delete",
-      getSuccess: true,
-    });
-  };
-  //removeAllNotification
-  const removeAllNotification = async () => {
-    await fetchData({
-      url: `user/delete-notifications`,
-      onSuccess: () => {
-        getNotification();
-      },
-      method: "delete",
-      getSuccess: true,
-    });
-  };
-
   //deviceNotification
   const deviceNotification = async (device_id, device_type) => {
     await fetchData({
@@ -65,23 +26,25 @@ export const useNotification = defineStore("notification", () => {
     });
   };
   //switchNotification
-  const switchNotification = async (payload) => {
-    await fetchData({
-      url: `user/switch-notify`,
-      onSuccess: () => {
-        getNotification();
-      },
+  // const switchNotification = async (payload) => {
+  //   await fetchData({
+  //     url: `user/switch-notify`,
+  //     onSuccess: () => {
+  //       getNotification();
+  //     },
 
-      body: payload,
-      method: "patch",
-      getSuccess: true,
-    });
-  };
+  //     body: payload,
+  //     method: "patch",
+  //     getSuccess: true,
+  //   });
+  // };
 
   //countNotification
   const countNotification = async () => {
+    console.log("55555555555");
+
     await fetchData({
-      url: `user/count-notifications`,
+      url: `api/notifications/count-notifications`,
       onSuccess: () => {
         count.value = resultData.value?.count;
       },
@@ -97,11 +60,10 @@ export const useNotification = defineStore("notification", () => {
     the_notify,
     pagination,
     //ACTIONS
-    getNotification,
-    removeNotification,
-    removeAllNotification,
+
+    // removeAllNotification,
     countNotification,
-    switchNotification,
+    // switchNotification,
     deviceNotification,
   };
 });

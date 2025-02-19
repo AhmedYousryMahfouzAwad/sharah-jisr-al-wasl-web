@@ -8,9 +8,15 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "no_notifications": "No Notifications",
+    "the_balance": "The balance",
+    "recharge_wallet": " Recharge Wallet ",
     "view_your_profile": "View Your Profile",
     "next": "  Next ",
-
+    "Recharge": " Recharge ",
+    "recharge_amount": "Recharge Amount",
+    "enter_recharge_amount": "Enter the recharge amount",
+    "Check_wallet": "Check your wallet balance from here.",
     "enter_phone": "Please enter the mobile number registered in the system.",
     "enable_notifications": "  Enable Notifications ",
     "change_phone": "If you want to change your mobile number, press the button",

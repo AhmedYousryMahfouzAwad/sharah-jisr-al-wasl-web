@@ -8,10 +8,16 @@
     "warranty": "الضمان"
   },
   "pages": {
+    "no_notifications": "  لا يوجد اشعارت   ",
+    "the_balance": "الرصيد",
+    "recharge_wallet": "شحن المحفظة",
+    "Recharge": "شحن  ",
+    "recharge_amount": "قيمة الشحن",
+    "enter_recharge_amount": "ادخل قيمة الشحن",
     "view_your_profile": "  اطلع على ملفك الشخصي   ",
     "next": " التالي",
     "enter_phone": "  يُرجي إدخال رقم الجوال المسجل به فى النظام. ",
-
+    "Check_wallet": "  تحقق من رصيد المحفظة من هنا. ",
     "enable_notifications": " تفعيل الاشعارات ",
     "change_phone": "اذا كنت تريد تغيير رقم الجوال اضغط على الزر ",
     "save_edit": " حفظ التعديلات ",
