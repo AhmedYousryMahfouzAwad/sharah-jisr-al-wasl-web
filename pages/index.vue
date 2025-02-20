@@ -40,8 +40,8 @@ const home = async () => {
   }
 };
 
-onMounted(() => {
-  home();
+onMounted(async () => {
+  await home();
 });
 </script>
 <style scoped>

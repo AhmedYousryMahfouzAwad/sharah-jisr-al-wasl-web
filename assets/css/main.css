@@ -206,3 +206,7 @@ html[lang="ar"] .p-datepicker-input-icon-container {
 :dir(rtl) .data-picker-panel .p-datepicker-next-button {
   transform: scale(-1) !important;
 }
+
+.vue3-star-ratings {
+  direction: ltr !important;
+}

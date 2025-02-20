@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-[#F9F5F1] relative w-full overflow-hidden cursor-pointer block"
+    class="bg-[#F9F5F1] w-full relative overflow-hidden cursor-pointer block"
   >
     <HomeTitle
       :src="'/elements.png'"
@@ -24,12 +24,24 @@
 
       <template v-else>
         <NuxtLink
-          v-for="(category, index) in categories"
-          :key="index"
-          to="/"
-          class="border-primary-1 container border-2 sm:col-span-4 col-span-12 md:mx-auto gap-3 p-10 rounded-lg bg-white shadow-sm flex w-full flex-col items-center"
+          v-for="category in categories"
+          :key="category.id"
+          :to="
+            localePath({
+              name: 'provider-id',
+              params: { id: category.id },
+            })
+          "
+          class="border-primary-1 !relative !z-[9] container border-2 sm:col-span-4 col-span-12 md:mx-auto gap-3 p-10 rounded-lg bg-white shadow-sm flex w-full flex-col items-center"
         >
-          <img :src="category.image" :alt="category.name" class="w-10 h-10" />
+          <div class="flex flex-col items-center bg-primary-2 rounded-lg">
+            <img
+              :src="category.image"
+              :alt="category.name"
+              class="w-10 h-10 p-2"
+            />
+          </div>
+
           <p class="text-gray-900 font-medium mt-3">{{ category.name }}</p>
         </NuxtLink>
       </template>
@@ -45,6 +57,7 @@
 
 <script setup>
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 defineProps({
   categories: {
