@@ -9,6 +9,7 @@
   },
   "pages": {
     "no_reviews": "  لا توجد تقييمات حتى الان  ",
+    "view_more": " مشاهدة المزيد",
 
     "check_reviews": " اطلع على تقييمات العملاء لك من هنا. ",
     "my_reviews": "تقييماتي",
@@ -224,6 +225,8 @@
     "filter_by": "  فلتر حسب ",
     "price": "السعر",
     "Filters": "فلاتر",
+    "sort": "التصنيف حسب",
+    "activity": "النشاط",
     "Cleaning_tools": "  ادوات نظافه",
     "Chemicals": "كيماويات",
     "picture_problems": "صور المشكلة",
@@ -301,8 +304,10 @@
   },
   "inputs": {
     "site_search": {
+      "name": "  بحث    ",
       "label": "البحث",
-      "placeholder": "قم بتحديد نوع البحث أولا"
+      "placeholder": "قم بتحديد نوع البحث أولا",
+      "placeholder_dot": "   بحث ..."
     },
     "name": {
       "label": "الإسم",

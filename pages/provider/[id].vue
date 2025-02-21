@@ -52,22 +52,152 @@
     </div>
 
     <div class="max-w-7xl mx-auto my-5 grid grid-cols-12 gap-4">
-      <div class="col-span-9">
-        <div class="grid grid-cols-3">
-          <HomeProviderCard
-            v-for="provider in list_provider"
-            :key="provider.id"
-            :image="provider.image"
-            :name="provider.name"
-            :address="provider.map_desc"
-            :city="provider.city"
-            :rating="provider.rate_avg"
-          />
+      <!-- Sidebar -->
+      <div class="col-span-12 lg:col-span-3 md:col-span-5">
+        <div class="grid grid-cols-1 px-1 md:grid-cols-1">
+          <!-- العنوان -->
+          <label class="text-start gap-x-2 text-sm font-bold">{{
+            t("inputs.site_search.label")
+          }}</label>
+          <div
+            class="flex flex-col sm:flex-row w-full gap-2 justify-center items-center max-w-md mx-auto"
+          >
+            <!-- مربع البحث -->
+            <div
+              class="flex border border-gray-300 rounded-lg overflow-hidden w-full sm:max-w-sm"
+            >
+              <input
+                type="text"
+                class="w-full px-2 py-2 text-right outline-none"
+                :placeholder="t('inputs.site_search.placeholder_dot')"
+              />
+              <!-- أيقونة البحث -->
+              <span class="flex items-center px-3 text-gray-400"> 🔍 </span>
+            </div>
+
+            <!-- زر البحث -->
+            <button
+              class="bg-primary-1 text-white px-4 rounded-lg py-2 w-full sm:w-auto"
+            >
+              {{ t("inputs.site_search.name") }}
+            </button>
+          </div>
+
+          <div class="max-w-sm mx-auto bg-white p-4">
+            <!-- عنوان التصنيف -->
+            <h3 class="text-start font-semibold text-lg">
+              {{ t("pages.sort") }}
+            </h3>
+
+            <!-- القسم الأول: المدينة -->
+            <div class="mt-4">
+              <h4 class="text-start my-2 font-semibold text-md text-primary-1">
+                {{ t("inputs.city.label") }}
+              </h4>
+              <div
+                class="mt-2 space-y-2 w-full max-h-[300px] overflow-y-auto p-2 custom-scrollbar"
+              >
+                <div
+                  v-for="city in list_cities"
+                  :key="city.key"
+                  class="flex items-center gap-2"
+                >
+                  <Checkbox
+                    v-model="selectedCity"
+                    :inputId="city.id"
+                    name="city"
+                    :value="city.id"
+                  />
+                  <label :for="city.id">{{ city.name }}</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- فاصل -->
+            <div class="border-t border-dashed border-primary-2 my-4"></div>
+
+            <div class="mt-4">
+              <h4 class="text-start my-2 font-semibold text-md text-primary-1">
+                {{ t("pages.activity") }}
+              </h4>
+              <div
+                class="mt-2 space-y-2 w-full max-h-[300px] overflow-y-auto p-2 custom-scrollbar"
+              >
+                <div
+                  v-for="activity in list_activities"
+                  :key="activity.key"
+                  class="flex items-center gap-2"
+                >
+                  <Checkbox
+                    v-model="selectedActivity"
+                    :inputId="activity.id"
+                    name="activity"
+                    :value="activity.id"
+                  />
+                  <label :for="city.id">{{ activity.name }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <!-- Main Content -->
+      <div class="col-span-12 lg:col-span-9 md:col-span-7">
+        <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
+          <!-- Skeleton Loading -->
+          <template v-if="globalLoading">
+            <div
+              v-for="n in 6"
+              :key="n"
+              class="p-4 bg-white rounded-lg shadow animate-pulse"
+            >
+              <div class="h-40 bg-gray-300 rounded"></div>
+              <div class="mt-4 h-4 bg-gray-300 rounded w-3/4"></div>
+              <div class="mt-2 h-4 bg-gray-200 rounded w-1/2"></div>
+              <div class="mt-2 h-4 bg-gray-200 rounded w-1/3"></div>
+            </div>
+          </template>
 
-      <div class="col-span-3">
-        <div class="flex flex-col gap-4">scsafsafsa</div>
+          <!-- Display Providers -->
+          <template v-else-if="list_provider.length > 0">
+            <HomeProviderCard
+              v-for="provider in list_provider"
+              :key="provider.id"
+              :image="provider.image"
+              :name="provider.name"
+              :address="provider.map_desc"
+              :city="provider.city"
+              :rating="parseFloat(provider.rate_avg).toFixed(1)"
+            />
+          </template>
+
+          <!-- No Providers Found -->
+          <template v-else>
+            <div
+              class="col-span-12 flex flex-col items-center justify-center text-center p-10"
+            >
+              <img alt="No results" class="w-40 h-40 mb-4" />
+              <h3 class="text-lg font-semibold text-gray-600">
+                {{ t("messages.no_providers_found") }}
+              </h3>
+              <p class="text-gray-500 text-sm mt-2">
+                {{ t("messages.try_different_filters") }}
+              </p>
+            </div>
+          </template>
+        </div>
+
+        <!-- Pagination -->
+        <div class="!border-none mt-5">
+          <div class="mt-5" v-if="!globalLoading && pagination.total_pages > 1">
+            <Paginator
+              :totalRecords="pagination.total_items"
+              :rows="pagination.per_page"
+              :first="(pagination.current_page - 1) * pagination.per_page"
+              @page="onPageChange"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -75,10 +205,24 @@
 
 <script setup>
 const { fetchData, resultData } = useFetchData();
+const { list_activities, list_cities } = storeToRefs(useCountries());
+const { getActivities, getCities } = useCountries();
 const route = useRoute();
 const banner = ref(null);
 const list_provider = ref([]);
 const { t } = useI18n();
+const page = ref(1);
+const globalLoading = ref(false);
+const checked = ref(false);
+const selectedCity = ref(null);
+const selectedActivity = ref(null);
+
+const pagination = ref({
+  total_items: 0,
+  per_page: 20,
+  total_pages: 1,
+  current_page: 1,
+});
 
 const getBanner = async () => {
   try {
@@ -94,14 +238,17 @@ const getBanner = async () => {
     console.error("❌ Error fetching banners:", error);
   }
 };
-const getProvider = async () => {
+const getProvider = async (pageNumber = 1) => {
+  globalLoading.value = true;
   try {
     await fetchData({
       url: `api/user/providers`,
-      params: { category_id: route.params.id },
+      params: { category_id: route.params.id, page: pageNumber },
       onSuccess: () => {
         list_provider.value = resultData.value.data;
-        console.log(list_provider.value);
+        pagination.value = resultData?.value?.pagination || {};
+        pagination.value.current_page = pageNumber;
+        globalLoading.value = false;
       },
     });
   } catch (error) {
@@ -109,9 +256,39 @@ const getProvider = async () => {
   }
 };
 
+const onPageChange = (event) => {
+  if (!pagination.value || typeof event.page !== "number") return;
+
+  page.value = event.page + 1;
+  getProvider(page.value);
+};
+
 // onMounted(getBanner, getProvider);
 onMounted(() => {
   getProvider();
   getBanner();
+  getCities();
+  getActivities();
 });
 </script>
+
+<style scoped>
+/* تخصيص الـ Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* حجم الـ scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* لون خلفية التراك */
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-primary-1;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-1;
+}
+</style>

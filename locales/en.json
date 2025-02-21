@@ -8,7 +8,10 @@
     "warranty": "Warranty"
   },
   "pages": {
-    "no_reviews": " No reviews yet", 
+    "activity": "Activity",
+    "sort": "Sort By",
+    "no_reviews": " No reviews yet",
+    "view_more": " View More",
     "check_reviews": "Check out your customer reviews from here. ",
     "no_notifications": "No Notifications",
     "my_reviews": "My reviews",
@@ -299,8 +302,11 @@
   },
   "inputs": {
     "site_search": {
+      "name": "   Search",
+
       "label": "Search",
-      "placeholder": "Specify the type of search first"
+      "placeholder": "Specify the type of search first",
+      "placeholder_dot": "   ... Search "
     },
     "name": {
       "label": "Name",

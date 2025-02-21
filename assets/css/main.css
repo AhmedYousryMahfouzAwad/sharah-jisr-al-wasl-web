@@ -210,3 +210,10 @@ html[lang="ar"] .p-datepicker-input-icon-container {
 .vue3-star-ratings {
   direction: ltr !important;
 }
+
+.vue3-star-ratings__outer[data-v-7fab3f62] {
+  color: #ffdb00 !important;
+}
+.vue3-star-ratings *[data-v-7fab3f62] {
+  margin: 1px !important;
+}

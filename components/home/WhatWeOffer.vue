@@ -10,7 +10,7 @@
     <p class="text-center text-gray-900 font-bold text-base mb-5 md:text-xl">
       {{ t("pages.what_we_offer_desc") }}
     </p>
-    <div class="max-w-7xl py-5 grid grid-cols-12 gap-5 mx-auto">
+    <div class="max-w-5xl py-5 grid grid-cols-12 gap-5 mx-auto">
       <template v-if="loading">
         <div
           v-for="index in 3"
