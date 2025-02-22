@@ -8,6 +8,19 @@
     "warranty": "الضمان"
   },
   "pages": {
+    "activities": "أنواع النشاط",
+    "desc": " الوصف  ",
+    "submit_rating": " ارسال التقييم ",
+
+    "send_request_price": " إرسال طلب عرض سعر ",
+    "rate_company": "  تقييم الشركة       ",
+    "contact_information_desc": "بيانات التواصل",
+    "working_hours": "  مواعيد العمل    ",
+    "types_of_activities": "     أنواع النشاط    ",
+    "phone_contact": "     رقم التواصل : ",
+    "from": " من ",
+    "location": "  الموقع : ",
+    "to": " إلى ",
     "no_reviews": "  لا توجد تقييمات حتى الان  ",
     "view_more": " مشاهدة المزيد",
     "no_providers_found": "لم يتم العثور على مقدمين",
@@ -514,7 +527,7 @@
     },
 
     "city": {
-      "label": "المدينة",
+      "label": " المدينة :",
       "placeholder": "اختر المدينة",
       "required": "المدينة مطلوبة",
       "search": "ابحث عن المدينة"

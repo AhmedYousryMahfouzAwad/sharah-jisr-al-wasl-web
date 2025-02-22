@@ -8,8 +8,18 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "activities": "Activities Types",
+    "desc": "  Description  ",
+    "working_hours": "   Working Hours  ",
+    "rate_company": "   Rate Company ",
+    "contact_information_desc": "Contact Information",
+    "types_of_activities": "      Types of activities",
     "no_providers_found": " No providers found ",
-
+    "from": " From ",
+    "to": " To ",
+    "location": "location :",
+    "phone_contact": "  Contact Number : ",
+    "send_request_price": "Send a Price Quote Request",
     "activity": "Activity",
     "sort": "Sort By",
     "no_reviews": " No reviews yet",
@@ -516,7 +526,7 @@
       "selected": "From selected images"
     },
     "city": {
-      "label": "City",
+      "label": "City :",
       "placeholder": "Choose city",
       "required": "City is required",
       "search": "Search for city"
