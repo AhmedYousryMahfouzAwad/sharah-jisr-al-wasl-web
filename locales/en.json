@@ -8,6 +8,8 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "no_providers_found": " No providers found ",
+
     "activity": "Activity",
     "sort": "Sort By",
     "no_reviews": " No reviews yet",

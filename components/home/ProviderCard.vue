@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center cursor-pointer">
+  <NuxtLink :to="to" class="flex justify-center items-center cursor-pointer">
     <div
       class="hover:bg-primary-3 bg-slate-50 border-2 hover:border-primary-1 border-gray-50 w-80 p-2 transition-all duration-300 hover:translate-y-[-4px]"
     >
@@ -63,7 +63,7 @@
         </NuxtLink>
       </div>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <script setup>
@@ -78,7 +78,7 @@ defineProps({
     type: String,
   },
   rating: {
-    type: Number,
+    type: [Number, String],
   },
   city: {
     type: String,
@@ -87,7 +87,11 @@ defineProps({
     type: String,
   },
   id: {
-    type: Number,
+    type: [String, Number],
+  },
+  to: {
+    type: [String, Object],
+    required: true,
   },
 });
 

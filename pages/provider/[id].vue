@@ -55,41 +55,36 @@
       <!-- Sidebar -->
       <div class="col-span-12 lg:col-span-3 md:col-span-5">
         <div class="grid grid-cols-1 px-1 md:grid-cols-1">
-          <!-- العنوان -->
           <label class="text-start gap-x-2 text-sm font-bold">{{
             t("inputs.site_search.label")
           }}</label>
-          <div
-            class="flex flex-col sm:flex-row w-full gap-2 justify-center items-center max-w-md mx-auto"
-          >
-            <!-- مربع البحث -->
+          <div class="flex flex-col sm:flex-row w-full gap-2">
             <div
-              class="flex border border-gray-300 rounded-lg overflow-hidden w-full sm:max-w-sm"
+              class="flex border border-gray-300 rounded-lg overflow-hidden w-full"
             >
               <input
                 type="text"
-                class="w-full px-2 py-2 text-right outline-none"
+                v-model="searchQuery"
+                class="w-full px-2 py-2 text-start outline-none"
                 :placeholder="t('inputs.site_search.placeholder_dot')"
               />
-              <!-- أيقونة البحث -->
+
               <span class="flex items-center px-3 text-gray-400"> 🔍 </span>
             </div>
 
-            <!-- زر البحث -->
             <button
+              @click="fetchProviders"
               class="bg-primary-1 text-white px-4 rounded-lg py-2 w-full sm:w-auto"
             >
               {{ t("inputs.site_search.name") }}
             </button>
           </div>
 
-          <div class="max-w-sm mx-auto bg-white p-4">
-            <!-- عنوان التصنيف -->
+          <div class="bg-white p-4">
             <h3 class="text-start font-semibold text-lg">
               {{ t("pages.sort") }}
             </h3>
 
-            <!-- القسم الأول: المدينة -->
             <div class="mt-4">
               <h4 class="text-start my-2 font-semibold text-md text-primary-1">
                 {{ t("inputs.city.label") }}
@@ -104,18 +99,17 @@
                 >
                   <Checkbox
                     v-model="selectedCity"
-                    :inputId="city.id"
+                    :inputId="String(city.id)"
                     name="city"
                     :value="city.id"
                   />
+
                   <label :for="city.id">{{ city.name }}</label>
                 </div>
               </div>
             </div>
 
-            <!-- فاصل -->
             <div class="border-t border-dashed border-primary-2 my-4"></div>
-
             <div class="mt-4">
               <h4 class="text-start my-2 font-semibold text-md text-primary-1">
                 {{ t("pages.activity") }}
@@ -167,7 +161,14 @@
               :name="provider.name"
               :address="provider.map_desc"
               :city="provider.city"
-              :rating="parseFloat(provider.rate_avg).toFixed(1)"
+              :rating="parseFloat(provider.rate_avg)"
+              :id="provider.id"
+              :to="
+                localeRoute({
+                  name: 'show-id',
+                  params: { id: provider.id },
+                })
+              "
             />
           </template>
 
@@ -176,13 +177,14 @@
             <div
               class="col-span-12 flex flex-col items-center justify-center text-center p-10"
             >
-              <img alt="No results" class="w-40 h-40 mb-4" />
-              <h3 class="text-lg font-semibold text-gray-600">
-                {{ t("messages.no_providers_found") }}
+              <img
+                src="/public/no_data.png"
+                alt="No Data"
+                class="w-40 h-40 mb-4"
+              />
+              <h3 class="text-lg font-semibold text-primary-1">
+                {{ t("pages.no_providers_found") }}
               </h3>
-              <p class="text-gray-500 text-sm mt-2">
-                {{ t("messages.try_different_filters") }}
-              </p>
             </div>
           </template>
         </div>
@@ -216,6 +218,8 @@ const globalLoading = ref(false);
 const checked = ref(false);
 const selectedCity = ref(null);
 const selectedActivity = ref(null);
+const searchQuery = ref("");
+const localeRoute = useLocaleRoute();
 
 const pagination = ref({
   total_items: 0,
@@ -238,13 +242,25 @@ const getBanner = async () => {
     console.error("❌ Error fetching banners:", error);
   }
 };
+
 const getProvider = async (pageNumber = 1) => {
+  const params = {
+    category_id: route.params.id,
+    page: pageNumber,
+    cities: selectedCity.value || [],
+    activities: selectedActivity.value || [],
+    name: searchQuery.value.trim() || null, // ✅ ترميز النص
+  };
+
+  console.log("🔍 Sending request with params:", params); // ✅ Debugging
+
   globalLoading.value = true;
   try {
     await fetchData({
       url: `api/user/providers`,
-      params: { category_id: route.params.id, page: pageNumber },
+      params,
       onSuccess: () => {
+        console.log("✅ Response received:", resultData.value); // ✅ Debugging
         list_provider.value = resultData.value.data;
         pagination.value = resultData?.value?.pagination || {};
         pagination.value.current_page = pageNumber;
@@ -252,8 +268,13 @@ const getProvider = async (pageNumber = 1) => {
       },
     });
   } catch (error) {
-    console.error("❌ Error fetching banners:", error);
+    console.error("❌ Error fetching providers:", error);
+    globalLoading.value = false;
   }
+};
+
+const fetchProviders = () => {
+  getProvider(1); // تحميل البيانات عند البحث مع تصفير الصفحة
 };
 
 const onPageChange = (event) => {
@@ -273,13 +294,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* تخصيص الـ Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 8px; /* حجم الـ scrollbar */
+  width: 8px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #f1f1f1; /* لون خلفية التراك */
+  background: #f1f1f1;
   border-radius: 4px;
 }
 
