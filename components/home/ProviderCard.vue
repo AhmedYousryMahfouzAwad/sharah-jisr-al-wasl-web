@@ -42,8 +42,11 @@
           </div>
         </div>
 
-        <div class="bg-[#DEDEDE] p-2">
+        <div v-show="!is_favored" class="bg-[#DEDEDE] p-2">
           <img src="/Icon.svg" alt="icon" class="w-10 h-5" srcset="" />
+        </div>
+        <div v-show="is_favored" class="bg-[#FEE4E2] p-2">
+          <img src="/favourite.svg" alt="icon" class="w-10 h-5" srcset="" />
         </div>
       </div>
       <div class="mt-4">
@@ -71,8 +74,6 @@
 import Vue3StarRatings from "vue3-star-ratings";
 const { t, locale } = useI18n();
 
-const { toggleFavorite, findIdx } = useFavoritesStore();
-
 defineProps({
   image: {
     type: String,
@@ -96,28 +97,12 @@ defineProps({
     type: [String, Object],
     required: true,
   },
+  is_favored: {
+    type: Boolean,
+  },
 });
 
 const currentLang = computed(() => locale.value);
-
-const toggle = async () => {
-  if (isAuth.value) {
-    try {
-      if (findIdx(products_details?.id) === -1) {
-        isAddingToFavorites.value = true; // Start loading for add
-        await toggleFavorite(route.params.details);
-      } else {
-        isAddingToFavorites.value = true; // Start loading for add
-
-        await toggleFavorite(route.params.details);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      isAddingToFavorites.value = false; // Stop loading
-    }
-  }
-};
 </script>
 
 <style scoped>

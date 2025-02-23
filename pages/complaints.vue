@@ -36,32 +36,50 @@
               <div class="card">
                 <!-- Tab Content -->
                 <div class="p-4">
-                  <div class="grid grid-cols-12 gap-2">
+                  <!-- Sub-tabs -->
+                  <div
+                    class="grid grid-cols-12 w-full rounded-full bg-primary-2 p-1 mb-4"
+                  >
+                    <!--   Individual -->
                     <button
-                      v-for="category in list_categories"
-                      :key="category.id"
                       type="button"
-                      @click="changeCategory(category.id)"
-                      :class="{
-                        'bg-primary-1 text-white': activeSubTab === category.id,
-                        'bg-primary-2 text-gray-600':
-                          activeSubTab !== category.id,
-                      }"
+                      @click="activeSubTab = 'contracting_companies'"
+                      :class="
+                        activeSubTab === 'contracting_companies'
+                          ? 'bg-primary-1 text-white'
+                          : 'bg-primary-2 text-gray-600'
+                      "
                       class="col-span-4 text-center text-sm font-bold rounded-full py-2"
                     >
-                      {{ category.name }}
+                      {{ t("pages.contracting_companies") }}
                     </button>
 
-                    <HomeProviderCard
-                      v-for="favorite in list_favorite"
-                      :key="favorite.id"
-                      :image="favorite.image"
-                      :name="favorite.name"
-                      :address="favorite.map_desc"
-                      :city="favorite.city"
-                      :rating="parseFloat(favorite.rate_avg)"
-                      :id="favorite.id"
-                    />
+                    <!-- Sub-tab: Company -->
+                    <button
+                      type="button"
+                      @click="activeSubTab = 'building_materials_companies'"
+                      :class="
+                        activeSubTab === 'building_materials_companies'
+                          ? 'bg-primary-1 text-white'
+                          : 'bg-pr-200 text-gray-600'
+                      "
+                      class="col-span-4 text-sm text-center font-bold rounded-full py-2"
+                    >
+                      {{ t("pages.building_materials_companies") }}
+                    </button>
+
+                    <button
+                      type="button"
+                      @click="activeSubTab = 'offices_companies'"
+                      :class="
+                        activeSubTab === 'offices_companies'
+                          ? 'bg-primary-1 text-white'
+                          : 'bg-pr-200 text-gray-600'
+                      "
+                      class="col-span-4 text-sm text-center font-bold rounded-full py-2"
+                    >
+                      {{ t("pages.offices") }}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -74,23 +92,31 @@
 </template>
 <script setup>
 const { fetchData, resultData } = useFetchData();
-const { list_categories } = storeToRefs(useCountries());
-const { getCategories } = useCountries();
-
+import * as yup from "yup";
 // i18n
 const { t } = useI18n();
+const available_balance = ref("");
 const loading = ref(true);
-const list_favorite = ref([]);
-const activeSubTab = ref(
-  list_categories.value.length ? list_categories.value[0].id : null
-);
+const loading_btn = ref(false);
+const visible = ref(false);
+const balance = ref(null);
+const activeSubTab = ref("contracting_companies");
 
-const getFavorites = async () => {
+const validationSchema = yup.object({
+  balance: yup.string().required(t("validation.required")),
+});
+
+// Set up the form with VeeValidate
+const { handleSubmit } = useForm({
+  validationSchema,
+});
+
+const wallet = async () => {
   try {
     await fetchData({
-      url: `api/user/favorites/${activeSubTab.value}`,
+      url: `api/wallets/show`,
       onSuccess: () => {
-        list_favorite.value = resultData.value.data ?? [];
+        available_balance.value = resultData.value.available_balance ?? 0;
       },
     });
   } catch (error) {
@@ -102,30 +128,33 @@ const getFavorites = async () => {
 
 onMounted(async () => {
   try {
-    await getCategories();
-    await getFavorites();
-    if (list_categories.value.length) {
-      activeSubTab.value = list_categories.value[0].id;
-    }
+    await wallet();
   } finally {
     loading.value = false; // Hide loading state after data is fetched
   }
 });
 
-watch(
-  list_categories,
-  (newList) => {
-    if (!activeSubTab.value && newList.length) {
-      activeSubTab.value = newList[0].id;
-    }
-  },
-  { immediate: true } // يتم تنفيذها مباشرةً عند التشغيل
-);
+const submit = handleSubmit(async () => {
+  const payload = { balance: balance.value, brand_id: 2 };
+  try {
+    loading_btn.value = true;
+    await fetchData({
+      url: `api/wallets/charge`,
+      method: "POST",
+      body: payload,
+      getSuccess: true,
 
-const changeCategory = async (categoryId) => {
-  activeSubTab.value = categoryId;
-  await getFavorites(); // جلب البيانات للتصنيف الجديد
-};
+      onSuccess: () => {
+        visible.value = false;
+        balance.value = null;
+      },
+    });
+  } catch (error) {
+    console.error("❌ Error fetching banners:", error);
+  } finally {
+    loading_btn.value = false;
+  }
+});
 </script>
 
 <style scoped>
@@ -222,14 +251,5 @@ input:focus,
 select:focus {
   outline: none;
   border-color: #4299e1;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>
