@@ -162,7 +162,9 @@
               :address="provider.map_desc"
               :city="provider.city"
               :rating="parseFloat(provider.rate_avg)"
+              :is_favored="provider.is_favored"
               :id="provider.id"
+              @toggle-favorite="handleToggleFavorite"
               :to="
                 localeRoute({
                   name: 'show-id',
@@ -285,7 +287,23 @@ const onPageChange = (event) => {
   getProvider(page.value);
 };
 
-// onMounted(getBanner, getProvider);
+const handleToggleFavorite = async (providerId) => {
+  try {
+    const provider = list_provider.value.find((p) => p.id === providerId);
+    if (!provider) return;
+    await fetchData({
+      url: `/api/user/favorites/toggle/${providerId}`,
+      method: "post",
+      getSuccess: true,
+      onSuccess: () => {
+        provider.is_favored = !provider.is_favored; // ✅ يعكس الحالة بعد نجاح الطلب
+      },
+    });
+  } catch (error) {
+    console.error("❌ Error fetching banners:", error);
+  }
+};
+
 onMounted(() => {
   getProvider();
   getBanner();

@@ -32,26 +32,45 @@
               </div>
             </div>
 
-            <div>
-              <div class="card">
-                <!-- Tab Content -->
-                <div class="p-4">
-                  <div class="grid grid-cols-12 gap-2">
-                    <button
-                      v-for="category in list_categories"
-                      :key="category.id"
-                      type="button"
-                      @click="changeCategory(category.id)"
-                      :class="{
-                        'bg-primary-1 text-white': activeSubTab === category.id,
-                        'bg-primary-2 text-gray-600':
-                          activeSubTab !== category.id,
-                      }"
-                      class="col-span-4 text-center text-sm font-bold rounded-full py-2"
-                    >
-                      {{ category.name }}
-                    </button>
+            <div class="card">
+              <!-- Tab Content -->
+              <div class="p-4">
+                <!-- Category Tabs -->
+                <div class="grid grid-cols-12 gap-2">
+                  <button
+                    v-for="category in list_categories"
+                    :key="category.id"
+                    type="button"
+                    @click="changeCategory(category.id)"
+                    :class="{
+                      'bg-primary-1 text-white': activeSubTab === category.id,
+                      'bg-primary-2 text-gray-600':
+                        activeSubTab !== category.id,
+                    }"
+                    class="col-span-6 md:col-span-4 lg:col-span-3 text-center text-sm font-bold rounded-full py-2"
+                  >
+                    {{ category.name }}
+                  </button>
+                </div>
 
+                <!-- Content Section -->
+                <div class="grid grid-cols-12 gap-2 mt-4">
+                  <!-- Skeleton Loader when Loading -->
+                  <template v-if="loading">
+                    <div
+                      v-for="n in 6"
+                      :key="n"
+                      class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4 bg-white rounded-lg shadow animate-pulse p-4"
+                    >
+                      <div class="h-40 bg-gray-300 rounded"></div>
+                      <div class="mt-4 h-4 bg-gray-300 rounded w-3/4"></div>
+                      <div class="mt-2 h-4 bg-gray-200 rounded w-1/2"></div>
+                      <div class="mt-2 h-4 bg-gray-200 rounded w-1/3"></div>
+                    </div>
+                  </template>
+
+                  <!-- Data Found -->
+                  <template v-else-if="list_favorite.length > 0">
                     <HomeProviderCard
                       v-for="favorite in list_favorite"
                       :key="favorite.id"
@@ -61,7 +80,17 @@
                       :city="favorite.city"
                       :rating="parseFloat(favorite.rate_avg)"
                       :id="favorite.id"
+                      :is_favored="favorite.is_favored"
+                      class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4"
                     />
+                  </template>
+
+                  <!-- No Data Found -->
+                  <div
+                    v-else
+                    class="col-span-12 text-center text-gray-500 text-sm font-semibold mt-5"
+                  >
+                    {{ t("pages.no_favorites_found") }}
                   </div>
                 </div>
               </div>
@@ -86,6 +115,7 @@ const activeSubTab = ref(
 );
 
 const getFavorites = async () => {
+  loading.value = true; // بداية التحميل
   try {
     await fetchData({
       url: `api/user/favorites/${activeSubTab.value}`,
@@ -94,9 +124,9 @@ const getFavorites = async () => {
       },
     });
   } catch (error) {
-    console.error("❌ Error fetching banners:", error);
+    console.error("❌ Error fetching favorites:", error);
   } finally {
-    loading.value = false;
+    loading.value = false; // إيقاف التحميل بعد جلب البيانات
   }
 };
 

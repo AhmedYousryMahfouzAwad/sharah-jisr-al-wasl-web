@@ -26,7 +26,6 @@
               :border-color="'#FFDB00'"
               :star-size="15"
             />
-
             <span class="text-sm text-gray-600">({{ rating }})</span>
           </div>
 
@@ -42,13 +41,27 @@
           </div>
         </div>
 
-        <div v-show="!is_favored" class="bg-[#DEDEDE] p-2">
-          <img src="/Icon.svg" alt="icon" class="w-10 h-5" srcset="" />
-        </div>
-        <div v-show="is_favored" class="bg-[#FEE4E2] p-2">
-          <img src="/favourite.svg" alt="icon" class="w-10 h-5" srcset="" />
+        <div>
+          <!-- زر الإضافة للمفضلة -->
+          <button
+            v-if="!is_favored"
+            class="bg-[#DEDEDE] p-2 transition-all duration-200"
+            @click.prevent="$emit('toggle-favorite', id)"
+          >
+            <img src="/Icon.svg" alt="icon" class="w-10 h-5" />
+          </button>
+
+          <!-- زر إزالة من المفضلة -->
+          <button
+            v-if="is_favored"
+            class="bg-[#FEE4E2] p-2 transition-all duration-200"
+            @click.prevent="$emit('toggle-favorite', id)"
+          >
+            <img src="/favourite_active.svg" alt="icon" class="w-10 h-5" />
+          </button>
         </div>
       </div>
+
       <div class="mt-4">
         <NuxtLink class="flex justify-end items-center space-x-2 gap-2">
           <p class="my-2 !text-xs !text-start !text-primary-1 font-bold">
@@ -75,31 +88,17 @@ import Vue3StarRatings from "vue3-star-ratings";
 const { t, locale } = useI18n();
 
 defineProps({
-  image: {
-    type: String,
-  },
-  name: {
-    type: String,
-  },
-  rating: {
-    type: [Number, String],
-  },
-  city: {
-    type: String,
-  },
-  address: {
-    type: String,
-  },
-  id: {
-    type: [String, Number],
-  },
+  image: String,
+  name: String,
+  rating: [Number, String],
+  city: String,
+  address: String,
+  id: [String, Number],
   to: {
     type: [String, Object],
     required: true,
   },
-  is_favored: {
-    type: Boolean,
-  },
+  is_favored: Boolean,
 });
 
 const currentLang = computed(() => locale.value);
