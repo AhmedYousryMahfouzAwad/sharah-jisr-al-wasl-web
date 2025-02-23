@@ -41,6 +41,7 @@
             </div>
           </div>
         </div>
+
         <div class="bg-[#DEDEDE] p-2">
           <img src="/Icon.svg" alt="icon" class="w-10 h-5" srcset="" />
         </div>
@@ -70,6 +71,8 @@
 import Vue3StarRatings from "vue3-star-ratings";
 const { t, locale } = useI18n();
 
+const { toggleFavorite, findIdx } = useFavoritesStore();
+
 defineProps({
   image: {
     type: String,
@@ -96,6 +99,25 @@ defineProps({
 });
 
 const currentLang = computed(() => locale.value);
+
+const toggle = async () => {
+  if (isAuth.value) {
+    try {
+      if (findIdx(products_details?.id) === -1) {
+        isAddingToFavorites.value = true; // Start loading for add
+        await toggleFavorite(route.params.details);
+      } else {
+        isAddingToFavorites.value = true; // Start loading for add
+
+        await toggleFavorite(route.params.details);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      isAddingToFavorites.value = false; // Stop loading
+    }
+  }
+};
 </script>
 
 <style scoped>

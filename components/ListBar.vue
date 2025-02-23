@@ -119,6 +119,23 @@
               class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
             />
           </SliderBar>
+          <SliderBar
+            :is-active="
+              route.path === '/favorite' || route.path === '/en/favorite'
+            "
+            :to="localePath({ name: 'favorite' })"
+            @click="closeSidebar"
+            :title="t('pages.favorite')"
+            class="hover:bg-primary-3 bg-primary-3 rounded-lg hover:rounded-lg hover:text-gray-800 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+          >
+            <IconsFavourtieIcon
+              :is-active="
+                route.path === '/favorite' || route.path === '/en/favorite'
+              "
+              :to="localePath('/favorite')"
+              class="hover:text-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105"
+            />
+          </SliderBar>
 
           <!-- <SliderBar
             v-if="isAuth"

@@ -128,7 +128,7 @@
                     name="activity"
                     :value="activity.id"
                   />
-                  <label :for="city.id">{{ activity.name }}</label>
+                  <label :for="activity.id">{{ activity.name }}</label>
                 </div>
               </div>
             </div>
@@ -203,6 +203,7 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script setup>
@@ -223,7 +224,7 @@ const localeRoute = useLocaleRoute();
 
 const pagination = ref({
   total_items: 0,
-  per_page: 20,
+  per_page: 10,
   total_pages: 1,
   current_page: 1,
 });
@@ -246,7 +247,7 @@ const getBanner = async () => {
 const getProvider = async (pageNumber = 1) => {
   const params = {
     category_id: route.params.id,
-    page: pageNumber,
+    paginate: pageNumber,
     cities: selectedCity.value || [],
     activities: selectedActivity.value || [],
     name: searchQuery.value.trim() || null, // ✅ ترميز النص

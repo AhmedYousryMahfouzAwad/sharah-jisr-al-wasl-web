@@ -105,6 +105,52 @@
             <span class="px-2 text-start">{{ day.end_time }}</span>
           </p>
         </div>
+
+        <div
+          class="bg-[#f9f6f3] p-6 rounded-lg my-2 shadow-lg w-full max-w-4xl mx-auto"
+        >
+          <!-- Header -->
+          <div class="flex justify-start mb-4">
+            <p class="text-lg text-start font-bold text-gray-800">
+              معرض الصور للأعمال السابقة
+            </p>
+          </div>
+
+          <!-- Image Carousel -->
+
+          <Carousel
+            :value="images"
+            :numVisible="2"
+            :numScroll="1"
+            :circular="true"
+            :autoplayInterval="3000"
+            class="rounded-lg overflow-hidden custom-carousel"
+          >
+            <!-- Slot for individual carousel item -->
+            <template #item="slotProps">
+              <div class="p-1">
+                <img
+                  :src="slotProps.data.image"
+                  class="rounded-lg object-cover w-full h-48"
+                />
+              </div>
+            </template>
+
+            <!-- Custom Previous Arrow -->
+            <template #previousicon>
+              <div class="custom-arrow">
+                <i class="pi pi-chevron-left"></i>
+              </div>
+            </template>
+
+            <!-- Custom Next Arrow -->
+            <template #nexticon>
+              <div class="custom-arrow">
+                <i class="pi pi-chevron-right"></i>
+              </div>
+            </template>
+          </Carousel>
+        </div>
       </div>
 
       <div class="col-span-12 md:col-span-5">
@@ -113,10 +159,8 @@
             {{ t("pages.rate_company") }}
           </p>
           <div>
-            <!-- تقييم النجوم -->
             <Rating v-model="rate" />
 
-            <!-- إضافة Transition للزر -->
             <transition name="fade-scale">
               <ButtonAuth
                 v-if="rate >= 1 && rate <= 5"
@@ -147,7 +191,7 @@
           </p>
           <div class="flex items-center space-x-2 gap-x-2">
             <img src="/map_provider.svg" alt="icon" class="w-4 h-4" />
-            <p class="font-semibold text-sm">
+            <p class="font-semibold text-xs">
               <template
                 v-if="
                   provider_obj.map_desc && provider_obj.lat && provider_obj.lng
@@ -157,7 +201,7 @@
                   :href="`https://www.google.com/maps?q=${provider_obj.lat},${provider_obj.lng}`"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-xs sm:text-sm font-semibold"
+                  class="text-xs font-semibold"
                 >
                   {{ provider_obj.map_desc }}
                 </a>
@@ -170,11 +214,11 @@
 
           <div class="flex items-center space-x-2 gap-x-2">
             <img src="/call.svg" alt="icon" class="w-4 h-4" />
-            <p class="font-semibold text-sm">
+            <p class="font-semibold text-xs">
               <template v-if="provider_obj && provider_obj.phone">
                 <a
                   :href="`tel:${provider_obj.phone}`"
-                  class="text-sm font-semibold flex"
+                  class="text-xs font-semibold flex"
                 >
                   {{ provider_obj.phone }}
                 </a>
@@ -192,24 +236,45 @@
         </div>
       </div>
     </div>
+
+    <BaseDialog v-model:visible="visible" class="w-full max-w-xl mx-2">
+      <template #content>
+        <img
+          src="/animation.gif"
+          alt="animation_image"
+          class="mx-auto justify-center w-[50%] items-center flex"
+        />
+        <span
+          class="text-surface-500 text-center font-bold dark:text-surface-400 block mb-8 mx-auto"
+        >
+          {{ resMsg }}
+        </span>
+      </template>
+    </BaseDialog>
   </div>
+  <Footer />
 </template>
 
 <script setup>
 import { ref, watchEffect } from "vue";
-const { fetchData, resultData } = useFetchData();
+const { fetchData, resultData, resMsg } = useFetchData();
 
+import Carousel from "primevue/carousel";
 import Vue3StarRatings from "vue3-star-ratings";
 import Image from "primevue/image";
 
 const route = useRoute();
 const { t, locale } = useI18n();
 
+//state
 const provider_obj = ref({});
 const isLoading = ref(true);
 const submitLoading = ref(false);
 const rate = ref(0);
+const visible = ref(false);
+const images = ref([]);
 
+//methods
 const getProvider = async () => {
   isLoading.value = true;
   try {
@@ -217,6 +282,7 @@ const getProvider = async () => {
       url: `api/user/providers/${route.params.id}`,
       onSuccess: () => {
         provider_obj.value = resultData.value || {};
+        images.value = resultData.value.images || [];
       },
     });
   } catch (error) {
@@ -229,16 +295,30 @@ const getProvider = async () => {
 const submitRating = async () => {
   submitLoading.value = true;
 
-  const params = {
-    rateable_id: route.params.id,
+  const payload = {
+    rateable_id: provider_obj.value.id,
     rate: rate.value,
   };
+
   try {
     await fetchData({
       url: "api/user/providers/rate",
-      method: "POST", // تأكد من استخدام POST
-      params,
-      getSuccess: true,
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json" },
+
+      onSuccess: () => {
+        visible.value = true;
+
+        setTimeout(() => {
+          visible.value = false;
+          rate.value = 0;
+        }, 1000);
+      },
+
+      onError: () => {
+        visible.value = false;
+      },
     });
 
     console.log("✅ Rating submitted successfully!");
@@ -249,14 +329,12 @@ const submitRating = async () => {
   }
 };
 
-// إعادة تحميل البيانات عند تغيير اللغة
 watchEffect(() => {
   getProvider();
 });
 </script>
 
 <style scoped>
-/* تحريك Fade In + Scale عند الظهور */
 .fade-scale-enter-active {
   transition: all 0.3s ease-out;
 }
@@ -269,7 +347,6 @@ watchEffect(() => {
   transform: scale(1);
 }
 
-/* تحريك Fade Out عند الإخفاء */
 .fade-scale-leave-active {
   transition: all 0.2s ease-in;
 }
@@ -280,5 +357,67 @@ watchEffect(() => {
 .fade-scale-leave-to {
   opacity: 0;
   transform: scale(0.9);
+}
+
+.card {
+  @apply max-w-[1200px] mx-auto py-4;
+}
+
+/* ::v-deep([dir="ltr"] .p-button .p-button-icon) {
+  transform: rotate(180deg);
+} */
+</style>
+
+<style>
+.p-button.p-button-icon-only {
+  @apply rtl:-scale-x-100;
+}
+
+.custom-arrow {
+  width: 36px;
+  height: 36px;
+  background-color: #e8d9c6; /* Beige color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.custom-arrow i {
+  font-size: 16px;
+  color: #4a4033; /* Darker arrow icon */
+}
+
+.custom-arrow:hover {
+  background-color: #dccbb4; /* Darker beige on hover */
+  transform: scale(1.05); /* Subtle zoom effect */
+}
+
+/* Position arrows in bottom-right */
+.custom-carousel .p-carousel-prev,
+.custom-carousel .p-carousel-next {
+  position: absolute;
+  bottom: 10px; /* Adjust as needed */
+  right: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+/* Align arrows horizontally */
+.custom-carousel .p-carousel-prev {
+  margin-right: 42px; /* Space between left & right arrow */
+}
+
+/* RTL Support */
+[dir="rtl"] .custom-carousel .p-carousel-prev {
+  margin-right: 0;
+  margin-left: 42px;
+}
+
+[dir="rtl"] .custom-carousel .p-carousel-next {
+  margin-left: 0;
 }
 </style>

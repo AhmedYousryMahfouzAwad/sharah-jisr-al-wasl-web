@@ -8,7 +8,11 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "offices": "Engineering consultancy offices",
+    "check_companies": "Check out the preferred companies from here.",
+    "favorite": "Favorite",
     "activities": "Activities Types",
+    "submit_rating": "Submit Rating",
     "desc": "  Description  ",
     "working_hours": "   Working Hours  ",
     "rate_company": "   Rate Company ",

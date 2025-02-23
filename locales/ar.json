@@ -9,9 +9,11 @@
   },
   "pages": {
     "activities": "أنواع النشاط",
+    "offices": " مكاتب الاستشارات الهندسية  ",
     "desc": " الوصف  ",
+    "favorite": " المفضلة",
     "submit_rating": " ارسال التقييم ",
-
+    "check_companies": "اطلع على الشركات المفضلة من هنا",
     "send_request_price": " إرسال طلب عرض سعر ",
     "rate_company": "  تقييم الشركة       ",
     "contact_information_desc": "بيانات التواصل",

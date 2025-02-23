@@ -13,41 +13,26 @@ export const useFavoritesStore = defineStore("favorites", () => {
   });
   // router
   const localePath = useLocalePath();
-  const router = useRouter();
-  const getFavorites = async (page = 1) => {
-    await fetchData({
-      url: `user/all-favorites`,
-      params: {
-        page: page,
-      },
-      onSuccess: () => {
-        favorites.value = resultData.value.data || [];
-        pagination.value = resultData?.value?.pagination || {};
-        pagination.value.current_page = page;
-      },
-    });
-  };
+  const route = useRoute();
 
-  const toggleFavorite = async (payload) => {
+  // const getFavorites = async (page = 1) => {
+  //   await fetchData({
+  //     url: `api/user/favorites`,
+  //     params: {
+  //       page: page,
+  //     },
+  //     onSuccess: () => {
+  //       favorites.value = resultData.value.data || [];
+  //       pagination.value = resultData?.value?.pagination || {};
+  //       pagination.value.current_page = page;
+  //     },
+  //   });
+  // };
+
+  const toggleFavorite = async () => {
     await fetchData({
-      url: `user/favorite`,
+      url: `api/user/favorites/toggle/${route.params.id}`,
       method: "post",
-      body: { product_id: payload },
-
-      onSuccess: async () => {
-        visible_sure_add_favorite.value = true;
-        setTimeout(() => {
-          visible_sure_add_favorite.value = false;
-        }, 1000);
-        setTimeout(async () => {
-          await getFavorites();
-          router.push(localePath("/"));
-        }, 1200);
-      },
-      getSuccess: true,
-      onError: () => {
-        visible_sure_add_favorite.value = false;
-      },
     });
   };
 
@@ -74,7 +59,7 @@ export const useFavoritesStore = defineStore("favorites", () => {
     visible_sure_add_favorite,
     pagination,
     //ACTIONS
-    getFavorites,
+    // getFavorites,
     toggleFavorite,
     findIdx,
   };
