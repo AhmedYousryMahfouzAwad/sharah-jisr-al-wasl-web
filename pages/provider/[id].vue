@@ -217,7 +217,7 @@ const banner = ref(null);
 const list_provider = ref([]);
 const { t } = useI18n();
 const page = ref(1);
-const globalLoading = ref(false);
+const globalLoading = ref(true);
 const checked = ref(false);
 const selectedCity = ref(null);
 const selectedActivity = ref(null);
@@ -249,7 +249,7 @@ const getBanner = async () => {
 const getProvider = async (pageNumber = 1) => {
   const params = {
     category_id: route.params.id,
-    paginate: pageNumber,
+    page: pageNumber,
     cities: selectedCity.value || [],
     activities: selectedActivity.value || [],
     name: searchQuery.value.trim() || null, // ✅ ترميز النص
@@ -296,7 +296,7 @@ const handleToggleFavorite = async (providerId) => {
       method: "post",
       getSuccess: true,
       onSuccess: () => {
-        provider.is_favored = !provider.is_favored; // ✅ يعكس الحالة بعد نجاح الطلب
+        provider.is_favored = !provider.is_favored;
       },
     });
   } catch (error) {

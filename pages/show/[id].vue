@@ -52,8 +52,41 @@
         />
         <div class="justify-between items-center flex mt-2">
           <p class="font-bold">{{ provider_obj.name }}</p>
-          <div class="bg-[#FEE4E2] p-2">
+          <!-- <div class="bg-[#FEE4E2] p-2">
             <img src="/Icon.svg" alt="icon" class="w-5 h-5" />
+          </div> -->
+
+          <div class="flex-shrink-0">
+            <button
+              @click="handleToggleFavorite"
+              v-if="!provider_obj.is_favored"
+              :disabled="isFavoriteLoading"
+              class="bg-[#DEDEDE] p-2 transition-all duration-200 flex justify-center items-center"
+            >
+              <span
+                v-if="isFavoriteLoading"
+                class="animate-spin border-2 border-gray-500 border-t-transparent rounded-full w-5 h-5"
+              ></span>
+              <img v-else src="/Icon.svg" alt="icon" class="w-5 h-5" />
+            </button>
+
+            <button
+              @click="handleToggleFavorite"
+              v-if="provider_obj.is_favored"
+              :disabled="isFavoriteLoading"
+              class="bg-[#FEE4E2] p-2 transition-all duration-200 flex justify-center items-center"
+            >
+              <span
+                v-if="isFavoriteLoading"
+                class="animate-spin border-2 border-red-500 border-t-transparent rounded-full w-5 h-5"
+              ></span>
+              <img
+                v-else
+                src="/favourite_active.svg"
+                alt="icon"
+                class="w-5 h-5"
+              />
+            </button>
           </div>
         </div>
 
@@ -265,6 +298,7 @@ import Image from "primevue/image";
 
 const route = useRoute();
 const { t, locale } = useI18n();
+const isFavoriteLoading = ref(false);
 
 //state
 const provider_obj = ref({});
@@ -332,6 +366,27 @@ const submitRating = async () => {
 watchEffect(() => {
   getProvider();
 });
+
+const handleToggleFavorite = async () => {
+  if (isFavoriteLoading.value) return; // ❌ منع النقر أثناء التحميل
+
+  isFavoriteLoading.value = true; // ⏳ تفعيل التحميل عند الضغط
+
+  try {
+    await fetchData({
+      url: `/api/user/favorites/toggle/${provider_obj.value.id}`,
+      method: "post",
+      getSuccess: true,
+      onSuccess: () => {
+        provider_obj.value.is_favored = !provider_obj.value.is_favored; // ✅ تحديث الحالة بعد نجاح الطلب
+      },
+    });
+  } catch (error) {
+    console.error("❌ Error toggling favorite:", error);
+  } finally {
+    isFavoriteLoading.value = false; // ⏳ إيقاف التحميل بعد انتهاء الطلب
+  }
+};
 </script>
 
 <style scoped>

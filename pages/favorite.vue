@@ -1,96 +1,120 @@
 <template>
   <!-- Main Content -->
-  <div
-    class="grid grid-cols-12 lg:container !mx-auto justify-center items-start"
-  >
-    <div class="lg:col-span-3 md:col-span-5 col-span-1 mx-5 my-5">
+  <div class="grid grid-cols-12 lg:container !mx-auto items-start">
+    <div class="lg:col-span-3 md:col-span-5 col-span-1 px-2 my-5">
       <ListBar />
     </div>
-    <div class="lg:col-span-9 md:col-span-7 col-span-11 my-5">
-      <div class="text-start space-y-10 mt-8 w-full">
+
+    <div
+      class="lg:col-span-9 md:col-span-7 col-span-11 flex items-start px-2 my-5"
+    >
+      <div class="text-start space-y-10 mt-8 justify-start items-start w-full">
         <!-- Card Container -->
-        <div class="flex justify-start items-center">
+        <div class="flex justify-start items-start">
           <div class="bg-white shadow-2xl rounded-xl p-4 w-full max-w-3xl">
             <!-- Header Section -->
-            <div class="flex items-center justify-between border-b pb-4">
-              <div class="flex items-center gap-x-2">
-                <div
-                  class="relative p-2 rounded-full bg-primary-2 cursor-pointer"
-                >
-                  <img
-                    src="/favourite.svg"
-                    alt="favorite"
-                    class="w-6 h-6 rounded-full object-cover"
-                  />
-                </div>
-                <div>
-                  <p class="font-bold text-sm">{{ t("pages.favorite") }}</p>
-                  <p class="font-semibold text-xs text-gray-700">
-                    {{ t("pages.check_companies") }}
-                  </p>
-                </div>
+
+            <div class="flex items-start gap-x-2">
+              <div
+                class="relative p-2 rounded-full bg-primary-2 cursor-pointer"
+              >
+                <img
+                  src="/favourite.svg"
+                  alt="favorite"
+                  class="w-6 h-6 rounded-full object-cover"
+                />
+              </div>
+              <div>
+                <p class="font-bold text-sm">{{ t("pages.favorite") }}</p>
+                <p class="font-semibold text-xs text-gray-700">
+                  {{ t("pages.check_companies") }}
+                </p>
               </div>
             </div>
 
-            <div class="card">
-              <!-- Tab Content -->
-              <div class="p-4">
-                <!-- Category Tabs -->
-                <div class="grid grid-cols-12 gap-2">
-                  <button
-                    v-for="category in list_categories"
-                    :key="category.id"
-                    type="button"
-                    @click="changeCategory(category.id)"
-                    :class="{
-                      'bg-primary-1 text-white': activeSubTab === category.id,
-                      'bg-primary-2 text-gray-600':
-                        activeSubTab !== category.id,
-                    }"
-                    class="col-span-6 md:col-span-4 lg:col-span-3 text-center text-sm font-bold rounded-full py-2"
+            <!-- Tab Content -->
+            <div class="p-2">
+              <!-- Category Tabs -->
+              <div
+                class="grid grid-cols-12 w-full rounded-full lg:bg-primary-2 bg-transparent p-1"
+              >
+                <button
+                  v-for="category in list_categories"
+                  :key="category.id"
+                  type="button"
+                  @click="changeCategory(category.id)"
+                  :class="{
+                    'bg-primary-1 text-white': activeSubTab === category.id,
+                  }"
+                  class="col-span-12 md:col-span-4 lg:col-span-4 text-center text-sm font-bold rounded-full py-2"
+                >
+                  {{ category.name }}
+                </button>
+              </div>
+
+              <!-- Content Section -->
+              <div class="grid grid-cols-12 gap-2 mt-4">
+                <!-- Skeleton Loader when Loading -->
+                <template v-if="loading">
+                  <div
+                    v-for="n in 6"
+                    :key="n"
+                    class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4 bg-white rounded-lg shadow animate-pulse p-4"
                   >
-                    {{ category.name }}
-                  </button>
+                    <div class="h-40 bg-gray-300 rounded"></div>
+                    <div class="mt-4 h-4 bg-gray-300 rounded w-3/4"></div>
+                    <div class="mt-2 h-4 bg-gray-200 rounded w-1/2"></div>
+                    <div class="mt-2 h-4 bg-gray-200 rounded w-1/3"></div>
+                  </div>
+                </template>
+
+                <!-- Data Found -->
+                <template v-else-if="list_favorite.length > 0">
+                  <HomeProviderCard
+                    v-for="favorite in list_favorite"
+                    :key="favorite.id"
+                    :image="favorite.image"
+                    :name="favorite.name"
+                    :address="favorite.map_desc"
+                    :city="favorite.city"
+                    :rating="parseFloat(favorite.rate_avg)"
+                    :id="favorite.id"
+                    :is_favored="favorite.is_favored"
+                    @toggle-favorite="handleToggleFavorite"
+                    :loadingFavoriteId="loadingFavoriteId"
+                    :to="toRoute(favorite.id)"
+                    class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4"
+                  />
+                </template>
+
+                <!-- No Data Found -->
+                <div
+                  v-else
+                  class="col-span-12 text-center text-primary-1 text-sm font-semibold mt-5"
+                >
+                  <img
+                    src="/public/no_data.png"
+                    alt="not found"
+                    class="w-40 mx-auto"
+                    srcset=""
+                  />
+                  {{ t("pages.no_favorites") }}
                 </div>
 
-                <!-- Content Section -->
-                <div class="grid grid-cols-12 gap-2 mt-4">
-                  <!-- Skeleton Loader when Loading -->
-                  <template v-if="loading">
-                    <div
-                      v-for="n in 6"
-                      :key="n"
-                      class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4 bg-white rounded-lg shadow animate-pulse p-4"
-                    >
-                      <div class="h-40 bg-gray-300 rounded"></div>
-                      <div class="mt-4 h-4 bg-gray-300 rounded w-3/4"></div>
-                      <div class="mt-2 h-4 bg-gray-200 rounded w-1/2"></div>
-                      <div class="mt-2 h-4 bg-gray-200 rounded w-1/3"></div>
-                    </div>
-                  </template>
-
-                  <!-- Data Found -->
-                  <template v-else-if="list_favorite.length > 0">
-                    <HomeProviderCard
-                      v-for="favorite in list_favorite"
-                      :key="favorite.id"
-                      :image="favorite.image"
-                      :name="favorite.name"
-                      :address="favorite.map_desc"
-                      :city="favorite.city"
-                      :rating="parseFloat(favorite.rate_avg)"
-                      :id="favorite.id"
-                      :is_favored="favorite.is_favored"
-                      class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4"
-                    />
-                  </template>
-
-                  <!-- No Data Found -->
+                <!-- Pagination -->
+                <div class="!border-none mt-5">
                   <div
-                    v-else
-                    class="col-span-12 text-center text-gray-500 text-sm font-semibold mt-5"
+                    class="mt-5"
+                    v-if="!globalLoading && pagination.total_pages > 1"
                   >
-                    {{ t("pages.no_favorites_found") }}
+                    <Paginator
+                      :totalRecords="pagination.total_items"
+                      :rows="pagination.per_page"
+                      :first="
+                        (pagination.current_page - 1) * pagination.per_page
+                      "
+                      @page="onPageChange"
+                    />
                   </div>
                 </div>
               </div>
@@ -106,6 +130,22 @@ const { fetchData, resultData } = useFetchData();
 const { list_categories } = storeToRefs(useCountries());
 const { getCategories } = useCountries();
 
+const localeRoute = useLocaleRoute(); // ✅   setup()
+
+const toRoute = (id) => {
+  return localeRoute({
+    name: "show-id",
+    params: { id },
+  });
+};
+
+const pagination = ref({
+  total_items: 0,
+  per_page: 10,
+  total_pages: 1,
+  current_page: 1,
+});
+
 // i18n
 const { t } = useI18n();
 const loading = ref(true);
@@ -114,13 +154,19 @@ const activeSubTab = ref(
   list_categories.value.length ? list_categories.value[0].id : null
 );
 
-const getFavorites = async () => {
-  loading.value = true; // بداية التحميل
+const getFavorites = async (pageNumber) => {
+  loading.value = true;
   try {
     await fetchData({
       url: `api/user/favorites/${activeSubTab.value}`,
+      params: {
+        page: pageNumber,
+      },
       onSuccess: () => {
         list_favorite.value = resultData.value.data ?? [];
+        pagination.value = resultData?.value?.pagination || {};
+        pagination.value.current_page = pageNumber;
+        loading.value = false;
       },
     });
   } catch (error) {
@@ -155,6 +201,40 @@ watch(
 const changeCategory = async (categoryId) => {
   activeSubTab.value = categoryId;
   await getFavorites(); // جلب البيانات للتصنيف الجديد
+};
+
+const loadingFavoriteId = ref(null); // 🔄 Track which item is loading
+
+const handleToggleFavorite = async (providerId) => {
+  if (loadingFavoriteId.value === providerId) return; // ❌ Prevent multiple clicks
+
+  loadingFavoriteId.value = providerId; // ⏳ Set loading state
+
+  try {
+    await fetchData({
+      url: `/api/user/favorites/toggle/${providerId}`,
+      method: "post",
+      getSuccess: true,
+      onSuccess: async () => {
+        const favorite = list_favorite.value.find((p) => p.id === providerId);
+        if (favorite) {
+          favorite.is_favored = !favorite.is_favored; // ✅ Toggle state
+        }
+        await getFavorites(); // ✅ Refresh data
+      },
+    });
+  } catch (error) {
+    console.error("❌ Error toggling favorite:", error);
+  } finally {
+    loadingFavoriteId.value = null; // 🛑 Remove loading state
+  }
+};
+
+const onPageChange = (event) => {
+  if (!pagination.value || typeof event.page !== "number") return;
+
+  page.value = event.page + 1;
+  getFavorites(page.value);
 };
 </script>
 
@@ -261,5 +341,9 @@ select:focus {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.grid {
+  align-items: start;
 }
 </style>

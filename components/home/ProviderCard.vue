@@ -15,50 +15,64 @@
 
       <div class="pt-2 justify-between items-start flex">
         <div>
-          <h3 class="text-lg font-bold text-gray-900">{{ name }}</h3>
-
-          <div class="flex items-center space-x-2 mt-2">
-            <vue3-star-ratings
-              class="star-active"
-              :model-value="rating"
-              :inactive-color="'#BABABA'"
-              v-bind:active-color="'#facc15'"
-              :border-color="'#FFDB00'"
-              :star-size="15"
-            />
-            <span class="text-sm text-gray-600">({{ rating }})</span>
-          </div>
-
-          <div class="mt-3 space-y-2">
-            <div class="flex items-center space-x-2 gap-x-2">
-              <img src="/map_provider.svg" alt="icon" class="w-4 h-4" />
-              <p class="text-xs font-bold">{{ city }}</p>
-            </div>
-            <div class="flex items-start space-x-2 gap-x-2">
-              <img src="/map_provider.svg" alt="icon" class="w-4 h-4" />
-              <p class="text-xs font-bold">{{ address }}</p>
-            </div>
-          </div>
+          <h3 class="text-base font-bold text-gray-900">{{ name }}</h3>
         </div>
 
-        <div>
-          <!-- زر الإضافة للمفضلة -->
+        <div class="flex-shrink-0">
+          <!-- زر الإضافة إلى المفضلة -->
           <button
             v-if="!is_favored"
-            class="bg-[#DEDEDE] p-2 transition-all duration-200"
+            :disabled="loadingFavoriteId === id"
+            class="bg-[#DEDEDE] p-2 transition-all duration-200 flex justify-center items-center"
             @click.prevent="$emit('toggle-favorite', id)"
           >
-            <img src="/Icon.svg" alt="icon" class="w-10 h-5" />
+            <span
+              v-if="loadingFavoriteId === id"
+              class="animate-spin border-2 border-gray-500 border-t-transparent rounded-full w-5 h-5"
+            ></span>
+            <img v-else src="/Icon.svg" alt="icon" class="w-10 h-5" />
           </button>
 
-          <!-- زر إزالة من المفضلة -->
+          <!-- زر الإزالة من المفضلة -->
           <button
             v-if="is_favored"
-            class="bg-[#FEE4E2] p-2 transition-all duration-200"
+            :disabled="loadingFavoriteId === id"
+            class="bg-[#FEE4E2] p-2 transition-all duration-200 flex justify-center items-center"
             @click.prevent="$emit('toggle-favorite', id)"
           >
-            <img src="/favourite_active.svg" alt="icon" class="w-10 h-5" />
+            <span
+              v-if="loadingFavoriteId === id"
+              class="animate-spin border-2 border-red-500 border-t-transparent rounded-full w-5 h-5"
+            ></span>
+            <img
+              v-else
+              src="/favourite_active.svg"
+              alt="icon"
+              class="w-10 h-5"
+            />
           </button>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2 mt-1">
+        <vue3-star-ratings
+          class="star-active"
+          :model-value="rating"
+          :inactive-color="'#BABABA'"
+          v-bind:active-color="'#facc15'"
+          :border-color="'#FFDB00'"
+          :star-size="15"
+        />
+        <span class="text-sm text-gray-600">({{ rating }})</span>
+      </div>
+
+      <div class="mt-3 space-y-2">
+        <div class="flex items-center space-x-2 gap-x-2">
+          <img src="/map_provider.svg" alt="icon" class="w-4 h-4" />
+          <p class="text-xs font-bold">{{ city }}</p>
+        </div>
+        <div class="flex items-start space-x-2 gap-x-2">
+          <img src="/map_provider.svg" alt="icon" class="w-4 h-4" />
+          <p class="text-xs font-bold line-clamp-2">{{ address }}</p>
         </div>
       </div>
 
@@ -95,7 +109,7 @@ defineProps({
   address: String,
   id: [String, Number],
   to: {
-    type: [String, Object],
+    type: [String, Object, Function],
     required: true,
   },
   is_favored: Boolean,

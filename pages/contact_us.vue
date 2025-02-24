@@ -74,6 +74,7 @@ const our_section_request = async () => {
   try {
     await fetchData({
       url: `api/our_section`,
+
       onSuccess: () => {
         message.value = resultData.value.message ?? {};
         vision.value = resultData.value.vision ?? {};
