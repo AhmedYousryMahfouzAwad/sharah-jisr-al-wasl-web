@@ -8,6 +8,9 @@
     "warranty": "الضمان"
   },
   "pages": {
+    "previous_work": "معرض الصور للأعمال السابقة",
+    "complaint_number": " رقم الشكوى : ",
+    "complaint_created": "  تاريخ الشكوى : ",
     "activities": "أنواع النشاط",
     "offices": " مكاتب الاستشارات الهندسية  ",
     "desc": " الوصف  ",

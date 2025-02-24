@@ -124,6 +124,7 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 <script setup>
 const { fetchData, resultData } = useFetchData();
@@ -172,7 +173,7 @@ const getFavorites = async (pageNumber) => {
   } catch (error) {
     console.error("❌ Error fetching favorites:", error);
   } finally {
-    loading.value = false; // إيقاف التحميل بعد جلب البيانات
+    loading.value = false;
   }
 };
 
@@ -195,7 +196,7 @@ watch(
       activeSubTab.value = newList[0].id;
     }
   },
-  { immediate: true } // يتم تنفيذها مباشرةً عند التشغيل
+  { immediate: true }
 );
 
 const changeCategory = async (categoryId) => {

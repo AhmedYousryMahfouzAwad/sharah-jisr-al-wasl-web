@@ -45,9 +45,9 @@
         <HomeTitleFooter :src="'/footer_defult.png'" :title="t('pages.about_the_website')" />
         <HomeTitleFooter :src="'/footer_defult.png'" :title="t('pages.auth.terms')" />
         <HomeTitleFooter :src="'/footer_defult.png'" :title="t('pages.privacy_policy')" />
-        <HomeTitleFooter :src="'/footer_defult.png'" :title="t('pages.complaints_inquiries')" />
+      <NuxtLink :to="localeRoute({ name: 'complaints_inquiries'})"><HomeTitleFooter :src="'/footer_defult.png'" :title="t('pages.complaints_inquiries')" /></NuxtLink>  
 
-
+ 
                 </div>
 
 
@@ -131,6 +131,7 @@
 
 <script setup>
 const localeRoute = useLocaleRoute();
+
 const { t } = useI18n();
 
  

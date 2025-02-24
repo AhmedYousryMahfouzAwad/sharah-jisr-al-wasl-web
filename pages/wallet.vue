@@ -95,6 +95,7 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 <script setup>
 const { fetchData, resultData } = useFetchData();

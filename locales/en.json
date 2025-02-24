@@ -8,6 +8,10 @@
     "warranty": "Warranty"
   },
   "pages": {
+    "complaint_number": " Complaint Number : ",
+    "complaint_created": "Complaint Date: ",
+
+    "previous_work": "Gallery of Previous Work",
     "offices": "Engineering consultancy offices",
     "check_companies": "Check out the preferred companies from here.",
     "favorite": "Favorite",
